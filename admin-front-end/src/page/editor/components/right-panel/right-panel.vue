@@ -11,6 +11,10 @@
           
         </div>
         <component v-if="currentTab!==undefined" v-bind:is="currentTab.component"></component>
+
+
+        <div class="effect-bar"></div>
+        <div class="bottom-bar"></div>
       </pannel>
     
 </template>
@@ -48,16 +52,17 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     #right-panel {
         position: fixed;
         right: 0;
         top: 37px;
-        bottom: 0;
+        bottom: 0px;
         width: 280px;
         min-width: 280px;
         z-index: 50;
 
+        // border: solid 2px red;
 
         .drag-left {
             position: absolute;
@@ -111,6 +116,26 @@ export default {
             .nav-btn.active {
                 background: #232323;
             }
+        }
+
+        .effect-bar {
+            position: absolute;
+            top: 30px;
+            bottom: 30px;
+            right: 0;
+            width: 35px;
+            background: #232323;
+            z-index: 1;
+        }
+
+        .bottom-bar {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background: #313131;
+            padding-right: 6px;
         }
     }
 

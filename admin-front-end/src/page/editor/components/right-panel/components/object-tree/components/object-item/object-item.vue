@@ -1,33 +1,34 @@
 <template>
-    <div class="object-tree">
-      <div class="stage-wrapper">
-        <div class="stage-title active">
+    <div class="object-item">
+      <div class="item-wrapper">
+        <div class="item-title active">
 
-          <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide">
+          <div class="editor-visible" :class="{'editor-hide':itemData.editorHide}" @click="toggleHide">
             <span class="icon"></span>
           </div>
 
-          <div class="child-ctl" :class="{open:stage.hasOwnProperty('__ud_attribute_children__') && stage.fold,close:stage.hasOwnProperty('__ud_attribute_children__') && !stage.fold}" @click="toggleFold">
-            <span class="icon" v-if="stage.hasOwnProperty('__ud_attribute_children__')"></span>
+          <div class="child-ctl" :class="{open:itemData.hasOwnProperty('__ud_attribute_children__') && itemData.fold,close:itemData.hasOwnProperty('__ud_attribute_children__') && !itemData.fold}" @click="toggleFold">
+            <span class="icon" v-if="itemData.hasOwnProperty('__ud_attribute_children__')"></span>
           </div>
 
           <div class="icon-stage">
             <span class="icon"></span>
           </div>
 
-          <div class="stage-name" :title="stage.name().value">{{stage.name().value}}</div>
+          <div class="itemData-name" :title="itemData.name().value">{{itemData.name().value}}</div>
 
           <div class="has-event">
             <span class="icon" v-if="true"></span>
-            <!-- <span class="icon" v-if="stage.eventHandlers().value.length>0"></span> -->
+            <!-- <span class="icon" v-if="itemData.eventHandlers().value.length>0"></span> -->
           </div>
 
         </div>
 
-        <template v-if="!stage.fold && stage.children &&  stage.children().value && stage.children().value.length>0">
-          <object-item  v-for="item in stage.children().value" :key="item._id().value" :item-data="item" :item-id="item._id().value"></object-item>
+
+        <template v-if="!itemData.fold &&  itemData.children && itemData.children().value && itemData.children().value.length>0">
+          <object-item  v-for="item in itemData.children().value" :key="item._id().value" :item-data="item"  :item-id="item._id().value"></object-item>
         </template>
-         
+        
         
 
       </div>
@@ -37,86 +38,50 @@
 
 <script>
 
-import { mapState } from 'vuex'
-import {UDStage,UDUIContainer,UDRectangle} from '../../../../../../lib/ui-designer/index.js'
-import objectItem from './components/object-item/object-item'
 
+import { mapGetters } from 'vuex'
 export default {
-  name: 'object-tree',
-  data(){
-    return {
-        // stage:undefined
-    }
+  name: 'object-item',
+  props: ['itemId'],
+  // props: ['itemData'],
+  // data(){
+  //   return {
+  //       itemData:undefined
+  //   }
+  // },
+   computed: {
+  itemData () {
+    return this.$store.getters.item(this.itemId)
+  }
   },
-  components: {
-    objectItem,
-  },
-  computed: mapState({
-    stage (state) {
-      return state.stage.stage
-    }
-  }),
   methods:{
     toggleHide(){
-      // this.$set(this.stage,'editorHide',!this.stage.editorHide)
+      console.log('toggleHide')
+      // this.$set(this.itemData,'editorHide',!this.itemData.editorHide)
       this.$store.commit('updateObject',{
-        id:this.stage._id().value,
+        id:this.itemData._id().value,
         propName:'editorHide',
-        propValue:!this.stage.editorHide
+        propValue:!this.itemData.editorHide
       });
     },
     toggleFold(){
-
+      console.log('toggleFold')
+      // this.$set(this.itemData,'fold',!this.itemData.fold)
       this.$store.commit('updateObject',{
-        id:this.stage._id().value,
+        id:this.itemData._id().value,
         propName:'fold',
-        propValue:!this.stage.fold
+        propValue:!this.itemData.fold
       });
-      // this.$set(this.stage,'fold',!this.stage.fold)
-      // this.$store.commit('updateObject',this.stage._id().value,'fold',!this.stage.fold)
     }
   },
   created() {
-    //TODO:先创建一个空的舞台对象进去，做测试使用
-    var rootStage = new UDStage();
-
-    //一个容器
-    let div1 = new UDUIContainer();
-    div1.x({value:20});
-    div1.y({value:30});
-    div1.name({value:'区域1'});
-
-    // 一个矩形
-    let rect1 = new UDRectangle();
-    rect1.x({value:20});
-    rect1.y({value:30});
-    rect1.name({value:'rect11'})
-
-    // 矩形放在容器里
-    div1.addChild(rect1);
-
-    rootStage.name({value:'舞台 这是一个非常自由的可以自定义的舞台'})
-    // 容器放到舞台里
-    rootStage.addChild(div1);
-    // this.stage = rootStage;
-
-    // this.$store.state.commit('updateObject',id,propName,propValue)
-    // this.$store.commit('setStage',rootStage)
-    
-
-
-    console.log('tree commit')
-    this.$store.commit('setStage',rootStage)
-
-    console.log(div1.constructor.name);
-    console.log(rootStage.children() && rootStage.children().value && rootStage.children().value.length>0);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-.object-tree {
+.object-item {
     position: absolute;
     top: 30px;
     left: 0;
@@ -129,14 +94,14 @@ export default {
     // border:solid 2px red;
 }
 
-.stage-wrapper {
+.item-wrapper {
   position: relative;
   width:100%;
 
 }
 
 // 舞台标题
-.stage-title {
+.item-title {
   position: relative;
   height: 26px;
   width:100%;
@@ -232,7 +197,7 @@ export default {
   }
 }
 // 当舞台是选择状态时
-.stage-title.active {
+.item-title.active {
   background: #39311f;
 }
 

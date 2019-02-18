@@ -1,7 +1,7 @@
 <template>
   <div id="editor">
       <top-bar></top-bar>
-      <rightPannel></rightPannel>
+      <right-pannel></right-pannel>
   </div>
 </template>
 

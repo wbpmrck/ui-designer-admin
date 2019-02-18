@@ -43,6 +43,9 @@ export default {
 .btn:hover .icon {
 }
 .btn.save .icon{
+
+    width: 22px;
+    height: 24px;
   background-position: -40px 0;
   float: left;
 }
