@@ -13,7 +13,7 @@
         <component v-if="currentTab!==undefined" v-bind:is="currentTab.component"></component>
 
 
-        <div class="effect-bar"></div>
+        <effect-event-bar></effect-event-bar>
         <div class="bottom-bar"></div>
       </pannel>
     
@@ -23,6 +23,7 @@
 import pannel from '../../../../components/pannel/pannel'
 import objectTree from './components/object-tree/object-tree'
 import assetTree from './components/asset-tree/asset-tree'
+import effectEventBar from './components/effect-event-bar/effect-event-bar'
 export default {
   name: 'right-panel',
   data(){
@@ -46,6 +47,7 @@ export default {
   components: {
     assetTree,
     objectTree,
+    effectEventBar,
     pannel,
   }
     
@@ -118,15 +120,6 @@ export default {
             }
         }
 
-        .effect-bar {
-            position: absolute;
-            top: 30px;
-            bottom: 30px;
-            right: 0;
-            width: 35px;
-            background: #232323;
-            z-index: 1;
-        }
 
         .bottom-bar {
             position: absolute;

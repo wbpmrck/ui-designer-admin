@@ -2,6 +2,14 @@
     display: block;
     background: url(../img/icon-sprite.svg) no-repeat;
 }
+.icon-2 {
+    display: block;
+    background: url(../img/icon-sprite-2.svg) no-repeat;
+}
+.icon-3 {
+    display: block;
+    background: url(../img/icon-sprite-3.svg) no-repeat;
+}
 html,body{
     font-size: 12px;
     color:#bfbfbf;
@@ -14,4 +22,12 @@ html,body{
 }
 div, input, textarea {
     box-sizing: border-box;
+}
+
+.btn-clear{
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
 }

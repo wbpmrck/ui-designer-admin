@@ -1,7 +1,7 @@
 <template>
     <div class="object-tree">
       <div class="stage-wrapper">
-        <div class="stage-title active">
+        <div class="stage-title" :class="{active:currentSelection===stage}">
 
           <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide">
             <span class="icon"></span>
@@ -11,21 +11,21 @@
             <span class="icon" v-if="stage.hasOwnProperty('__ud_attribute_children__')"></span>
           </div>
 
-          <div class="icon-stage">
+          <div class="icon-stage" @click="selectStage">
             <span class="icon"></span>
           </div>
 
-          <div class="stage-name" :title="stage.name().value">{{stage.name().value}}</div>
+          <div class="stage-name" :title="stage.name().value"  @click="selectStage">{{stage.name().value}}</div>
 
           <div class="has-event">
-            <span class="icon" v-if="true"></span>
-            <!-- <span class="icon" v-if="stage.eventHandlers().value.length>0"></span> -->
+            <!-- <span class="icon" v-if="true"></span> -->
+            <span class="icon" @click="selectStageEvent" v-if="stage.eventHandlers().value.length>0" :class="{active:currentScene===SCENE.EVENT_PANEL && currentSelection===stage}"></span>
           </div>
 
         </div>
 
         <template v-if="!stage.fold && stage.children &&  stage.children().value && stage.children().value.length>0">
-          <object-item  v-for="item in stage.children().value" :key="item._id().value" :item-data="item" :item-id="item._id().value"></object-item>
+          <object-item  v-for="item in stage.children().value" :key="item._id().value" :item-data="item" :item-id="item._id().value" :item-level="1"></object-item>
         </template>
          
         
@@ -38,6 +38,7 @@
 <script>
 
 import { mapState } from 'vuex'
+import SCENE  from '../../../../../../model/ui-scene.js'
 import {UDStage,UDUIContainer,UDRectangle} from '../../../../../../lib/ui-designer/index.js'
 import objectItem from './components/object-item/object-item'
 
@@ -45,6 +46,7 @@ export default {
   name: 'object-tree',
   data(){
     return {
+        SCENE //必须放在data里，否则vue模板里没法直接使用SCENE进行比较
         // stage:undefined
     }
   },
@@ -54,9 +56,27 @@ export default {
   computed: mapState({
     stage (state) {
       return state.stage.stage
+    },
+    currentSelection (state) {
+      return state.selection.currentSelect
+    },
+    currentScene (state) {
+      return state.selection.scene
     }
   }),
   methods:{
+    selectStageEvent(){
+      this.$store.commit('selectItem',{
+        item:this.stage,
+        scene:SCENE.EVENT_PANEL
+      });
+    },
+    selectStage(){
+      this.$store.commit('selectItem',{
+        item:this.stage,
+        scene:SCENE.OBJECT_TREE
+      });
+    },
     toggleHide(){
       // this.$set(this.stage,'editorHide',!this.stage.editorHide)
       this.$store.commit('updateObject',{
@@ -80,24 +100,60 @@ export default {
     //TODO:先创建一个空的舞台对象进去，做测试使用
     var rootStage = new UDStage();
 
+    rootStage.eventHandlers({
+      value:[
+        "event1",
+        "event2",
+      ]
+    })
+
     //一个容器
     let div1 = new UDUIContainer();
     div1.x({value:20});
     div1.y({value:30});
-    div1.name({value:'区域1'});
+    div1.name({value:'区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 '});
 
     // 一个矩形
     let rect1 = new UDRectangle();
     rect1.x({value:20});
     rect1.y({value:30});
-    rect1.name({value:'rect11'})
+    rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
+
+    // 2个矩形
+    let rect2 = new UDRectangle();
+    rect2.x({value:20});
+    rect2.y({value:30});
+    rect2.name({value:'rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 '})
 
     // 矩形放在容器里
     div1.addChild(rect1);
+    div1.addChild(rect2);
+
+
+    //一个容器
+    let div2 = new UDUIContainer();
+    div2.x({value:20});
+    div2.y({value:30});
+    div2.name({value:'区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 '});
+
+    // 3个矩形
+    let rect3 = new UDRectangle();
+    rect3.x({value:20});
+    rect3.y({value:30});
+    rect3.name({value:'rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3'})
+    rect3.eventHandlers({
+      value:[
+        "event31",
+        "event32",
+      ]
+    })
+    // 矩形放在容器里
+    div2.addChild(rect3);
 
     rootStage.name({value:'舞台 这是一个非常自由的可以自定义的舞台'})
     // 容器放到舞台里
     rootStage.addChild(div1);
+    rootStage.addChild(div2);
     // this.stage = rootStage;
 
     // this.$store.state.commit('updateObject',id,propName,propValue)
@@ -125,7 +181,7 @@ export default {
     bottom: 30px;
     background: #232323;
     // border-right: 1px solid #151515;
-    border-right: 1px solid #faba32;
+    // border-right: 1px solid #efefef;
     // border:solid 2px red;
 }
 
@@ -142,6 +198,9 @@ export default {
   width:100%;
   display: flex;
   align-items: center;
+  border-left: solid 1px #000;
+  border-right: solid 1px #000;
+  border-bottom: solid 1px #000;
 
   // 编辑器可见性编辑
   .editor-visible{
@@ -204,12 +263,13 @@ export default {
 
   // 舞台名称
   .stage-name {
-    padding-left: 18px;
+    padding-left: 4px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
     max-width:150px;
+    cursor: pointer;
   }
 
   // 舞台已有事件标识
@@ -228,6 +288,9 @@ export default {
       height: 22px;
       background-position: -757px 2.5px;
       cursor: pointer;
+    }
+    .icon.active{
+      background-position:-757px -77.5px
     }
   }
 }

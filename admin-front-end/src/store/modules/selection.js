@@ -1,6 +1,9 @@
+import Vue from 'vue'
+
 const state = {
-  currentSelect: null
-}
+  currentSelect: null,
+  scene:undefined
+};
 
 // getters
 const getters = {
@@ -12,6 +15,14 @@ const actions = {
 
 // mutations
 const mutations = {
+
+  selectItem (state,payload){
+    console.log('store selectItem，payload=')
+    console.log(payload)
+    // state.stage = stage;
+    Vue.set(state, "currentSelect", payload.item)
+    Vue.set(state, "scene", payload.scene)
+  },
 }
 
 export default {
@@ -19,5 +30,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }
