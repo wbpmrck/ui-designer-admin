@@ -180,6 +180,9 @@ export default {
     min-width: 245px;
     bottom: 30px;
     background: #232323;
+
+    overflow-y: auto;
+    overflow-x: hidden;
     // border-right: 1px solid #151515;
     // border-right: 1px solid #efefef;
     // border:solid 2px red;

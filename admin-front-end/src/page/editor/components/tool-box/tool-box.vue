@@ -1,0 +1,126 @@
+<template>
+  <div id="tool-box" :class="{expand:isExpand}">
+    <div id="tool-box-header">
+      <button @click="toggleExpand" class="icon-4 toggle-expand btn-clear" :title="isExpand?'点击折叠':'点击展开'"></button>
+    </div>
+    <div id="tool-list">
+      <div class="tool-item pressable" v-for="tool in toolList" :key="tool.name" :title="tool.desc" :class="{active:currentScene===SCENE.TOOL_BOX && currentSelectTool===tool.name}">
+          <component :is="tool.def" :name="tool.name"></component>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import rectangle from './components/rectangle/rectangle'
+import toolImage from './components/image/image'
+import { mapGetters,mapState } from 'vuex'
+import SCENE from '../../../../model/ui-scene.js'
+
+export default {
+  name: 'tool-box',
+  props: {
+  },
+  components: {
+    rectangle,
+    toolImage,
+  },
+   computed: {
+     ...mapState({
+      currentSelection (state) {
+        return state.selection.currentSelect
+      },
+      currentSelectTool (state) {
+        return state.selection.currentSelectTool
+      },
+      currentScene (state) {
+        return state.selection.scene
+      }
+    })
+  },
+  data(){
+    return {
+      SCENE,
+      isExpand:true,
+      toolList:[
+        {name:'rectangle',def:rectangle,desc:'矩形'},
+        {name:'tool-image',def:toolImage,desc:'图片'},
+      ],
+    }
+  },
+  methods:{
+    toggleExpand(){
+      console.log('toggleExpand')
+      this.isExpand = !this.isExpand;
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+// 工具箱
+#tool-box {    
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 37px;
+  width: 37px;
+  border-right: 1px solid #151515;
+  background-color: #353535;
+  z-index: 120;
+  // 工具箱头部
+  #tool-box-header {
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #262626;
+    height: 11px;
+    .toggle-expand {
+      border: none;
+      width: 20px;
+      height: 11px;
+      background-position: -30px 0;
+    }
+    .toggle-expand:hover {
+      background-position: -30px -20px;
+    }
+  }
+  // 工具箱列表
+  #tool-list {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    .tool-item {
+      display: inline-block;
+      position: relative;
+      width: 28px;
+      height: 28px;
+      padding: 5px;
+      opacity: .6;
+      .disabled {
+        opacity: .3;
+        cursor: not-allowed;
+      }
+    }
+    .tool-item:hover{
+      opacity: 1;
+    }
+    .tool-item.active {
+      opacity: 1;
+      background-color: #282828!important;
+    }
+  }
+}
+#tool-box.expand {   
+  width: 65px; 
+  #tool-box-header .toggle-expand {
+    background-position:0px 0;
+  }
+  #tool-box-header .toggle-expand:hover{
+    background-position: 0px -20px;
+  }
+}
+
+</style>

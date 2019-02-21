@@ -8,6 +8,9 @@ const state = {
 const getters = {
   item: (state) => (id) => {
     return findObject(state.stage,id)
+  },
+  stage(state){
+    return state.stage;
   }
 }
 
@@ -37,11 +40,22 @@ function findObject(parent,id){
 // mutations
 const mutations = {
 
+  /**
+   * 初始化整个舞台
+   * @param {*} state 
+   * @param {Object} stage 
+   */
   setStage (state,stage){
     console.log('store setStage')
     // state.stage = stage;
     Vue.set(state, "stage", stage)
   },
+
+  /**
+   * 修改某个对象
+   * @param {*} state 
+   * @param {Object} param1 
+   */
   updateObject (state,{id,propName,propValue}) {
     console.log('store updateObject')
     // console.log('id=')
@@ -53,7 +67,11 @@ const mutations = {
 
     let obj = findObject(state.stage,id);
     Vue.set(obj, propName, propValue)
-  }
+  },
+  addObject (state,{parent,object}){
+    console.log('store addObject')
+    parent.addChild && parent.addChild(object)
+  },
 }
 
 export default {
