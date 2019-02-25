@@ -1,9 +1,9 @@
 <template>
-    <div class="object-tree">
+    <div class="object-tree scrollable-1">
       <div class="stage-wrapper">
         <div class="stage-title" :class="{active:currentSelection===stage}">
 
-          <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide">
+          <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide" :title="stage.editorHide?'编辑器内隐藏':'编辑器内可见'">
             <span class="icon"></span>
           </div>
 
@@ -181,12 +181,14 @@ export default {
     bottom: 30px;
     background: #232323;
 
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
+
     // border-right: 1px solid #151515;
     // border-right: 1px solid #efefef;
     // border:solid 2px red;
 }
+
 
 .stage-wrapper {
   position: relative;

@@ -3,7 +3,7 @@
     <div id="tool-box-header">
       <button @click="toggleExpand" class="icon-4 toggle-expand btn-clear" :title="isExpand?'点击折叠':'点击展开'"></button>
     </div>
-    <div id="tool-list">
+    <div id="tool-list" class="scrollable-1">
       <div class="tool-item pressable" v-for="tool in toolList" :key="tool.name" :title="tool.desc" :class="{active:currentScene===SCENE.TOOL_BOX && currentSelectTool===tool.name}">
           <component :is="tool.def" :name="tool.name"></component>
       </div>
@@ -34,6 +34,9 @@ export default {
       currentSelectTool (state) {
         return state.selection.currentSelectTool
       },
+      isExpand (state) {
+        return state.editor.toolBox.isExpand
+      },
       currentScene (state) {
         return state.selection.scene
       }
@@ -42,7 +45,6 @@ export default {
   data(){
     return {
       SCENE,
-      isExpand:true,
       toolList:[
         {name:'rectangle',def:rectangle,desc:'矩形'},
         {name:'tool-image',def:toolImage,desc:'图片'},
@@ -52,7 +54,11 @@ export default {
   methods:{
     toggleExpand(){
       console.log('toggleExpand')
-      this.isExpand = !this.isExpand;
+      // this.isExpand = !this.isExpand;
+      this.$store.commit('setToolBoxState',{
+        name:"isExpand",
+        value:!this.isExpand
+      });
     }
   }
 }
@@ -88,8 +94,6 @@ export default {
   // 工具箱列表
   #tool-list {
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
     padding-top: 4px;
     padding-bottom: 4px;
     .tool-item {

@@ -2,20 +2,23 @@
   <div id="editor">
       <top-bar></top-bar>
       <tool-box></tool-box>
-      <right-pannel></right-pannel>
+      <property-panel></property-panel>
+      <right-panel></right-panel>
   </div>
 </template>
 
 <script>
 import topBar from './components/top-bar/top-bar'
-import rightPannel from './components/right-panel/right-panel'
+import rightPanel from './components/right-panel/right-panel'
 import toolBox from './components/tool-box/tool-box'
+import propertyPanel from './components/property-panel/property-panel'
 export default {
   name: 'editor',
   components: {
     topBar,
-    rightPannel,
+    rightPanel,
     toolBox,
+    propertyPanel,
   }
 }
 </script>

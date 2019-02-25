@@ -16,6 +16,12 @@ const getters = {
 
 // actions
 const actions = {
+  addObjectAndSelectIt ({ state, commit,dispatch, rootState },{object,parent,scene}) {
+    // 先提交添加孩子的mutation  
+    commit('addObject',{object,parent})
+    // 再提交选择对象的mutation
+    commit('selectItem',{item:object,scene})
+  }
 }
 
 function findObject(parent,id){

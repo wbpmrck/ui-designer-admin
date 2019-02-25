@@ -1,7 +1,7 @@
 <template>
 
 
-      <pannel id="right-panel">
+      <panel id="right-panel">
         <div class="drag-left"></div>
         <div class="tab-bar">
             <div class="nav-btn" v-for="tab in tabs" :key="tab.name" @click="selectTab(tab)" :class="{ active: currentTab.name === tab.name }">
@@ -15,12 +15,12 @@
 
         <effect-event-bar></effect-event-bar>
         <div class="bottom-bar"></div>
-      </pannel>
+      </panel>
     
 </template>
 
 <script>
-import pannel from '../../../../components/pannel/pannel'
+import panel from '../../../../components/panel/panel'
 import objectTree from './components/object-tree/object-tree'
 import assetTree from './components/asset-tree/asset-tree'
 import effectEventBar from './components/effect-event-bar/effect-event-bar'
@@ -48,7 +48,7 @@ export default {
     assetTree,
     objectTree,
     effectEventBar,
-    pannel,
+    panel,
   }
     
 }

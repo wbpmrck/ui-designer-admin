@@ -39,3 +39,29 @@ div, input, textarea {
 .pressable:active{
     transform: translateX(2px) translateY(2px)
 }
+
+/* 滚动条定制 */
+.scrollable-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.scrollable-1::-webkit-scrollbar
+{
+    width:0px;
+	max-width: 10px;
+	background-color: #F5F5F5;
+}
+
+.scrollable-1::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+/* 通用的文本长度限制和省略号效果 */
+.text-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

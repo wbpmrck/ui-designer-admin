@@ -3,7 +3,7 @@
       <div class="item-wrapper">
         <div class="item-title"  :class="{active:currentSelection===itemData}">
 
-          <div class="editor-visible" :class="{'editor-hide':itemData.editorHide}" @click="toggleHide">
+          <div class="editor-visible" :class="{'editor-hide':itemData.editorHide}" @click="toggleHide" :title="itemData.editorHide?'编辑器内隐藏':'编辑器内可见'">
             <span class="icon"></span>
           </div>
 
