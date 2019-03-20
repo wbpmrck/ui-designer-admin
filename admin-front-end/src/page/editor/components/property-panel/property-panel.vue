@@ -14,6 +14,158 @@
 import panel from '../../../../components/panel/panel'
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../model/ui-scene.js'
+import formText from './components/form-text/form-text'
+import formImage from './components/form-image/form-image'
+import formSlider from './components/form-slider/form-slider'
+import formNumber from './components/form-number/form-number'
+import formSwitch from './components/form-switch/form-switch'
+import formColorPicker from './components/form-color-picker/form-color-picker'
+
+import {FormLine,FormGroup} from './form-group.js'
+
+// 分组配置
+const groupConfig =[
+        {
+          name:'基本信息',
+          props:[
+            { 
+              field:'name',
+              form:[{
+                type:formText,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, //对象的ID
+            { 
+              field:'url',
+              form:[{
+                type:formImage,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, //图片资源地址
+          ]
+        },
+        {
+          name:'位置信息',
+          props:[
+            { 
+              field:'x',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'y',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'w',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'h',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'z',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, 
+          ]
+        },
+        {
+          name:'背景和边框',
+          props:[
+           { 
+              field:'alpha',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    min:0,
+                    max:0,
+                    precision:2, //精度，保留2位小数
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                },
+                {
+                  type:formSlider,
+                  param:{
+                    min:0,
+                    max:0,
+                    precision:2, //精度，保留2位小数
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                }
+              ]
+            }, 
+            { 
+              field:'bgColor',
+              form:[
+                {
+                  type:formColorPicker,
+                  col:24
+                }
+              ]
+            }, 
+          ]
+        },
+      ];
+
+
+      function findFieldConfig(object){
+
+        let forms =[];
+
+        groupConfig.forEach((group)=>{
+          let g = undefined;
+          console.log('forEach1')
+          console.log(group.name)
+          
+          group.props.forEach((field)=>{
+          console.log('forEach2')
+          console.log(field.field)
+              if(object[field.field] && object[field.field].__ud_attribute__){
+                if(!g){
+                  g = new FormGroup(group.name);
+                  forms.push(g);
+                }
+                g.addField(field);
+              }
+          });
+
+        })
+
+        console.log('forms=')
+        console.log(forms)
+        return forms;
+      }
 
 export default {
   name: 'property-panel',
@@ -21,6 +173,12 @@ export default {
   },
   components: {
     panel,
+    formColorPicker,
+    formText,
+    formImage,
+    formSlider,
+    formNumber,
+    formSwitch
   },
    computed: {
      ...mapState({
@@ -36,19 +194,15 @@ export default {
       currentScene (state) {
         return state.selection.scene
       }
-    })
+    }),
+    forms(){
+      //TODO:分析 currentSelection ,对比group配置，生成一个当前选择的对象的属性分组对象。用来绑定到属性面板
+      return findFieldConfig(this.currentSelection);
+    }
   },
   data(){
     return {
       SCENE,
-      groups:[
-        {
-          title:'基本信息',
-          props:[
-            { field:'name'}
-          ]
-        },
-      ]
     }
   },
   methods:{
