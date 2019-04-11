@@ -63,7 +63,7 @@ const mutations = {
    * @param {Object} param1 
    */
   updateObject (state,{id,propName,propValue}) {
-    console.log('store updateObject')
+    console.log(`store updateObject:${propName}=${propValue}`)
     // console.log('id=')
     // console.log(id)
     // console.log('propName=')
@@ -72,8 +72,23 @@ const mutations = {
     // console.log(propValue)
 
     let obj = findObject(state.stage,id);
+    obj[propName] =propValue;
     Vue.set(obj, propName, propValue)
   },
+
+  /**
+   * 修改某个对象的某个UD属性
+   * @param {*} state 
+   * @param {Object} param1 
+   */
+  updateObjectUDProperty (state,{id,propName,propValue}) {
+    console.log(`store updateObjectUDProperty:${propName}=${propValue}`)
+
+    let obj = findObject(state.stage,id);
+    obj[propName]({value:propValue});
+    // Vue.set(obj[`__ud_attribute_${this.propName}__`],'value', propValue)
+  },
+
   addObject (state,{parent,object}){
     console.log('store addObject')
     parent.addChild && parent.addChild(object)

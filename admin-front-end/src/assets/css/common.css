@@ -73,10 +73,50 @@ div, input, textarea {
 #app .el-input-number{
     width: 100%;
 }
-#app .el-input-number__decrease{
 
+/* 数字框右侧的小箭头 */
+#app .el-input-number {
+    line-height: 22px;
 }
+#app .el-input-number span{
+    border:none;
 
+    background: #151515;
+    width: 16px;
+    height: 10px!important;
+    border-left: 1px solid #313131;
+}
+#app .el-input-number i{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 2px;
+    font-style: normal;
+    vertical-align: baseline;
+    text-align: center;
+    text-transform: none;
+    text-rendering: auto;
+    line-height: 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    display: inline-block;
+    font-size: 12px;
+    transform: scale(.58333333) rotate(0deg);
+    zoom: 1;
+    /* color: #999; */
+    color: #ffa800;
+}
+#app .el-input-number .el-icon-arrow-up:before {
+    /* content: "\E610"; */
+}
 
 
 /* 文本框 */
@@ -90,6 +130,7 @@ div, input, textarea {
     color: #a0a0a0;
     background-color: #353535;
     padding: 4px 7px;
+    text-align: left;
 }
 
 

@@ -6,7 +6,7 @@
           <div class="text">的属性</div>
         </div>
 
-          <div class="prop-group" v-for="group in forms" :key="group.name">
+          <div class="prop-group" v-for="group in forms" :key="currentSelection._id().value+group.name">
             <div class="prop-group-name">
               <span class="text">{{group.name}}</span>
               <span class="icon" :class="{open:group.collapsed}" @click="toggleCollapseGroup(group)" :title="group.collapsed?'点击展开':'点击收起'"></span>
@@ -14,14 +14,15 @@
 
             <div class="prop-group-content">
 
-              <el-row :gutter="10" v-for="(line ,index1) in group.lines" :key="group.name+index1" v-show="!group.collapsed">
+              <el-row :gutter="10" v-for="(line ,index1) in group.lines" :key="currentSelection._id().value+group.name+index1" v-show="!group.collapsed">
 
-                <el-form label-width="65px"  :key="group.name+index1">
+                <el-form label-width="55px"  :key="currentSelection._id().value+group.name+index1">
                   <template  v-for="(field,index2 ) in line.fields">
-                      <el-col :span="formItem.col" v-for="(formItem ,index3) in field.form" :key="group.name+index1+''+index2+''+index3">
+                      <el-col :span="formItem.col" v-for="(formItem ,index3) in field.form" :key="currentSelection._id().value+group.name+index1+''+index2+''+index3">
                         <el-form-item :label="index3===0?field.desc:''">
                           <!-- <component v-bind:is="formItem.type" @change="handleFieldChange.bind(field.field)"></component> -->
-                          <component v-bind:is="formItem.type" @change="handleFieldChange(field.field)"></component>
+                          <!-- <component v-bind:is="formItem.type" @change="handleFieldChange(field.field)"></component> -->
+                          <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]().value" ></component>
                         </el-form-item>
                         <!-- <div class="filed-name" v-if="index3===0">{{field.desc}}:</div> -->
                       </el-col>
@@ -122,6 +123,9 @@ export default {
         console.log(forms)
         return forms;
       }
+
+      console.log('change forms')
+      this.forms =[];
       this.forms = findFieldConfig(this.currentSelection);
     }
   },
@@ -138,7 +142,7 @@ export default {
           props:[
             { 
               field:'name',
-              desc:'唯一名称',
+              desc:'ID',
               form:[{
                 type:formText,
                 col:24 //24栏，表示这个表单占据一整行
@@ -165,6 +169,9 @@ export default {
                 type:formNumber,
                   param:{
                     precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:-99999, //最小值
                   },
                 col:12 //12栏，表示这个表单占半行
               }]
@@ -176,6 +183,9 @@ export default {
                 type:formNumber,
                   param:{
                     precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:-99999, //最小值
                   },
                 col:12 //12栏，表示这个表单占半行
               }]
@@ -187,6 +197,9 @@ export default {
                 type:formNumber,
                   param:{
                     precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:0, //最小值
                   },
                 col:12 //12栏，表示这个表单占半行
               }]
@@ -198,6 +211,9 @@ export default {
                 type:formNumber,
                   param:{
                     precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:0, //最小值
                   },
                 col:12 //12栏，表示这个表单占半行
               }]
@@ -209,6 +225,9 @@ export default {
                 type:formNumber,
                   param:{
                     precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:0, //最小值
                   },
                 col:24 //24栏，表示这个表单占据一整行
               }]
@@ -226,18 +245,20 @@ export default {
                 {
                   type:formNumber,
                   param:{
-                    min:0,
-                    max:0,
                     precision:2, //精度，保留2位小数
+                    step:0.1, //增加的步长
+                    min:0,
+                    max:1, //最大值
                   },
                   col:12 //12栏，表示这个表单占据半行
                 },
                 {
                   type:formSlider,
                   param:{
-                    min:0,
-                    max:0,
                     precision:2, //精度，保留2位小数
+                    step:0.1, //增加的步长
+                    min:0,
+                    max:1, //最大值
                   },
                   col:12 //12栏，表示这个表单占据半行
                 }
@@ -277,7 +298,8 @@ export default {
     position: absolute;
     top: 36px;
     left: 37px;
-    width: 260px;
+    width: 300px;
+    // width: 260px;
     background: #232323;
     max-height: 100%;
     overflow: hidden;

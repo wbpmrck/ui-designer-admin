@@ -9,8 +9,7 @@
 
 export default {
   name: 'form-text',
-  props: {
-  },
+  props: ['objectId','propName','propInitVal','param'],
   components: {
   },
   data(){
@@ -23,8 +22,19 @@ export default {
       this.val = val;
       console.log(`formText new val:${val}`)
       this.$emit('change',val);
+
+
+      this.$store.commit('updateObjectUDProperty',{
+        id:this.objectId,
+        // propName:`__ud_attribute_${this.propName}__.value`,
+        propName:this.propName,
+        propValue:this.val
+      });
     }
-  }
+  },
+  created() {
+    this.val = this.propInitVal;
+  },
 }
 </script>
 
