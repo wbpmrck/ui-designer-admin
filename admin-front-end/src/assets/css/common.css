@@ -65,3 +65,41 @@ div, input, textarea {
     overflow: hidden;
     white-space: nowrap;
 }
+
+
+/* 下面是对element-ui的定制 */
+
+/* 数字输入框 */
+#app .el-input-number{
+    width: 100%;
+}
+#app .el-input-number__decrease{
+
+}
+
+
+
+/* 文本框 */
+#app .el-input__inner{
+    height: 22px;
+    font-size: 12px;
+    line-height: 22px;
+    border-radius: 0;
+    transition: border .2s cubic-bezier(.645,.045,.355,1),background .2s cubic-bezier(.645,.045,.355,1),box-shadow .2s cubic-bezier(.645,.045,.355,1);
+    border: 1px solid #444;
+    color: #a0a0a0;
+    background-color: #353535;
+    padding: 4px 7px;
+}
+
+
+
+/* 表单标签框 */
+#app .el-form-item__label{
+    font-size: 12px;
+    color: #a0a0a0;
+}
+/* 表单项 */
+#app .el-form-item {
+    margin-bottom: 0px;
+}

@@ -1,5 +1,7 @@
 <template>     
-     <div class="form-number"></div>
+     <div class="form-number">
+         <el-input-number v-model="val" :precision="2" :step="0.1" :max="10" controls-position="right"></el-input-number>
+     </div>
 </template>
 
 <script>
@@ -12,6 +14,7 @@ export default {
   },
   data(){
     return {
+      val:0
     }
   },
   methods:{

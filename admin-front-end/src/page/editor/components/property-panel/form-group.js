@@ -37,6 +37,7 @@ class FormGroup {
 
   constructor(name){
     this.name = name;
+    this.collapsed = false;
     this.lines = []; //分组内的多行表单项
   }
 

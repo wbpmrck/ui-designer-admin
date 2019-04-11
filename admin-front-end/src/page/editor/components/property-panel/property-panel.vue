@@ -5,6 +5,36 @@
           <div class="object-name text-ellipsis">{{currentSelection.name().value}}</div>
           <div class="text">的属性</div>
         </div>
+
+          <div class="prop-group" v-for="group in forms" :key="group.name">
+            <div class="prop-group-name">
+              <span class="text">{{group.name}}</span>
+              <span class="icon" :class="{open:group.collapsed}" @click="toggleCollapseGroup(group)" :title="group.collapsed?'点击展开':'点击收起'"></span>
+            </div>
+
+            <div class="prop-group-content">
+
+              <el-row :gutter="10" v-for="(line ,index1) in group.lines" :key="group.name+index1" v-show="!group.collapsed">
+
+                <el-form label-width="65px"  :key="group.name+index1">
+                  <template  v-for="(field,index2 ) in line.fields">
+                      <el-col :span="formItem.col" v-for="(formItem ,index3) in field.form" :key="group.name+index1+''+index2+''+index3">
+                        <el-form-item :label="index3===0?field.desc:''">
+                          <!-- <component v-bind:is="formItem.type" @change="handleFieldChange.bind(field.field)"></component> -->
+                          <component v-bind:is="formItem.type" @change="handleFieldChange(field.field)"></component>
+                        </el-form-item>
+                        <!-- <div class="filed-name" v-if="index3===0">{{field.desc}}:</div> -->
+                      </el-col>
+                    <!-- <el-col :span="2" :key="group.name+index1+''+index2">{{field.field}}</el-col> -->
+                  
+                  </template>
+                </el-form>
+              </el-row>
+
+            </div>
+
+          </div>
+
       </panel>
     
 </template>
@@ -24,148 +54,8 @@ import formColorPicker from './components/form-color-picker/form-color-picker'
 import {FormLine,FormGroup} from './form-group.js'
 
 // 分组配置
-const groupConfig =[
-        {
-          name:'基本信息',
-          props:[
-            { 
-              field:'name',
-              form:[{
-                type:formText,
-                col:24 //24栏，表示这个表单占据一整行
-              }]
-            }, //对象的ID
-            { 
-              field:'url',
-              form:[{
-                type:formImage,
-                col:24 //24栏，表示这个表单占据一整行
-              }]
-            }, //图片资源地址
-          ]
-        },
-        {
-          name:'位置信息',
-          props:[
-            { 
-              field:'x',
-              form:[{
-                type:formNumber,
-                  param:{
-                    precision:0, //精度，整数
-                  },
-                col:12 //12栏，表示这个表单占半行
-              }]
-            }, 
-            { 
-              field:'y',
-              form:[{
-                type:formNumber,
-                  param:{
-                    precision:0, //精度，整数
-                  },
-                col:12 //12栏，表示这个表单占半行
-              }]
-            }, 
-            { 
-              field:'w',
-              form:[{
-                type:formNumber,
-                  param:{
-                    precision:0, //精度，整数
-                  },
-                col:12 //12栏，表示这个表单占半行
-              }]
-            }, 
-            { 
-              field:'h',
-              form:[{
-                type:formNumber,
-                  param:{
-                    precision:0, //精度，整数
-                  },
-                col:12 //12栏，表示这个表单占半行
-              }]
-            }, 
-            { 
-              field:'z',
-              form:[{
-                type:formNumber,
-                  param:{
-                    precision:0, //精度，整数
-                  },
-                col:24 //24栏，表示这个表单占据一整行
-              }]
-            }, 
-          ]
-        },
-        {
-          name:'背景和边框',
-          props:[
-           { 
-              field:'alpha',
-              form:[
-                {
-                  type:formNumber,
-                  param:{
-                    min:0,
-                    max:0,
-                    precision:2, //精度，保留2位小数
-                  },
-                  col:12 //12栏，表示这个表单占据半行
-                },
-                {
-                  type:formSlider,
-                  param:{
-                    min:0,
-                    max:0,
-                    precision:2, //精度，保留2位小数
-                  },
-                  col:12 //12栏，表示这个表单占据半行
-                }
-              ]
-            }, 
-            { 
-              field:'bgColor',
-              form:[
-                {
-                  type:formColorPicker,
-                  col:24
-                }
-              ]
-            }, 
-          ]
-        },
-      ];
 
 
-      function findFieldConfig(object){
-
-        let forms =[];
-
-        groupConfig.forEach((group)=>{
-          let g = undefined;
-          console.log('forEach1')
-          console.log(group.name)
-          
-          group.props.forEach((field)=>{
-          console.log('forEach2')
-          console.log(field.field)
-              if(object[field.field] && object[field.field].__ud_attribute__){
-                if(!g){
-                  g = new FormGroup(group.name);
-                  forms.push(g);
-                }
-                g.addField(field);
-              }
-          });
-
-        })
-
-        console.log('forms=')
-        console.log(forms)
-        return forms;
-      }
 
 export default {
   name: 'property-panel',
@@ -195,18 +85,187 @@ export default {
         return state.selection.scene
       }
     }),
-    forms(){
-      //TODO:分析 currentSelection ,对比group配置，生成一个当前选择的对象的属性分组对象。用来绑定到属性面板
-      return findFieldConfig(this.currentSelection);
+    // forms(){
+
+    //   //TODO:分析 currentSelection ,对比group配置，生成一个当前选择的对象的属性分组对象。用来绑定到属性面板
+    //   return findFieldConfig(this.currentSelection);
+    // }
+  },
+  watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+    currentSelection: function (newQuestion, oldQuestion) {
+      let self = this;
+      function findFieldConfig(object){
+
+        let forms =[];
+
+        self.groupConfig.forEach((group)=>{
+          let g = undefined;
+          console.log('forEach1')
+          console.log(group.name)
+          
+          group.props.forEach((field)=>{
+          console.log('forEach2')
+          console.log(field.field)
+              if(object[field.field] && object[field.field].__ud_attribute__){
+                if(!g){
+                  g = new FormGroup(group.name);
+                  forms.push(g);
+                }
+                g.addField(field);
+              }
+          });
+
+        })
+
+        console.log('forms=')
+        console.log(forms)
+        return forms;
+      }
+      this.forms = findFieldConfig(this.currentSelection);
     }
   },
   data(){
     return {
       SCENE,
+
+      forms:[],
+
+      groupConfig :[
+        {
+          name:'基本信息',
+          collapsed:false,
+          props:[
+            { 
+              field:'name',
+              desc:'唯一名称',
+              form:[{
+                type:formText,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, //对象的ID
+            { 
+              field:'url',
+              desc:'资源URL',
+              form:[{
+                type:formImage,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, //图片资源地址
+          ]
+        },
+        {
+          name:'位置信息',
+          collapsed:false,
+          props:[
+            { 
+              field:'x',
+              desc:'X坐标',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'y',
+              desc:'Y坐标',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'w',
+              desc:'宽度',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'h',
+              desc:'高度',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'z',
+              desc:'Z轴',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                  },
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, 
+          ]
+        },
+        {
+          name:'背景和边框',
+          collapsed:false,
+          props:[
+           { 
+              field:'alpha',
+              desc:'透明度',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    min:0,
+                    max:0,
+                    precision:2, //精度，保留2位小数
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                },
+                {
+                  type:formSlider,
+                  param:{
+                    min:0,
+                    max:0,
+                    precision:2, //精度，保留2位小数
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                }
+              ]
+            }, 
+            { 
+              field:'bgColor',
+              desc:'背景色',
+              form:[
+                {
+                  type:formColorPicker,
+                  col:24
+                }
+              ]
+            }, 
+          ]
+        },
+      ]
     }
   },
   methods:{
-  
+    toggleCollapseGroup(g){
+        g.collapsed =  !g.collapsed;
+    },
+    handleFieldChange(field,val){
+      console.log(`handleFieldChange---field=[${field}],val=[${val}]`)
+      this.currentSelection['__ud_attribute_'+field+'__'].value = val;
+    }
   }
 }
 </script>
@@ -257,4 +316,47 @@ export default {
     }
 }
 
+// 属性分组
+.prop-group {
+  position: relative;
+    text-align: left;
+    .prop-group-content {
+      padding:12px 15px 12px 0;
+    }
+  // 分组名称
+  .prop-group-name {
+    position: relative;
+    text-align: left;
+    background-color: #353535;
+    color: #b5b5b5;
+    border-top:solid 1px #000;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    .icon {    
+      width: 32px;
+      height: 26px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-position:  -1240px 0;
+      cursor: pointer;
+    }
+    .icon.open {
+      background-position:  -1160px -400px;
+      
+    }
+  }
+
+  // 字段名称
+  .filed-name{
+    display: inline-block;
+    width:65px;
+    color: #a0a0a0;
+    margin: 0 5px 0 2px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+}
 </style>
