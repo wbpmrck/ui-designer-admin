@@ -144,3 +144,11 @@ div, input, textarea {
 #app .el-form-item {
     margin-bottom: 0px;
 }
+
+/* 只有第一个表单item左侧需要预留label的空间 */
+#app .el-form-item__content{
+    margin-left: 0!important;
+}
+#app .first .el-form-item__content{
+    margin-left: 55px!important;
+}

@@ -117,6 +117,7 @@ export default {
     let rect1 = new UDRectangle();
     rect1.x({value:20});
     rect1.y({value:30});
+    rect1.alpha({value:0.5});
     rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
 
     // 2个矩形
@@ -162,6 +163,7 @@ export default {
 
 
     console.log('tree commit')
+    console.log(rootStage)
     this.$store.commit('setStage',rootStage)
 
     console.log(div1.constructor.name);

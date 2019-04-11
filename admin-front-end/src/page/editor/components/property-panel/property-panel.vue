@@ -19,10 +19,13 @@
                 <el-form label-width="55px"  :key="currentSelection._id().value+group.name+index1">
                   <template  v-for="(field,index2 ) in line.fields">
                       <el-col :span="formItem.col" v-for="(formItem ,index3) in field.form" :key="currentSelection._id().value+group.name+index1+''+index2+''+index3">
-                        <el-form-item :label="index3===0?field.desc:''">
+                        <el-form-item :label="index3===0?field.desc:''" :class="{first:index3===0}">
                           <!-- <component v-bind:is="formItem.type" @change="handleFieldChange.bind(field.field)"></component> -->
                           <!-- <component v-bind:is="formItem.type" @change="handleFieldChange(field.field)"></component> -->
-                          <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]().value" ></component>
+                          <!-- <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]().value" ></component> -->
+                          <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]() && currentSelection['__ud_attribute_'+field.field+'__'].value" ></component>
+                          <!-- <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection" ></component> -->
+                          <!-- <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]() && currentSelection['__ud_attribute_'+field.field+'__']?currentSelection['__ud_attribute_'+field.field+'__'].value" ></component> -->
                         </el-form-item>
                         <!-- <div class="filed-name" v-if="index3===0">{{field.desc}}:</div> -->
                       </el-col>
@@ -86,6 +89,7 @@ export default {
         return state.selection.scene
       }
     }),
+
     // forms(){
 
     //   //TODO:分析 currentSelection ,对比group配置，生成一个当前选择的对象的属性分组对象。用来绑定到属性面板
@@ -255,7 +259,6 @@ export default {
                 {
                   type:formSlider,
                   param:{
-                    precision:2, //精度，保留2位小数
                     step:0.1, //增加的步长
                     min:0,
                     max:1, //最大值

@@ -20,7 +20,6 @@ export default {
   methods:{
     handleChange(val){
       this.val = val;
-      console.log(`formText new val:${val}`)
       this.$emit('change',val);
 
 
@@ -35,6 +34,12 @@ export default {
   created() {
     this.val = this.propInitVal;
   },
+  watch: { 
+    propInitVal: function(newVal, oldVal) { // watch it
+          console.log('text Prop changed: ', newVal, ' | was: ', oldVal)
+      this.val = newVal;
+    }
+  }
 }
 </script>
 

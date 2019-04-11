@@ -1,6 +1,6 @@
 <template>     
      <div class="form-number">
-         <el-input-number v-model="val" :precision="param.precision" :step="param.step" :max="param.max" :min="param.min" controls-position="right" size="mini"></el-input-number>
+         <el-input-number v-model="val" @change="handleChange" :precision="param.precision" :step="param.step" :max="param.max" :min="param.min" controls-position="right" size="mini"></el-input-number>
      </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
   methods:{
     handleChange(val){
       this.val = val;
-      console.log(`formText new val:${val}`)
       this.$emit('change',val);
 
 
@@ -34,6 +33,12 @@ export default {
   created() {
     this.val = this.propInitVal;
   },
+  watch: { 
+    propInitVal: function(newVal, oldVal) { // watch it
+          console.log('formNumber Prop changed: ', newVal, ' | was: ', oldVal)
+      this.val = newVal;
+    }
+  }
 }
 </script>
 
