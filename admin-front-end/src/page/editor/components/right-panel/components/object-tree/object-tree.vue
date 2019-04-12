@@ -117,7 +117,7 @@ export default {
     let rect1 = new UDRectangle();
     rect1.x({value:20});
     rect1.y({value:30});
-    rect1.alpha({value:0.5});
+    rect1.alpha({value:11.5});
     rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
 
     // 2个矩形

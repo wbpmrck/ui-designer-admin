@@ -12,9 +12,9 @@
               <span class="icon" :class="{open:group.collapsed}" @click="toggleCollapseGroup(group)" :title="group.collapsed?'点击展开':'点击收起'"></span>
             </div>
 
-            <div class="prop-group-content">
+            <div class="prop-group-content" v-show="!group.collapsed">
 
-              <el-row :gutter="10" v-for="(line ,index1) in group.lines" :key="currentSelection._id().value+group.name+index1" v-show="!group.collapsed">
+              <el-row :gutter="10" v-for="(line ,index1) in group.lines" :key="currentSelection._id().value+group.name+index1" >
 
                 <el-form label-width="55px"  :key="currentSelection._id().value+group.name+index1">
                   <template  v-for="(field,index2 ) in line.fields">
@@ -114,7 +114,7 @@ export default {
           console.log(field.field)
               if(object[field.field] && object[field.field].__ud_attribute__){
                 if(!g){
-                  g = new FormGroup(group.name);
+                  g = new FormGroup(group.name,group.collapsed);
                   forms.push(g);
                 }
                 g.addField(field);
@@ -233,13 +233,13 @@ export default {
                     max:99999, //最大值
                     min:0, //最小值
                   },
-                col:24 //24栏，表示这个表单占据一整行
+                col:12 //24栏，表示这个表单占据一整行
               }]
             }, 
           ]
         },
         {
-          name:'背景和边框',
+          name:'背景',
           collapsed:false,
           props:[
            { 
@@ -250,18 +250,18 @@ export default {
                   type:formNumber,
                   param:{
                     precision:2, //精度，保留2位小数
-                    step:0.1, //增加的步长
+                    step:1, //增加的步长
                     min:0,
-                    max:1, //最大值
+                    max:100, //最大值
                   },
                   col:12 //12栏，表示这个表单占据半行
                 },
                 {
                   type:formSlider,
                   param:{
-                    step:0.1, //增加的步长
+                    step:0.01, //增加的步长
                     min:0,
-                    max:1, //最大值
+                    max:100, //最大值
                   },
                   col:12 //12栏，表示这个表单占据半行
                 }
@@ -273,10 +273,120 @@ export default {
               form:[
                 {
                   type:formColorPicker,
-                  col:24
+                  col:10
+                },
+                {
+                  type:formText,
+                  col:14
                 }
               ]
             }, 
+          ]
+        },
+        {
+          name:'3D旋转',
+          collapsed:false,
+          props:[
+           { 
+              field:'rotateX',
+              desc:'X轴旋转',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:0,
+                    max:360, //最大值
+                  },
+                  col:12
+                }
+              ]
+            },
+           { 
+              field:'rotateY',
+              desc:'Y轴旋转',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:0,
+                    max:360, //最大值
+                  },
+                  col:12
+                }
+              ]
+            },
+           { 
+              field:'rotateZ',
+              desc:'Z轴旋转',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:0,
+                    max:360, //最大值
+                  },
+                  col:12
+                }
+              ]
+            },
+          ]
+        },
+        {
+          name:'边框和阴影',
+          collapsed:false,
+          props:[
+           { 
+              field:'borderRadius',
+              desc:'圆角',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:-99999,
+                    max:99999, //最大值
+                  },
+                  col:12
+                }
+              ]
+            },
+           { 
+              field:'borderWidth',
+              desc:'边框',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:0,
+                    max:99999, //最大值
+                  },
+                  col:12
+                }
+              ]
+            },
+           { 
+              field:'borderColor',
+              desc:'边框颜色',
+              form:[
+                {
+                  type:formColorPicker,
+                  col:10
+                },
+                {
+                  type:formText,
+                  col:14
+                }
+              ]
+            },
           ]
         },
       ]
@@ -301,8 +411,8 @@ export default {
     position: absolute;
     top: 36px;
     left: 37px;
-    width: 300px;
-    // width: 260px;
+    // width: 300px;
+    width: 260px;
     background: #232323;
     max-height: 100%;
     overflow: hidden;
