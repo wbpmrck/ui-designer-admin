@@ -8,6 +8,7 @@
 
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
+import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
 import {UDStage,UDUIContainer,UDRectangle} from '../../../../../../lib/ui-designer/index.js'
 export default {
   name: 'rectangle',
@@ -36,7 +37,8 @@ export default {
     //给出什么时候不可点击
     disable(){
       if(
-         (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
+        //  (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
+         (this.currentScene=== SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection,UDUIContainer) ) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
          (this.currentScene=== SCENE.TOOL_BOX && this.currentSelectTool === this.name) //当选择的是工具箱，且当前选择的工具就是自己的时候
       ){
         return false; //返回可以使用
@@ -68,9 +70,7 @@ export default {
         object:rect1,
         parent:this.currentSelection,
       });
-
-
-    }
+    },
   },
   created() {
   }
