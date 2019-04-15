@@ -10,6 +10,7 @@
                 ref="upload"
                 action="http://127.0.0.1:7001/upload"
                 :limit="1"
+                accept="image/*"
                 :show-file-list="false"
                 :before-upload="fileBeforeUpload"
                 :on-progress="fileUploadProgress"

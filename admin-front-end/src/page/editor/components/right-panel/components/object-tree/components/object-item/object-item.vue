@@ -3,20 +3,28 @@
       <div class="item-wrapper">
         <div class="item-title"  :class="{active:currentSelection===itemData}">
 
+          <!-- item是否可见控制 -->
           <div class="editor-visible" :class="{'editor-hide':itemData.editorHide}" @click="toggleHide" :title="itemData.editorHide?'编辑器内隐藏':'编辑器内可见'">
             <span class="icon"></span>
           </div>
 
           <div class="gutter" :style="{width: itemLevel*20 + 'px' }"></div>
 
+          <!-- 子元素展开按钮 -->
           <div class="child-ctl" :class="{open:itemData.hasOwnProperty('__ud_attribute_children__') && itemData.fold,close:itemData.hasOwnProperty('__ud_attribute_children__') && !itemData.fold}" @click="toggleFold">
             <span class="icon" v-if="itemData.hasOwnProperty('__ud_attribute_children__')"></span>
           </div>
 
+          <!-- item图标 -->
           <div :class="{['icon-'+itemType]:true,'icon-item':true}"  @click="selectItem">
-            <span class="icon-2"></span>
+            <span class="icon-2" v-if="'UDImage'!==itemType">
+              
+            </span>
+            <img v-if="'UDImage'===itemType" src="" :alt="itemData[`__ud_attribute_url__`].value" :src="itemData[`__ud_attribute_url__`].value">
           </div>
 
+
+          <!-- item名称 -->
           <div class="item-name" :style="{'max-width':(150 - (itemLevel*20) )+'px'}" :title="itemData.name().value"   @click="selectItem">{{itemData.name().value}}</div>
 
           <div class="has-event">
@@ -203,6 +211,10 @@ export default {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    img {
+      width:100%;
+      height:100%;
+    }
   }
   // 矩形图标
   .icon-UDRectangle .icon-2 {
