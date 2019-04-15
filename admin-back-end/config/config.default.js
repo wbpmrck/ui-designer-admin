@@ -21,6 +21,31 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+    multipart:{
+      fileSize: '50mb',
+      fileExtensions: [
+        '.zip',
+        '.pdf',
+        '.xlsx',
+        '.docx',
+        '.js',
+        '.css',
+        '.jsx',
+        '.txt',
+        '.log',
+      ],
+    },
+    security :{
+      csrf: {
+        enable: false,
+        ignoreJSON: true
+      },
+      domainWhiteList: ['*']
+    },
+    cors :{
+      origin:'*',
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+    },
   };
 
   return {

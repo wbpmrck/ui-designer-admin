@@ -8,7 +8,7 @@
                 slot="prefix" 
                 class="uploader ud-v-middle"
                 ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="http://127.0.0.1:7001/upload"
                 :limit="1"
                 :show-file-list="false"
                 :before-upload="fileBeforeUpload"
@@ -27,8 +27,7 @@
 
 export default {
   name: 'form-image',
-  props: {
-  },
+  props: ['objectId','propName','propInitVal','param'],
   components: {
   },
   data(){
@@ -37,8 +36,9 @@ export default {
     };
   },
   methods:{
-      submitUpload() {
-        this.$refs.upload.submit();
+      reset() {
+        this.$refs.upload.clearFiles();
+        console.log(`file upload reset`)
       },
       fileChange(arg){
         //TODO:在选择文件的时候，自动调用上传，并拿到最终的资源地址，写在文本框里
@@ -48,10 +48,20 @@ export default {
       fileUploadSuccess(arg){
         console.log(`fileUploadSuccess `)
         console.log(arg)
+
+        this.$store.commit('updateObjectUDProperty',{
+          id:this.objectId,
+          // propName:`__ud_attribute_${this.propName}__.value`,
+          propName:this.propName,
+          propValue:arg.path
+        });
+
+        this.reset();
       },
       fileUploadError(arg){
         console.log(`fileUploadError `)
         console.log(arg)
+        this.reset();
       },
       fileUploadProgress(arg){
         console.log(`fileUploadProgress `)
@@ -61,6 +71,15 @@ export default {
         console.log(`fileBeforeUpload `)
         console.log(arg)
       },
+  },
+  created() {
+    this.val = this.propInitVal;
+  },
+  watch: { 
+    propInitVal: function(newVal, oldVal) { // watch it
+          console.log('formNumber Prop changed: ', newVal, ' | was: ', oldVal)
+      this.val = newVal;
+    }
   }
 }
 </script>
