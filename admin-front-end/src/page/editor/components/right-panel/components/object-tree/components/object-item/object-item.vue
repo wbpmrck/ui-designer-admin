@@ -17,10 +17,9 @@
 
           <!-- item图标 -->
           <div :class="{['icon-'+itemType]:true,'icon-item':true}"  @click="selectItem">
-            <span class="icon-2" v-if="'UDImage'!==itemType">
-              
-            </span>
-            <img v-if="'UDImage'===itemType" src="" :alt="itemData[`__ud_attribute_url__`].value" :src="itemData[`__ud_attribute_url__`].value">
+            <span class="icon-2" v-if="'UDImage'!==itemType"></span>
+            <span class="icon-default" v-if="'UDImage'===itemType && !itemData[`__ud_attribute_url__`].value"></span>
+            <img v-if="'UDImage'===itemType && itemData[`__ud_attribute_url__`].value" :src="itemData[`__ud_attribute_url__`].value">
           </div>
 
 
@@ -228,7 +227,13 @@ export default {
       height: 16px;
       background-position:  -1720px 0;
   }
-
+  // 图片图标
+  .icon-UDImage .icon-default {
+      width: 16px;
+      height: 16px;
+      background: url(./assets/img/image.svg) no-repeat;
+      background-position:  0px 0px;
+  }
 
   // 舞台名称
   .item-name {
