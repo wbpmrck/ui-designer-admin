@@ -1,20 +1,14 @@
 <template>     
-     <div class="form-switch">
-
-       <el-switch
-        v-model="val"
-        @change="handleChange"
-        active-color="#13ce66"
-        inactive-color="#ff4949">
-      </el-switch>
+     <div class="form-dropdown">
+         <el-input-number v-model="val" @change="handleChange" :precision="param.precision" :step="param.step" :max="param.max" :min="param.min" controls-position="right" size="mini"></el-input-number>
      </div>
 </template>
 
 <script>
 
 export default {
-  name: 'form-switch',
-   props: ['objectId','propName','propInitVal','param'],
+  name: 'form-dropdown',
+  props: ['objectId','propName','propInitVal','param'],
   components: {
   },
   data(){
@@ -50,6 +44,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.form-switch {    
+.form-dropdown {    
 }
 </style>

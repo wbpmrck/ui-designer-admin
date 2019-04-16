@@ -54,6 +54,7 @@ import formSlider from './components/form-slider/form-slider'
 import formNumber from './components/form-number/form-number'
 import formSwitch from './components/form-switch/form-switch'
 import formColorPicker from './components/form-color-picker/form-color-picker'
+import formDropDown from './components/form-dropdown/form-dropdown'
 
 import {FormLine,FormGroup} from './form-group.js'
 
@@ -162,8 +163,51 @@ export default {
             }, //图片资源地址
           ]
         },
+
         {
-          name:'位置信息',
+          name:'环境和模式',
+          collapsed:false,
+          props:[
+           { 
+              field:'deviceEnv',
+              desc:'设备类型',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:24
+                }
+              ]
+            },
+           { 
+              field:'preloadEnable',
+              desc:'预加载',
+              form:[
+                {
+                  type:formSwitch,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
+            { 
+                field:'userScaleEnable',
+                desc:'用户缩放',
+                form:[
+                  {
+                    type:formSwitch,
+                    param:{
+                    },
+                    col:12
+                  }
+                ]
+              }
+          ]
+        },
+        {
+          name:'位置形状',
           collapsed:false,
           props:[
             { 

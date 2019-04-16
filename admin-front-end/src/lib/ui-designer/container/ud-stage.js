@@ -2,10 +2,11 @@ import UDContainer from './ud-container'
 import UDEvent from '../ud-event'
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
 import {UDAttributeUnit} from '../enums/ud-unit'
+import UDDeviceEnv from '../enums/ud-device-env'
 
 const className = 'UDStage'
 /**
- * 表示可以被展示和显示的界面元素对象
+ * 表示一个应用。是应用的根元素
  */
 @DECORATORS.serializable(true)
 class UDStage extends UDContainer{
@@ -33,6 +34,41 @@ class UDStage extends UDContainer{
         return super.getSupportActions().concat([
         ]);
     }
+
+
+
+    /*
+        1.位置相关
+    */
+  
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:Number.getType(),desc:'设计宽度',value:0,unit:UDAttributeUnit.PX})
+   w(){};
+
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:Number.getType(),desc:'设计高度',value:0,unit:UDAttributeUnit.PX})
+   h(){};
+
+    /*
+        2.运行环境相关
+    */
+  
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:UDDeviceEnv.getType(),desc:'设备环境',value:UDDeviceEnv.MOBILE})
+   deviceEnv(){};
+
+    /*
+        3.运行模式相关
+    */
+  
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:Boolean.getType(),desc:'启动预加载',value:true})
+   preloadEnable(){};
+
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:Boolean.getType(),desc:'允许用户缩放',value:false})
+   userScaleEnable(){};
+
 
     // constructor({typeName,serializedString}) {
     constructor() {
