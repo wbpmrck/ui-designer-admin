@@ -19,7 +19,8 @@
                 <el-form label-width="55px"  :key="currentSelection._id().value+group.name+index1">
                   <template  v-for="(field,index2 ) in line.fields">
                       <el-col :span="formItem.col" v-for="(formItem ,index3) in field.form" :key="currentSelection._id().value+group.name+index1+''+index2+''+index3">
-                        <el-form-item :label="index3===0?field.desc:''" :class="{first:index3===0}">
+                        <!-- 属性标签trick:如果group配置里有desc,则使用desc.否则直接使用runtime从ud领域带过来的设计者附加在属性上的描述信息 -->
+                        <el-form-item :label="index3===0?field.desc||currentSelection[field.field]().desc:''" :class="{first:index3===0}">
                           <!-- <component v-bind:is="formItem.type" @change="handleFieldChange.bind(field.field)"></component> -->
                           <!-- <component v-bind:is="formItem.type" @change="handleFieldChange(field.field)"></component> -->
                           <!-- <component v-bind:is="formItem.type" :param="formItem.param" :prop-name="field.field" :object-id="currentSelection._id().value" :prop-init-val="currentSelection[field.field]().value" ></component> -->
@@ -227,6 +228,43 @@ export default {
           ]
         },
         {
+          name:'舞台大小',
+          collapsed:false,
+          props:[
+            
+            { 
+              field:'sw',
+              // desc:'宽度',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:0, //最小值
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            { 
+              field:'sh',
+              // desc:'高度',
+              form:[{
+                type:formNumber,
+                  param:{
+                    precision:0, //精度，整数
+                    step:1, //增加的步长
+                    max:99999, //最大值
+                    min:0, //最小值
+                  },
+                col:12 //12栏，表示这个表单占半行
+              }]
+            }, 
+            
+          ]
+        },
+        
+        {
           name:'位置形状',
           collapsed:false,
           props:[
@@ -260,7 +298,7 @@ export default {
             }, 
             { 
               field:'w',
-              desc:'宽度',
+              // desc:'宽度',
               form:[{
                 type:formNumber,
                   param:{
@@ -274,7 +312,7 @@ export default {
             }, 
             { 
               field:'h',
-              desc:'高度',
+              // desc:'高度',
               form:[{
                 type:formNumber,
                   param:{

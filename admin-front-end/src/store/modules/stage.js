@@ -72,7 +72,7 @@ const mutations = {
     // console.log(propValue)
 
     let obj = findObject(state.stage,id);
-    obj[propName] =propValue;
+    // obj[propName] =propValue;
     Vue.set(obj, propName, propValue)
   },
 

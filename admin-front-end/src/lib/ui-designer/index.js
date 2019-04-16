@@ -6,6 +6,7 @@ import UDImage  from "./ui/ud-image"
 import UDContainer  from "./container/ud-container"
 import UDUIContainer  from "./container/ud-ui-container"
 import UDStage  from "./container/ud-stage"
+import UDPage  from "./container/ud-page"
 import UDEvent  from "./ud-event"
 import UDEventHandler  from "./ud-event-handler"
 import UDAction  from "./ud-action"
@@ -29,6 +30,7 @@ import  UDTouch from "./gesture/ud-touch"
 import  UDTouchEventContext from "./gesture/ud-touch-event-context"
 
 export  {
+    UDPage,  
     UDStage,  
     UDRectangle,  
     UDImage,  

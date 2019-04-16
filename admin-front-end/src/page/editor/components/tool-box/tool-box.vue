@@ -15,6 +15,7 @@
 
 import rectangle from './components/rectangle/rectangle'
 import toolImage from './components/image/image'
+import toolPage from './components/page/page'
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../model/ui-scene.js'
 
@@ -25,6 +26,7 @@ export default {
   components: {
     rectangle,
     toolImage,
+    toolPage,
   },
    computed: {
      ...mapState({
@@ -48,6 +50,7 @@ export default {
       toolList:[
         {name:'rectangle',def:rectangle,desc:'矩形'},
         {name:'tool-image',def:toolImage,desc:'图片'},
+        {name:'tool-page',def:toolPage,desc:'页面'},
       ],
     }
   },
@@ -94,8 +97,10 @@ export default {
   // 工具箱列表
   #tool-list {
     height: 100%;
+    padding-left: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    text-align: left;
     .tool-item {
       display: inline-block;
       position: relative;

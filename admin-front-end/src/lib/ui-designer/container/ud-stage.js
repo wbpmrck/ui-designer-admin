@@ -43,12 +43,12 @@ class UDStage extends UDContainer{
     */
   
    @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'设计宽度',value:0,unit:UDAttributeUnit.PX})
-   w(){};
+   @DECORATORS.field({type:Number.getType(),desc:'舞台宽度',value:0,unit:UDAttributeUnit.PX})
+   sw(){};
 
    @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'设计高度',value:0,unit:UDAttributeUnit.PX})
-   h(){};
+   @DECORATORS.field({type:Number.getType(),desc:'舞台高度',value:0,unit:UDAttributeUnit.PX})
+   sh(){};
 
     /*
         2.运行环境相关

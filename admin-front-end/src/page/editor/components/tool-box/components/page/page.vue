@@ -1,5 +1,5 @@
 <template>
-    <div class="rectangle" :class="{disabled:disable}" @click="clickMe">
+    <div class="tool-page" :class="{disabled:disable}" @click="clickMe">
      
     </div>
 </template>
@@ -9,9 +9,9 @@
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
-import {UDStage,UDUIContainer,UDRectangle,UDPage} from '../../../../../../lib/ui-designer/index.js'
+import {UDStage,UDUIContainer,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
-  name: 'rectangle',
+  name: 'tool-page',
   props: [],
   props: ['name'],
   data(){
@@ -37,9 +37,7 @@ export default {
     //给出什么时候不可点击
     disable(){
       if(
-        //  (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
-         (this.currentScene=== SCENE.OBJECT_TREE &&  isInstanceOf(this.currentSelection,UDUIContainer) ) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
-         (this.currentScene=== SCENE.OBJECT_TREE &&  isInstanceOf(this.currentSelection,UDPage) ) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
+         (this.currentScene=== SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection,UDStage) ) || //当选择对象树，且当前选择的对象是 舞台的时候
          (this.currentScene=== SCENE.TOOL_BOX && this.currentSelectTool === this.name) //当选择的是工具箱，且当前选择的工具就是自己的时候
       ){
         return false; //返回可以使用
@@ -55,20 +53,14 @@ export default {
       }
       // FIXME:当前工具箱不占据选择状态(虽然store里预留了)。这样比较方便
 
-      // 一个矩形
-      let rect1 = new UDRectangle();
-      rect1.name({value:'矩形'});
-
-      // 添加并且选中对象。这种方式可能不方便连续添加对象
-      // this.$store.dispatch('addObjectAndSelectIt',{
-      //   object:rect1,
-      //   parent:this.currentSelection,
-      //   scene:SCENE.OBJECT_TREE,
-      // });
+      // 一个新页面
+      // 从当前上下文获取一些比较友好的初始化参数
+      let me = new UDPage();
+      me.name({value:'页面'});
 
       //添加对象，保持当前选择的容器不变
       this.$store.commit('addObject',{
-        object:rect1,
+        object:me,
         parent:this.currentSelection,
       });
     },
@@ -80,11 +72,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.rectangle {
+.tool-page {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/rect.svg) no-repeat;
+    background: url(./assets/img/page.svg) no-repeat;
 }
 
 </style>

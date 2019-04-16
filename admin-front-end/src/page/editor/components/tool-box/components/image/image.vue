@@ -9,7 +9,7 @@
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
-import {UDImage,UDUIContainer} from '../../../../../../lib/ui-designer/index.js'
+import {UDImage,UDUIContainer,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
   name: 'tool-image', //FIXME:加tool前缀是考虑到vue不推荐使用内置的关键字image做组件名称
   props: [],
@@ -32,6 +32,7 @@ export default {
         
         //  (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
          (this.currentScene=== SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection,UDUIContainer) ) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
+         (this.currentScene=== SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection,UDPage) ) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
          (this.currentScene=== SCENE.TOOL_BOX && this.currentSelectTool === this.name) //当选择的是工具箱，且当前选择的工具就是自己的时候
       ){
         return false;
