@@ -3,6 +3,7 @@ import UDEvent from '../ud-event'
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
 import {UDAttributeUnit} from '../enums/ud-unit'
 import UDDeviceEnv from '../enums/ud-device-env'
+import UDTouchTurnPageEnum from '../enums/ud-touch-turn-page-enum'
 
 const className = 'UDStage'
 /**
@@ -69,6 +70,14 @@ class UDStage extends UDContainer{
    @DECORATORS.field({type:Boolean.getType(),desc:'允许用户缩放',value:false})
    userScaleEnable(){};
 
+
+    /*
+        4.场景控制相关
+    */
+  
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:UDTouchTurnPageEnum.getType(),desc:'滑动翻页模式',value:UDTouchTurnPageEnum.NONE})
+   touchTurnPage(){};
 
     // constructor({typeName,serializedString}) {
     constructor() {

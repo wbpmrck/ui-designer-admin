@@ -167,6 +167,82 @@ div, input, textarea {
     width:100%;
 }
 
+/* ============  下拉框 ============  */
+.el-select-dropdown .el-scrollbar .el-select-dropdown__wrap {
+    border:none;
+    padding: 0 0 0 0;
+}
+.el-select-dropdown .el-scrollbar .el-select-dropdown__list{
+    overflow: visible;
+    max-height: 300px;
+    outline: none;
+    margin-bottom: 0;
+    padding: 0 0 0 0;
+    list-style: none;
+
+    color: #a0a0a0!important;
+    border: 1px solid #353535!important;
+    background: #353535;
+    border-bottom-left-radius: 2px!important;
+    border-bottom-right-radius: 2px!important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 2px 2px 5px #1d1d1d;
+
+    box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+    /* border-radius: 6px; */
+    box-sizing: border-box;
+    z-index: 1050;
+    outline: none;
+    overflow: hidden;
+    font-size: 12px;
+}
+.el-select-dropdown .el-scrollbar .el-select-dropdown__item{
+    color: #a0a0a0;
+    /* padding: 7px 15px; */
+    font-weight: 400;
+    color: #666;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+
+    border: 1px solid #353535!important;
+    background: #353535;
+    border-bottom-left-radius: 2px!important;
+    border-bottom-right-radius: 2px!important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 2px 2px 5px #1d1d1d;
+
+
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+    /* border-radius: 6px; */
+    box-sizing: border-box;
+    z-index: 1050;
+    outline: none;
+    overflow: hidden;
+    font-size: 12px;
+}
+.el-select-dropdown .el-scrollbar .el-select-dropdown__item:hover {
+    background: #151515;
+    /* color: #fff; */
+    color: #ffa800;
+}
+.form-dropdown .el-select{
+    width: 100%;
+}
+
+#app .el-switch__core{
+    width: 100%!important;
+}
+
+#app .el-switch{
+    width: 100%;
+}
+
 /* ============  表单标签框 ============  */
 #app .el-form-item__label{
     font-size: 12px;

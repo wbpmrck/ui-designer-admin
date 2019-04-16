@@ -107,12 +107,12 @@ export default {
 
         self.groupConfig.forEach((group)=>{
           let g = undefined;
-          console.log('forEach1')
-          console.log(group.name)
+          // console.log('forEach1')
+          // console.log(group.name)
           
           group.props.forEach((field)=>{
-          console.log('forEach2')
-          console.log(field.field)
+          // console.log('forEach2')
+          // console.log(field.field)
               if(object[field.field] && object[field.field].__ud_attribute__){
                 if(!g){
                   g = new FormGroup(group.name,group.collapsed);
@@ -124,12 +124,12 @@ export default {
 
         })
 
-        console.log('forms=')
-        console.log(forms)
+        // console.log('forms=')
+        // console.log(forms)
         return forms;
       }
 
-      console.log('change forms')
+      // console.log('change forms')
       this.forms =[];
       this.forms = findFieldConfig(this.currentSelection);
     }
@@ -204,6 +204,26 @@ export default {
                   }
                 ]
               }
+          ]
+        },
+
+        {
+          name:'页面场景控制',
+          collapsed:false,
+          props:[
+           { 
+              field:'touchTurnPage',
+              desc:'滑动翻页',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:24
+                }
+              ]
+            },
+           
           ]
         },
         {
