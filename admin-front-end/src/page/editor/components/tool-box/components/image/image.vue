@@ -49,9 +49,10 @@ export default {
       }
       // FIXME:当前工具箱不占据选择状态(虽然store里预留了)。这样比较方便
 
+      let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个图片
       let url1 = new UDImage();
-      url1.name({value:'图片'});
+      url1.name({value:'图片'+sliblingCount});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{

@@ -55,8 +55,11 @@ export default {
 
       // 一个新页面
       // 从当前上下文获取一些比较友好的初始化参数
+
+      let pageCount = this.currentSelection.children().value.length+1;
+
       let me = new UDPage();
-      me.name({value:'页面'});
+      me.name({value:'页面'+pageCount});
 
       //添加对象，保持当前选择的容器不变
       this.$store.commit('addObject',{

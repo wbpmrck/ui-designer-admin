@@ -4,8 +4,8 @@
         <div class="item-title"  :class="{active:currentSelection===itemData}">
 
           <!-- item是否可见控制 -->
-          <div class="editor-visible" :class="{'editor-hide':itemData.editorHide}" @click="toggleHide" :title="itemData.editorHide?'编辑器内隐藏':'编辑器内可见'">
-            <span class="icon"></span>
+          <div class="editor-visible" :class="{'editor-hide':itemData.editorHide,'none':itemData.constructor.name ==='UDStage' || itemData.constructor.name ==='UDPage'}" >
+            <span class="icon" v-show="!(itemData.constructor.name ==='UDStage' || itemData.constructor.name ==='UDPage')" @click="toggleHide" :title="itemData.editorHide?'编辑器内隐藏':'编辑器内可见'"></span>
           </div>
 
           <div class="gutter" :style="{width: itemLevel*20 + 'px' }"></div>
@@ -176,6 +176,10 @@ export default {
       background-position: -800px 0;
     }
   }
+  // 如果item没有编辑器可见区域，则背景色使用父亲的
+  .editor-visible.none{
+    background:inherit;
+  }
   // 编辑器隐藏
   .editor-hide span{
     background-position: -800px -40px;
@@ -220,6 +224,12 @@ export default {
       width: 16px;
       height: 16px;
       background-position:  -1520px 0;
+  }
+  // 页面图标
+  .icon-UDPage .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position: -1320px 0;
   }
   // 容器图标
   .icon-UDUIContainer .icon-2 {

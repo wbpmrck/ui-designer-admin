@@ -3,8 +3,9 @@
       <div class="stage-wrapper">
         <div class="stage-title" :class="{active:currentSelection===stage}">
 
-          <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide" :title="stage.editorHide?'编辑器内隐藏':'编辑器内可见'">
-            <span class="icon"></span>
+          <!-- <div class="editor-visible" :class="{'editor-hide':stage.editorHide}" @click="toggleHide" :title="stage.editorHide?'编辑器内隐藏':'编辑器内可见'"> -->
+          <div class="editor-visible">
+            <!-- <span class="icon"></span> -->
           </div>
 
           <div class="child-ctl" :class="{open:stage.hasOwnProperty('__ud_attribute_children__') && stage.fold,close:stage.hasOwnProperty('__ud_attribute_children__') && !stage.fold}" @click="toggleFold">
@@ -99,74 +100,67 @@ export default {
   created() {
     //TODO:先创建一个空的舞台对象进去，做测试使用
     var rootStage = new UDStage();
+    rootStage.name({value:'舞台'})
 
-    rootStage.eventHandlers({
-      value:[
-        "event1",
-        "event2",
-      ]
-    })
+    // rootStage.eventHandlers({
+    //   value:[
+    //     "event1",
+    //     "event2",
+    //   ]
+    // })
 
-    //一个容器
-    let div1 = new UDUIContainer();
-    div1.x({value:20});
-    div1.y({value:30});
-    div1.name({value:'区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 '});
+    // //一个容器
+    // let div1 = new UDUIContainer();
+    // div1.x({value:20});
+    // div1.y({value:30});
+    // div1.name({value:'区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 '});
 
-    // 一个矩形
-    let rect1 = new UDRectangle();
-    rect1.x({value:20});
-    rect1.y({value:30});
-    rect1.alpha({value:11.5});
-    rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
+    // // 一个矩形
+    // let rect1 = new UDRectangle();
+    // rect1.x({value:20});
+    // rect1.y({value:30});
+    // rect1.alpha({value:11.5});
+    // rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
 
-    // 2个矩形
-    let rect2 = new UDRectangle();
-    rect2.x({value:20});
-    rect2.y({value:30});
-    rect2.name({value:'rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 '})
+    // // 2个矩形
+    // let rect2 = new UDRectangle();
+    // rect2.x({value:20});
+    // rect2.y({value:30});
+    // rect2.name({value:'rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 '})
 
-    // 矩形放在容器里
-    div1.addChild(rect1);
-    div1.addChild(rect2);
+    // // 矩形放在容器里
+    // div1.addChild(rect1);
+    // div1.addChild(rect2);
 
 
-    //一个容器
-    let div2 = new UDUIContainer();
-    div2.x({value:20});
-    div2.y({value:30});
-    div2.name({value:'区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 '});
+    // //一个容器
+    // let div2 = new UDUIContainer();
+    // div2.x({value:20});
+    // div2.y({value:30});
+    // div2.name({value:'区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 '});
 
-    // 3个矩形
-    let rect3 = new UDRectangle();
-    rect3.x({value:20});
-    rect3.y({value:30});
-    rect3.name({value:'rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3'})
-    rect3.eventHandlers({
-      value:[
-        "event31",
-        "event32",
-      ]
-    })
-    // 矩形放在容器里
-    div2.addChild(rect3);
+    // // 3个矩形
+    // let rect3 = new UDRectangle();
+    // rect3.x({value:20});
+    // rect3.y({value:30});
+    // rect3.name({value:'rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3'})
+    // rect3.eventHandlers({
+    //   value:[
+    //     "event31",
+    //     "event32",
+    //   ]
+    // })
+    // // 矩形放在容器里
+    // div2.addChild(rect3);
 
-    rootStage.name({value:'舞台 这是一个非常自由的可以自定义的舞台'})
-    // 容器放到舞台里
-    rootStage.addChild(div1);
-    rootStage.addChild(div2);
-    // this.stage = rootStage;
-
-    // this.$store.state.commit('updateObject',id,propName,propValue)
-    // this.$store.commit('setStage',rootStage)
-    
-
+    // // 容器放到舞台里
+    // rootStage.addChild(div1);
+    // rootStage.addChild(div2);
 
     console.log('tree commit')
     console.log(rootStage)
     this.$store.commit('setStage',rootStage)
 
-    console.log(div1.constructor.name);
     console.log(rootStage.children() && rootStage.children().value && rootStage.children().value.length>0);
   }
 }
@@ -216,7 +210,8 @@ export default {
     margin-left: 2px;
     width: 20px;
     height: 20px;
-    background: #151515;
+    // 2019年04月16日 注释：舞台不需要隐藏
+    // background: #151515;
     cursor: pointer;
     span {
       position:absolute;

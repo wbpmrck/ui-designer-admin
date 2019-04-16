@@ -1,5 +1,5 @@
 <template>
-    <div class="rectangle" :class="{disabled:disable}" @click="clickMe">
+    <div class="ui-container" :class="{disabled:disable}" @click="clickMe">
      
     </div>
 </template>
@@ -11,7 +11,7 @@ import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
 import {UDStage,UDUIContainer,UDRectangle,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
-  name: 'rectangle',
+  name: 'ui-container',
   props: [],
   props: ['name'],
   data(){
@@ -57,19 +57,19 @@ export default {
 
       let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个矩形
-      let rect1 = new UDRectangle();
-      rect1.name({value:'矩形'+sliblingCount});
+      let me = new UDUIContainer();
+      me.name({value:'区块容器'+sliblingCount});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{
-      //   object:rect1,
+      //   object:me,
       //   parent:this.currentSelection,
       //   scene:SCENE.OBJECT_TREE,
       // });
 
       //添加对象，保持当前选择的容器不变
       this.$store.commit('addObject',{
-        object:rect1,
+        object:me,
         parent:this.currentSelection,
       });
     },
@@ -81,11 +81,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.rectangle {
+.ui-container {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/rect.svg) no-repeat;
+    background: url(./assets/img/ui-container.svg) no-repeat;
 }
 
 </style>

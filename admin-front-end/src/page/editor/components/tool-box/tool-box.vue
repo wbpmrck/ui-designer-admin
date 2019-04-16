@@ -4,8 +4,11 @@
       <button @click="toggleExpand" class="icon-4 toggle-expand btn-clear" :title="isExpand?'点击折叠':'点击展开'"></button>
     </div>
     <div id="tool-list" class="scrollable-1">
-      <div class="tool-item pressable" v-for="tool in toolList" :key="tool.name" :title="tool.desc" :class="{active:currentScene===SCENE.TOOL_BOX && currentSelectTool===tool.name}">
-          <component :is="tool.def" :name="tool.name"></component>
+      <div class="tool-group" v-for="group in toolListGroup" :key="group.name" >
+        <div class="group-name">{{group.name}}</div>
+        <div class="tool-item pressable" v-for="tool in group.tools" :key="tool.name" :title="tool.desc" :class="{active:currentScene===SCENE.TOOL_BOX && currentSelectTool===tool.name}">
+            <component :is="tool.def" :name="tool.name"></component>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +19,7 @@
 import rectangle from './components/rectangle/rectangle'
 import toolImage from './components/image/image'
 import toolPage from './components/page/page'
+import uiContainer from './components/ui-container/ui-container'
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../model/ui-scene.js'
 
@@ -27,6 +31,7 @@ export default {
     rectangle,
     toolImage,
     toolPage,
+    uiContainer,
   },
    computed: {
      ...mapState({
@@ -51,6 +56,28 @@ export default {
         {name:'rectangle',def:rectangle,desc:'矩形'},
         {name:'tool-image',def:toolImage,desc:'图片'},
         {name:'tool-page',def:toolPage,desc:'页面'},
+        {name:'uiContainer',def:uiContainer,desc:'区块容器'},
+      ],
+      toolListGroup:[
+        {
+          name:'容器',
+          tools:[
+            {name:'tool-page',def:toolPage,desc:'页面'},
+            {name:'uiContainer',def:uiContainer,desc:'区块容器'},
+          ]
+        },
+        {
+          name:'基础图形',
+          tools:[
+            {name:'rectangle',def:rectangle,desc:'矩形'},
+          ]
+        },
+        {
+          name:'页面内容',
+          tools:[
+            {name:'tool-image',def:toolImage,desc:'图片'},
+          ]
+        },
       ],
     }
   },
@@ -97,10 +124,38 @@ export default {
   // 工具箱列表
   #tool-list {
     height: 100%;
-    padding-left: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
     padding-top: 4px;
     padding-bottom: 4px;
     text-align: left;
+
+    // 工具箱分组
+    .tool-group {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #2a2a2a;
+      .group-name{
+        position: absolute;
+        display: inline-block;
+        border: solid 1px #5b5b5b;
+        left: 65px;
+        top:0;
+
+        width:80px;
+        padding: 10px;
+        background-color: #262626;
+
+        visibility: hidden;
+      }
+    }
+    .tool-group:hover {
+      .group-name{
+        visibility: visible;
+      }
+    }
     .tool-item {
       display: inline-block;
       position: relative;
