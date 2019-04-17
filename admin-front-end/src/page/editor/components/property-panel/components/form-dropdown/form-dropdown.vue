@@ -33,6 +33,9 @@ export default {
         'UDTouchTurnPageEnum.SWIPE_DOWN':'手指下滑翻页',
         'UDTouchTurnPageEnum.SWIPE_LEFT':'手指左滑翻页',
         'UDTouchTurnPageEnum.SWIPE_RIGHT':'手指右滑翻页',
+        'UDClipMode.CLIP':'剪切内容',
+        'UDClipMode.VISIBLE':'允许内容溢出但不滚动',
+        'UDClipMode.SCROLL':'超出内容产生滚动条',
       }
     }
   },

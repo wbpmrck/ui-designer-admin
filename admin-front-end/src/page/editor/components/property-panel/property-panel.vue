@@ -1,6 +1,6 @@
 <template>
 
-      <panel id="property-panel" :class="{'after-tool-expand':isToolBoxExpand}" v-if="currentSelection">
+      <panel id="property-panel" class="scrollable-1" :class="{'after-tool-expand':isToolBoxExpand}" v-if="currentSelection">
         <div id="property-panel-header">
           <div class="object-name text-ellipsis">{{currentSelection.name().value}}</div>
           <div class="text">的属性</div>
@@ -439,6 +439,40 @@ export default {
             },
           ]
         },
+
+
+        {
+          name:'内容组织',
+          collapsed:false,
+          props:[
+           { 
+              field:'clipX',
+              // desc:'设备类型',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:24
+                }
+              ]
+            },
+           { 
+              field:'clipY',
+              // desc:'设备类型',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:24
+                }
+              ]
+            },
+          ]
+        },
+
+
         {
           name:'边框和阴影',
           collapsed:false,
@@ -498,10 +532,25 @@ export default {
     toggleCollapseGroup(g){
         g.collapsed =  !g.collapsed;
     },
+    toggleFoldAllProps(){
+      let collapsed = !this.forms[0].collapsed;
+      this.forms.forEach((g)=>{
+        g.collapsed =  collapsed;
+      })
+      return false;
+    },
     handleFieldChange(field,val){
       console.log(`handleFieldChange---field=[${field}],val=[${val}]`)
       this.currentSelection['__ud_attribute_'+field+'__'].value = val;
     }
+  },
+  created(){
+    //注册键盘事件
+    hotkeys('Shift+T', this.toggleFoldAllProps);
+  },
+  beforeDestroy(){
+    //释放键盘事件注册
+    hotkeys.unbind('Shift+T');
   }
 }
 </script>
@@ -510,14 +559,16 @@ export default {
 
 // 属性面板
 #property-panel {    
-    position: absolute;
+    position: fixed;
     top: 36px;
+    bottom: 0;
     left: 37px;
     // width: 300px;
     width: 260px;
     background: #232323;
     max-height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     z-index: 51;
     transition: initial;
 }

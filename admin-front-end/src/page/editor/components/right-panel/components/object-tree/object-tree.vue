@@ -120,15 +120,63 @@ export default {
       });
       // this.$set(this.stage,'fold',!this.stage.fold)
       // this.$store.commit('updateObject',this.stage._id().value,'fold',!this.stage.fold)
-    }
+    },
+    //模拟点击当前选择的项
+    toggleFoldSelectItem(){
+      this.$store.commit('updateObject',{
+        id:this.currentSelection._id().value,
+        propName:'fold',
+        propValue:!this.currentSelection.fold
+      });
+    },
+    //向上选择一个元素。注意这里是视觉上的向上选择。如果上一个元素被展开，则选择其最靠近自己的一个子元素
+    selectUpItem(){
+
+    },
+    /**
+     * 向下选择一个元素。注意这里是视觉上的向下选择。如果下一个元素被展开，则选择其最靠近自己的一个子元素
+     */
+    selectDownItem({from,searchChildren}={}){
+      if(from===undefined){from = this.currentSelection} //默认搜索当前选择的
+      if(searchChildren===undefined){searchChildren = true} //默认搜索孩子
+      //先看自己有没有展开，并且有子元素
+      if(!from.fold && from.children && from.children().value.length>0 && searchChildren){
+        //展开了，且有子元素，则选择第一个
+        this.$store.commit('selectItem',{
+          item:from.children().value[0],
+          scene:SCENE.OBJECT_TREE
+        });
+      }else if(from.parent){
+        //自己没展开，或者没有子元素，那就选择下一个兄弟元素
+        //如果自己是父亲的最后一个孩子，则后面没有兄弟
+        if(from.parent.indexOfChild(from)===from.parent.children().value.length-1){
+          //则把任务交给父亲，并且告诉父亲不要再搜索自己了
+          this.selectDownItem({from:from.parent,searchChildren:false})
+        }else{
+          //还有下一个兄弟元素，则选择之
+          let sibling = from.sibling(1);
+          this.$store.commit('selectItem',{
+            item:sibling,
+            scene:SCENE.OBJECT_TREE
+          });
+        }
+      }else{
+        //如果没有父亲，则表示他是stage,则无需处理
+      }
+    },
   },
   created() {
     //注册键盘事件
-    hotkeys('delete', this.deleteSelect);
+    hotkeys('delete,backspace', this.deleteSelect);
+    hotkeys('up', this.selectUpItem);
+    hotkeys('down', this.selectDownItem);
+    hotkeys('enter', this.toggleFoldSelectItem);
+    //选择stage
+    this.selectStage();
   },
   beforeDestroy(){
     //释放键盘事件注册
-    hotkeys.unbind('delete');
+    hotkeys.unbind('delete,backspace');
   }
 }
 </script>

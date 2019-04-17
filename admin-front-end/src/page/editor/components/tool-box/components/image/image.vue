@@ -51,19 +51,21 @@ export default {
 
       let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个图片
-      let url1 = new UDImage();
-      url1.name({value:'图片'+sliblingCount});
+      let me = new UDImage();
+      me.name({value:'图片'+sliblingCount});
+      me.w({value:50});
+      me.h({value:50});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{
-      //   object:url1,
+      //   object:me,
       //   parent:this.currentSelection,
       //   scene:SCENE.OBJECT_TREE,
       // });
 
       //添加对象，保持当前选择的容器不变
       this.$store.commit('addObject',{
-        object:url1,
+        object:me,
         parent:this.currentSelection,
       });
     },

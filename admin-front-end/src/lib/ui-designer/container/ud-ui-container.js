@@ -2,6 +2,7 @@ import UDUIObject from '../ui/ud-ui-object'
 import UDEvent from '../ud-event'
 import UDObject from "../ud-object"
 import UDAction from "../ud-action"
+import UDClipMode from "../enums/ud-clip-mode"
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
 
 const className = 'UDUIContainer'
@@ -46,6 +47,17 @@ class UDUIContainer extends UDUIObject{
         ]);
     }
     
+
+    
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({type:UDClipMode.getType(),desc:'X轴剪切',value:UDClipMode.CLIP})
+    clipX(){};
+    
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({type:UDClipMode.getType(),desc:'Y轴剪切',value:UDClipMode.CLIP})
+    clipY(){};
+ 
+ 
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({type:Types.ARRAY('UDObject'),desc:'节点的孩子',value:[]})

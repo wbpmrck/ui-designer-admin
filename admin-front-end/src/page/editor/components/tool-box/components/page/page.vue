@@ -61,6 +61,8 @@ export default {
       let me = new UDPage();
       me.name({value:'页面'+pageCount});
 
+      me.w({value:this.stage.sw().value});
+      me.h({value:this.stage.sh().value});
       //添加对象，保持当前选择的容器不变
       this.$store.commit('addObject',{
         object:me,

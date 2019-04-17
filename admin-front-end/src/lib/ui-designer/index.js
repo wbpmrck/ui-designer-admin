@@ -2,6 +2,9 @@
 import UDObjec  from "./ud-object"
 import UDUIObject  from "./ui/ud-ui-object"
 import UDRectangle  from "./ui/ud-rectangle"
+import UDCircle  from "./ui/ud-circle"
+import UDLine  from "./ui/ud-line"
+import UDText  from "./ui/ud-text"
 import UDImage  from "./ui/ud-image"
 import UDContainer  from "./container/ud-container"
 import UDUIContainer  from "./container/ud-ui-container"
@@ -34,6 +37,9 @@ export  {
     UDStage,  
     UDRectangle,  
     UDImage,  
+    UDCircle,  
+    UDLine,  
+    UDText,  
     UDCompareOperatorEnum,  
     UDArithmeticOperatorEnum,  
     UDLogicOperatorEnum,  

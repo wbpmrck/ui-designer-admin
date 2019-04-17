@@ -1,5 +1,5 @@
 <template>
-    <div class="rectangle" :class="{disabled:disable}" @click="clickMe">
+    <div class="circle" :class="{disabled:disable}" @click="clickMe">
      
     </div>
 </template>
@@ -9,9 +9,9 @@
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
-import {UDStage,UDUIContainer,UDRectangle,UDPage} from '../../../../../../lib/ui-designer/index.js'
+import {UDStage,UDUIContainer,UDCircle,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
-  name: 'rectangle',
+  name: 'circle',
   props: [],
   props: ['name'],
   data(){
@@ -58,9 +58,7 @@ export default {
       let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个矩形
       let me = new UDRectangle();
-      me.name({value:'矩形'+sliblingCount});
-      me.w({value:50});
-      me.h({value:50});
+      me.name({value:'圆形'+sliblingCount});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{
@@ -83,7 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.rectangle {
+.circle {
     display: inline-block;
     width: 100%;
     height: 100%;
