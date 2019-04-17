@@ -74,7 +74,8 @@ class UDUIContainer extends UDUIObject{
     removeChild(child){
         let index = this.indexOfChild(child);
         if(index>=0){
-            this.children.splice(index,1);
+            console.log('remove child:'+index)
+            this.children().value.splice(index,1);
 
             //TODO:在child身上触发“被删除”事件
             child.parent = undefined;
@@ -92,7 +93,7 @@ class UDUIContainer extends UDUIObject{
         let index = -1;
 
         for(let i=0;i<this.children().value.length;i++){
-            if(this.children().value[i]._id().value === child._id){
+            if(this.children().value[i]._id().value === child._id().value){
                 index =  i;
                 break;
             }

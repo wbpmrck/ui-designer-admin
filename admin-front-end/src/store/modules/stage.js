@@ -93,6 +93,15 @@ const mutations = {
     console.log('store addObject')
     parent.addChild && parent.addChild(object)
   },
+  deleteObject (state,{parent,object}){
+    console.log('store deleteObject')
+
+    if(parent){
+      parent.removeChild && parent.removeChild(object)
+    }else{
+      console.log('store deleteObject failed,no parent!')
+    }
+  },
 }
 
 export default {

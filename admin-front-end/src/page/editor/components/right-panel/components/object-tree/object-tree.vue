@@ -42,6 +42,7 @@ import { mapState } from 'vuex'
 import SCENE  from '../../../../../../model/ui-scene.js'
 import {UDStage,UDUIContainer,UDRectangle} from '../../../../../../lib/ui-designer/index.js'
 import objectItem from './components/object-item/object-item'
+import hotkeys from 'hotkeys-js';
 
 export default {
   name: 'object-tree',
@@ -66,6 +67,30 @@ export default {
     }
   }),
   methods:{
+    deleteSelect(event, handler){
+      // Prevent the default refresh event under WINDOWS system
+      event.preventDefault();
+
+      if(this.currentScene=== SCENE.OBJECT_TREE){
+        //选择当前元素的下一个兄弟
+        let nextSlibling = this.currentSelection.sibling(1);
+        if(!nextSlibling){
+          //如果没有兄弟，就选择父亲
+          nextSlibling = this.currentSelection.parent;
+        }
+        //删除当前选择的对象
+        this.$store.commit('deleteObject',{
+          object:this.currentSelection,
+          parent:this.currentSelection.parent,
+        });
+
+        //选择当前元素的下一个兄弟，或者是他父亲
+        this.$store.commit('selectItem',{
+          item:nextSlibling,
+          scene:SCENE.OBJECT_TREE
+        });
+      }
+    },
     selectStageEvent(){
       this.$store.commit('selectItem',{
         item:this.stage,
@@ -98,70 +123,12 @@ export default {
     }
   },
   created() {
-    //TODO:先创建一个空的舞台对象进去，做测试使用
-    var rootStage = new UDStage();
-    rootStage.name({value:'舞台'})
-
-    // rootStage.eventHandlers({
-    //   value:[
-    //     "event1",
-    //     "event2",
-    //   ]
-    // })
-
-    // //一个容器
-    // let div1 = new UDUIContainer();
-    // div1.x({value:20});
-    // div1.y({value:30});
-    // div1.name({value:'区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 区域1 '});
-
-    // // 一个矩形
-    // let rect1 = new UDRectangle();
-    // rect1.x({value:20});
-    // rect1.y({value:30});
-    // rect1.alpha({value:11.5});
-    // rect1.name({value:'rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 rect11 '})
-
-    // // 2个矩形
-    // let rect2 = new UDRectangle();
-    // rect2.x({value:20});
-    // rect2.y({value:30});
-    // rect2.name({value:'rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 rect22 '})
-
-    // // 矩形放在容器里
-    // div1.addChild(rect1);
-    // div1.addChild(rect2);
-
-
-    // //一个容器
-    // let div2 = new UDUIContainer();
-    // div2.x({value:20});
-    // div2.y({value:30});
-    // div2.name({value:'区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 区域2 '});
-
-    // // 3个矩形
-    // let rect3 = new UDRectangle();
-    // rect3.x({value:20});
-    // rect3.y({value:30});
-    // rect3.name({value:'rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3 rect3'})
-    // rect3.eventHandlers({
-    //   value:[
-    //     "event31",
-    //     "event32",
-    //   ]
-    // })
-    // // 矩形放在容器里
-    // div2.addChild(rect3);
-
-    // // 容器放到舞台里
-    // rootStage.addChild(div1);
-    // rootStage.addChild(div2);
-
-    console.log('tree commit')
-    console.log(rootStage)
-    this.$store.commit('setStage',rootStage)
-
-    console.log(rootStage.children() && rootStage.children().value && rootStage.children().value.length>0);
+    //注册键盘事件
+    hotkeys('delete', this.deleteSelect);
+  },
+  beforeDestroy(){
+    //释放键盘事件注册
+    hotkeys.unbind('delete');
   }
 }
 </script>

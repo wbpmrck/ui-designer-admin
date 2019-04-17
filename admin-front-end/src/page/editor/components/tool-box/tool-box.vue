@@ -159,9 +159,10 @@ export default {
     .tool-item {
       display: inline-block;
       position: relative;
-      width: 28px;
-      height: 28px;
-      padding: 5px;
+      width: 18px;
+      height: 18px;
+      // padding: 5px;
+      margin: 5px;
       opacity: .6;
       .disabled {
         opacity: .3;

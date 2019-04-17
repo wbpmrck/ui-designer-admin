@@ -95,6 +95,23 @@ class UDObject {
     }
 
     /**
+     * 获取对象的兄弟节点
+     * @param {Number} n :自己身后的第n个兄弟。默认是1
+     */
+    sibling(n){
+        n = n === undefined?1:n;
+        if(this.parent && this.parent.children().value.length>1){
+            //选择当前元素的下一个兄弟，或者是他父亲
+            let selfIndex = this.parent.indexOfChild(this);
+            let siblingIndex = (selfIndex+n)%this.parent.children().value.length;
+            let nextSlibling = this.parent.children().value.length>siblingIndex?this.parent.children().value[siblingIndex]:undefined;
+            return nextSlibling;
+        }else{
+            return undefined;
+        }
+    }
+
+    /**
      * 从应用中删除自身
      */
     delete(){

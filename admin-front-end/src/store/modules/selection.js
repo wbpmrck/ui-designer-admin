@@ -25,9 +25,14 @@ const mutations = {
   selectItem (state,payload){
     console.log('store selectItem，payload=')
     console.log(payload)
-    // state.stage = stage;
-    Vue.set(state, "currentSelect", payload.item)
-    Vue.set(state, "scene", payload.scene)
+
+    if(payload.item){
+      // state.stage = stage;
+      Vue.set(state, "currentSelect", payload.item)
+      Vue.set(state, "scene", payload.scene)
+    }else{
+      console.warn('can not select item,item is null')
+    }
   },
 
   /**
