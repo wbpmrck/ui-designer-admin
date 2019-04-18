@@ -231,6 +231,13 @@ export default {
       height: 16px;
       background-position:  -1560px 0;
   }
+  // 输入框图标
+  .icon-UDInput .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position:  -800px -160px;
+  }
+  
   // 线条图标
   .icon-UDLine .icon-2 {
       width: 16px;

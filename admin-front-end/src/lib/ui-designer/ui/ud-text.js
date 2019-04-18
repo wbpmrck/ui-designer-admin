@@ -32,6 +32,9 @@ class UDText extends UDTextBase{
     }
 
 
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({type:String.getType(),desc:'文本内容',value:""})
+    txt(){};
     
     @DECORATORS.serializable(true)
     @DECORATORS.field({type:UDClipMode.getType(),desc:'X轴剪切',value:UDClipMode.CLIP})

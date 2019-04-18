@@ -170,6 +170,83 @@ export default {
                 col:24 //24栏，表示这个表单占据一整行
               }]
             }, //文本类组件的文本内容
+            { 
+              field:'value',
+              desc:'输入内容',
+              form:[{
+                type:formText,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, //input组件的文本内容
+           
+          ]
+        },
+
+        {
+          name:'输入设置',
+          collapsed:false,
+          props:[
+             { 
+              field:'placeholder',
+              desc:'提示文本',
+              form:[{
+                type:formText,
+                col:24 //24栏，表示这个表单占据一整行
+              }]
+            }, 
+            { 
+              field:'phColor',
+              desc:'提示颜色',
+              form:[
+                {
+                  type:formColorPicker,
+                  col:10
+                },
+                {
+                  type:formText,
+                  col:14
+                }
+               ]
+            }, 
+
+            { 
+              field:'maxLen',
+              desc:'最大长度',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, //精度，保留2位小数
+                    step:1, //增加的步长
+                    min:0,
+                    max:99999, //最大值
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                },
+                {
+                  type:formSlider,
+                  param:{
+                    step:1, //增加的步长
+                    min:0,
+                    max:99999, //最大值
+                  },
+                  col:12 //12栏，表示这个表单占据半行
+                }  
+              ]
+            }, 
+            { 
+              field:'inputType',
+              desc:'输入类型',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:24
+                }
+              ]
+            },
+
           ]
         },
 

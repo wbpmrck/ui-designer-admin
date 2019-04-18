@@ -69,9 +69,6 @@ class UDTextBase extends UDUITwoDim{
    @DECORATORS.field({type:Number.getType(),desc:'行距',value:0,unit:UDAttributeUnit.PX})
    ls(){};
 
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:String.getType(),desc:'文本内容',value:""})
-   txt(){};
 
     // constructor({typeName,serializedString}) {
     constructor() {

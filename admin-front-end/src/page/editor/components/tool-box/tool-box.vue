@@ -16,6 +16,7 @@
 
 <script>
 
+import udInput from './components/input/input'
 import udText from './components/text/text'
 import udLine from './components/line/line'
 import udCircle from './components/circle/circle'
@@ -32,6 +33,7 @@ export default {
   },
   components: {
     rectangle,
+    udInput,
     udLine,
     udText,
     udCircle,
@@ -85,6 +87,12 @@ export default {
           tools:[
             {name:'tool-image',def:toolImage,desc:'图片'},
             {name:'tool-udText',def:udText,desc:'文本'},
+          ]
+        },
+        {
+          name:'用户输入',
+          tools:[
+            {name:'tool-ud-input',def:udInput,desc:'单行输入'},
           ]
         },
       ],

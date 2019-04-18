@@ -1,5 +1,5 @@
 <template>
-    <div class="text" :class="{disabled:disable}" @click="clickMe">
+    <div class="input" :class="{disabled:disable}" @click="clickMe">
      
     </div>
 </template>
@@ -9,9 +9,9 @@
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
-import {UDStage,UDUIContainer,UDText,UDPage} from '../../../../../../lib/ui-designer/index.js'
+import {UDStage,UDUIContainer,UDInput,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
-  name: 'ud-text',
+  name: 'ud-input',
   props: [],
   props: ['name'],
   data(){
@@ -57,13 +57,12 @@ export default {
 
       let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个矩形
-      let me = new UDText();
+      let me = new UDInput();
       me.x({value:50});
       me.y({value:50});
       me.w({value:250});
       me.h({value:50});
-      me.txt({value:'文本内容'+sliblingCount});
-      me.name({value:'文本内容'+sliblingCount});
+      me.name({value:'输入框'+sliblingCount});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{
@@ -86,11 +85,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.text {
+.input {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/text.svg) no-repeat;
+    background: url(./assets/img/input.svg) no-repeat;
 }
 
 </style>
