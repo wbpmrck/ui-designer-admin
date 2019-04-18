@@ -246,6 +246,18 @@ export default {
                 }
               ]
             },
+            { 
+              field:'forbidEnter',
+              desc:'禁用回车',
+              form:[
+                {
+                  type:formSwitch,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
 
           ]
         },

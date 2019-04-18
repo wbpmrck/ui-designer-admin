@@ -16,6 +16,7 @@
 
 <script>
 
+import udTextarea from './components/textarea/textarea'
 import udInput from './components/input/input'
 import udText from './components/text/text'
 import udLine from './components/line/line'
@@ -33,6 +34,7 @@ export default {
   },
   components: {
     rectangle,
+    udTextarea,
     udInput,
     udLine,
     udText,
@@ -93,6 +95,7 @@ export default {
           name:'用户输入',
           tools:[
             {name:'tool-ud-input',def:udInput,desc:'单行输入'},
+            {name:'tool-ud-multi-input',def:udTextarea,desc:'多行输入'},
           ]
         },
       ],

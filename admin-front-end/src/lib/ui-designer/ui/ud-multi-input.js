@@ -31,16 +31,9 @@ class UDMultiInput extends UDInput{
         ]);
     }
 
-
-    
     @DECORATORS.serializable(true)
-    @DECORATORS.field({type:UDClipMode.getType(),desc:'X轴剪切',value:UDClipMode.CLIP})
-    clipX(){};
-    
-    @DECORATORS.serializable(true)
-    @DECORATORS.field({type:UDClipMode.getType(),desc:'Y轴剪切',value:UDClipMode.CLIP})
-    clipY(){};
- 
+    @DECORATORS.field({type:Boolean.getType(),desc:'禁用回车',value:false})
+    forbidEnter(){};
 
     // constructor({typeName,serializedString}) {
     constructor() {

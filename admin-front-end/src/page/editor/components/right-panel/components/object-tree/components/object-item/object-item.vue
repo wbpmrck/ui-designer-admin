@@ -237,6 +237,13 @@ export default {
       height: 16px;
       background-position:  -800px -160px;
   }
+  // 多行输入框图标
+  .icon-UDMultiInput .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position:  -1600px -160px;
+  }
+  
   
   // 线条图标
   .icon-UDLine .icon-2 {
