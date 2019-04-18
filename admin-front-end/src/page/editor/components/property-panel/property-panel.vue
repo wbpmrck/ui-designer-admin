@@ -437,6 +437,105 @@ export default {
             }, 
           ]
         },
+
+
+        {
+          name:'字体样式',
+          collapsed:false,
+          props:[
+            { 
+              field:'font',
+              desc:'字体',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                    dropDataList:'fontFamily', 
+                  },
+                  col:15
+                }
+              ]
+            },
+            { 
+              field:'fs',
+              desc:'字号',
+              form:[
+                {
+                  type:formNumber,
+                  param:{
+                    precision:0, 
+                    step:1, //增加的步长
+                    min:0,
+                    max:160, //最大值
+                  },
+                  col:9
+                }
+              ]
+            },
+            { 
+              field:'fontColor',
+              desc:'字体颜色',
+              form:[
+                {
+                  type:formColorPicker,
+                  col:10
+                },
+                {
+                  type:formText,
+                  col:14
+                }
+               ]
+            }, 
+            { 
+              field:'alignH',
+              desc:'水平对齐',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
+            { 
+              field:'alignV',
+              desc:'垂直对齐',
+              form:[
+                {
+                  type:formDropDown,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
+            { 
+              field:'bold',
+              desc:'加粗',
+              form:[
+                {
+                  type:formSwitch,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
+            { 
+              field:'italic',
+              desc:'斜体',
+              form:[
+                {
+                  type:formSwitch,
+                  param:{
+                  },
+                  col:12
+                }
+              ]
+            },
+          ]
+        },     
         {
           name:'背景',
           collapsed:false,
@@ -482,6 +581,7 @@ export default {
             }, 
           ]
         },
+      
         {
           name:'3D旋转',
           collapsed:false,
@@ -660,8 +760,8 @@ export default {
     top: 36px;
     bottom: 0;
     left: 37px;
-    // width: 300px;
-    width: 260px;
+    width: 300px;
+    // width: 260px;
     background: #232323;
     max-height: 100%;
     overflow-y: scroll;

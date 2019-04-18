@@ -34,7 +34,7 @@ class UDTextBase extends UDUITwoDim{
 
 
     @DECORATORS.serializable(true)
-    @DECORATORS.field({type:String.getType(),desc:'字体家族',value:''})
+    @DECORATORS.field({type:String.getType(),desc:'字体家族',value:'Microsoft YaHei'})
     font(){};
  
    @DECORATORS.serializable(true)

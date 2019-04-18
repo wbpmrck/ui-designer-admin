@@ -171,12 +171,11 @@ div, input, textarea {
 .el-select-dropdown .el-scrollbar .el-select-dropdown__wrap {
     border:none;
     padding: 0 0 0 0;
-    /* 此属性需要和dropdown__list的max-height一起设置 */
     max-height: 380px; 
 }
 .el-select-dropdown .el-scrollbar .el-select-dropdown__list{
     overflow: visible;
-    max-height: 380px;
+    /* max-height: 380px; */
     outline: none;
     margin-bottom: 0;
     padding: 0 0 0 0;
