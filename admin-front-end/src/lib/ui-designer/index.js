@@ -2,6 +2,8 @@
 import UDObjec  from "./ud-object"
 // import UDUIObject  from "./ui/ud-ui-object"
 import UDRectangle  from "./ui/ud-rectangle"
+import UDInput  from "./ui/ud-input"
+import UDMultiInput  from "./ui/ud-multi-input"
 import UDCircle  from "./ui/ud-circle"
 import UDLine  from "./ui/ud-line"
 import UDText  from "./ui/ud-text"
@@ -36,6 +38,8 @@ export  {
     UDPage,  
     UDStage,  
     UDRectangle,  
+    UDInput,  
+    UDMultiInput,  
     UDImage,  
     UDCircle,  
     UDLine,  

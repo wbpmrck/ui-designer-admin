@@ -33,20 +33,16 @@ class UDTextBase extends UDUITwoDim{
     }
 
 
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({type:String.getType(),desc:'字体家族',value:''})
+    font(){};
+ 
    @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'字体大小',value:12,unit:UDAttributeUnit.PX})
+   @DECORATORS.field({type:Number.getType(),desc:'字号',value:12,unit:UDAttributeUnit.PX})
    fs(){};
    
    @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'行距',value:0,unit:UDAttributeUnit.PX})
-   ls(){};
-   
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:String.getType(),desc:'字体家族',value:''})
-   font(){};
-
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:String.getType(),desc:'字色',value:''})
+   @DECORATORS.field({type:String.getType(),desc:'字色',value:'#000'})
    fontColor(){};
 
    @DECORATORS.serializable(true)
@@ -68,7 +64,14 @@ class UDTextBase extends UDUITwoDim{
    @DECORATORS.serializable(true)
    @DECORATORS.field({type:Boolean.getType(),desc:'下划线',value:false})
    underline(){};
+   
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:Number.getType(),desc:'行距',value:0,unit:UDAttributeUnit.PX})
+   ls(){};
 
+   @DECORATORS.serializable(true)
+   @DECORATORS.field({type:String.getType(),desc:'文本内容',value:""})
+   txt(){};
 
     // constructor({typeName,serializedString}) {
     constructor() {

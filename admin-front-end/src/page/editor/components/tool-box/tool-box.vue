@@ -16,6 +16,7 @@
 
 <script>
 
+import udText from './components/text/text'
 import udLine from './components/line/line'
 import udCircle from './components/circle/circle'
 import rectangle from './components/rectangle/rectangle'
@@ -32,6 +33,7 @@ export default {
   components: {
     rectangle,
     udLine,
+    udText,
     udCircle,
     toolImage,
     toolPage,
@@ -82,6 +84,7 @@ export default {
           name:'页面内容',
           tools:[
             {name:'tool-image',def:toolImage,desc:'图片'},
+            {name:'tool-udText',def:udText,desc:'文本'},
           ]
         },
       ],

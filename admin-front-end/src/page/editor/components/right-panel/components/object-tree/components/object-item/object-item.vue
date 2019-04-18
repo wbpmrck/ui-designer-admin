@@ -237,6 +237,12 @@ export default {
       height: 16px;
       background-position:  -1640px 0;
   }
+  // 文本图标
+  .icon-UDText .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position:  -1400px 0;
+  }
   // 页面图标
   .icon-UDPage .icon-2 {
       width: 16px;
