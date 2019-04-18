@@ -1,12 +1,12 @@
-import UDUIObject from './ud-ui-object'
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import UDUITwoDim from './ud-ui-two-dim';
 
 const className = 'UDImage'
 /**
  * 表示可以被展示和显示的界面元素对象
  */
 @DECORATORS.serializable(true)
-class UDImage extends UDUIObject{
+class UDImage extends UDUITwoDim{
     
     static getTypeName(){
         return className

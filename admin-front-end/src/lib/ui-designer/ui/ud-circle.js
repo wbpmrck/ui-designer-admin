@@ -1,13 +1,13 @@
-import UDUIObject from './ud-ui-object'
 import {UDAttributeUnit}  from "../enums/ud-unit"
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import UDUITwoDim from './ud-ui-two-dim';
 
 const className = 'UDCircle'
 /**
  * 一个圆形
  */
 @DECORATORS.serializable(true)
-class UDCircle extends UDUIObject{
+class UDCircle extends UDUITwoDim{
     
     static getTypeName(){
         return className

@@ -16,6 +16,8 @@
 
 <script>
 
+import udLine from './components/line/line'
+import udCircle from './components/circle/circle'
 import rectangle from './components/rectangle/rectangle'
 import toolImage from './components/image/image'
 import toolPage from './components/page/page'
@@ -29,6 +31,8 @@ export default {
   },
   components: {
     rectangle,
+    udLine,
+    udCircle,
     toolImage,
     toolPage,
     uiContainer,
@@ -52,12 +56,12 @@ export default {
   data(){
     return {
       SCENE,
-      toolList:[
-        {name:'rectangle',def:rectangle,desc:'矩形'},
-        {name:'tool-image',def:toolImage,desc:'图片'},
-        {name:'tool-page',def:toolPage,desc:'页面'},
-        {name:'uiContainer',def:uiContainer,desc:'区块容器'},
-      ],
+      // toolList:[
+      //   {name:'rectangle',def:rectangle,desc:'矩形'},
+      //   {name:'tool-image',def:toolImage,desc:'图片'},
+      //   {name:'tool-page',def:toolPage,desc:'页面'},
+      //   {name:'uiContainer',def:uiContainer,desc:'区块容器'},
+      // ],
       toolListGroup:[
         {
           name:'容器',
@@ -70,6 +74,8 @@ export default {
           name:'基础图形',
           tools:[
             {name:'rectangle',def:rectangle,desc:'矩形'},
+            {name:'udCircle',def:udCircle,desc:'圆形'},
+            {name:'udLine',def:udLine,desc:'直线'},
           ]
         },
         {

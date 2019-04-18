@@ -1,9 +1,9 @@
-import UDUIObject from '../ui/ud-ui-object'
 import UDEvent from '../ud-event'
 import UDObject from "../ud-object"
 import UDAction from "../ud-action"
 import UDClipMode from "../enums/ud-clip-mode"
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import UDUITwoDim from '../ui/ud-ui-two-dim';
 
 const className = 'UDUIContainer'
 /**
@@ -12,7 +12,7 @@ const className = 'UDUIContainer'
  */
 
 @DECORATORS.serializable(true)
-class UDUIContainer extends UDUIObject{
+class UDUIContainer extends UDUITwoDim{
     
     static getTypeName(){
         return className

@@ -1,15 +1,15 @@
-import UDUIObject from './ud-ui-object'
 import UDTextAlignH from "../enums/ud-text-align-h"
 import UDTextAlignV from "../enums/ud-text-align-v"
 import {UDAttributeUnit}  from "../enums/ud-unit"
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import UDUITwoDim from './ud-ui-two-dim';
 
 const className = 'UDTextBase'
 /**
  * 表示可以处理文本展示类的控件，这是一个虚基类，不应该直接基于本类创建实例。
  */
 @DECORATORS.serializable(true)
-class UDTextBase extends UDUIObject{
+class UDTextBase extends UDUITwoDim{
     
     static getTypeName(){
         return className

@@ -225,6 +225,18 @@ export default {
       height: 16px;
       background-position:  -1520px 0;
   }
+  // 圆形图标
+  .icon-UDCircle .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position:  -1560px 0;
+  }
+  // 线条图标
+  .icon-UDLine .icon-2 {
+      width: 16px;
+      height: 16px;
+      background-position:  -1640px 0;
+  }
   // 页面图标
   .icon-UDPage .icon-2 {
       width: 16px;

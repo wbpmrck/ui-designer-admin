@@ -1,5 +1,5 @@
 <template>
-    <div class="circle" :class="{disabled:disable}" @click="clickMe">
+    <div class="line" :class="{disabled:disable}" @click="clickMe">
      
     </div>
 </template>
@@ -9,9 +9,9 @@
 import { mapGetters,mapState } from 'vuex'
 import SCENE from '../../../../../../model/ui-scene.js'
 import {isInstanceOf} from '../../../../../../lib/utils/oop.js'
-import {UDStage,UDUIContainer,UDCircle,UDPage} from '../../../../../../lib/ui-designer/index.js'
+import {UDStage,UDUIContainer,UDLine,UDPage} from '../../../../../../lib/ui-designer/index.js'
 export default {
-  name: 'udCircle',
+  name: 'udLine',
   props: [],
   props: ['name'],
   data(){
@@ -57,10 +57,12 @@ export default {
 
       let sliblingCount = this.currentSelection.children().value.length+1;
       // 一个矩形
-      let me = new UDCircle();
-      me.w({value:50});
-      me.h({value:50});
-      me.name({value:'圆形'+sliblingCount});
+      let me = new UDLine();
+      me.fx({value:50});
+      me.fy({value:50});
+      me.ex({value:150});
+      me.ey({value:150});
+      me.name({value:'线条'+sliblingCount});
 
       // 添加并且选中对象。这种方式可能不方便连续添加对象
       // this.$store.dispatch('addObjectAndSelectIt',{
@@ -83,11 +85,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.circle {
+.line {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/ellipse.svg) no-repeat;
+    background: url(./assets/img/line.svg) no-repeat;
 }
 
 </style>

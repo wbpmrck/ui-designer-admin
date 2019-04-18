@@ -2,6 +2,7 @@ import UDContainer from './ud-container'
 import UDEvent from '../ud-event'
 import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
 import {UDAttributeUnit} from '../enums/ud-unit'
+import UDClipMode from "../enums/ud-clip-mode"
 import UDDeviceEnv from '../enums/ud-device-env'
 import UDTouchTurnPageEnum from '../enums/ud-touch-turn-page-enum'
 
@@ -95,9 +96,15 @@ class UDPage extends UDContainer{
        3.内容控制
    */
 
+ 
+    
   @DECORATORS.serializable(true)
-  @DECORATORS.field({type:Boolean.getType(),desc:'是否剪切',value:false})
-  clipContent(){};
+  @DECORATORS.field({type:UDClipMode.getType(),desc:'X轴剪切',value:UDClipMode.CLIP})
+  clipX(){};
+  
+  @DECORATORS.serializable(true)
+  @DECORATORS.field({type:UDClipMode.getType(),desc:'Y轴剪切',value:UDClipMode.CLIP})
+  clipY(){};
 
 
 

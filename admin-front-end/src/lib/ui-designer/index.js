@@ -1,6 +1,6 @@
 
 import UDObjec  from "./ud-object"
-import UDUIObject  from "./ui/ud-ui-object"
+// import UDUIObject  from "./ui/ud-ui-object"
 import UDRectangle  from "./ui/ud-rectangle"
 import UDCircle  from "./ui/ud-circle"
 import UDLine  from "./ui/ud-line"
@@ -57,7 +57,7 @@ export  {
     UDObjec,
     UDRange,
     UDContainer,
-    UDUIObject,
+    // UDUIObject,
     UDEvent,
     UDEventHandler,
     UDAction,
