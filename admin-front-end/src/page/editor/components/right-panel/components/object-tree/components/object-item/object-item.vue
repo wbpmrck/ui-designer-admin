@@ -11,8 +11,8 @@
           <div class="gutter" :style="{width: itemLevel*20 + 'px' }"></div>
 
           <!-- 子元素展开按钮 -->
-          <div class="child-ctl" :class="{open:itemData.hasOwnProperty('__ud_attribute_children__') && itemData.fold,close:itemData.hasOwnProperty('__ud_attribute_children__') && !itemData.fold}" @click="toggleFold">
-            <span class="icon" v-if="itemData.hasOwnProperty('__ud_attribute_children__')"></span>
+          <div class="child-ctl" :class="{open:itemData.hasOwnProperty('__ud_attribute_children__') && itemData.fold,close:itemData.hasOwnProperty('__ud_attribute_children__') && !itemData.fold}" >
+            <span class="icon" v-if="itemData.hasOwnProperty('__ud_attribute_children__')  && itemData.children().value.length>0 " @click="toggleFold"></span>
           </div>
 
           <!-- item图标 -->

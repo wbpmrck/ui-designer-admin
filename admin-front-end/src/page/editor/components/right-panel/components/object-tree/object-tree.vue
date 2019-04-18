@@ -8,8 +8,8 @@
             <!-- <span class="icon"></span> -->
           </div>
 
-          <div class="child-ctl" :class="{open:stage.hasOwnProperty('__ud_attribute_children__') && stage.fold,close:stage.hasOwnProperty('__ud_attribute_children__') && !stage.fold}" @click="toggleFold">
-            <span class="icon" v-if="stage.hasOwnProperty('__ud_attribute_children__')"></span>
+          <div class="child-ctl" :class="{open:stage.hasOwnProperty('__ud_attribute_children__') && stage.fold,close:stage.hasOwnProperty('__ud_attribute_children__') && !stage.fold}">
+            <span class="icon"  @click="toggleFold" v-if="stage.hasOwnProperty('__ud_attribute_children__') && stage.children().value.length>0"></span>
           </div>
 
           <div class="icon-stage" @click="selectStage">
@@ -130,7 +130,49 @@ export default {
       });
     },
     //向上选择一个元素。注意这里是视觉上的向上选择。如果上一个元素被展开，则选择其最靠近自己的一个子元素
-    selectUpItem(){
+    selectUpItem({from,searchChildren}={}){
+
+      if(from===undefined){from = this.currentSelection} //默认搜索当前选择的
+      if(searchChildren===undefined){searchChildren = true} //默认搜索孩子
+
+      //是不是stage
+      if(from.parent){
+        //先看前面有没有兄弟节点
+        if(from.parent.indexOfChild(from)===0){
+          //自己已经是第一个了，则选择自己的父亲
+
+          this.$store.commit('selectItem',{
+            item:from.parent,
+            scene:SCENE.OBJECT_TREE
+          });
+        }else{
+          //前面还有兄弟
+          let siblingBefore =  from.sibling(-1);
+          if(siblingBefore.fold || !siblingBefore.children || siblingBefore.children().value.length===0 ){
+            //如果这个兄弟没有展开，或者没有孩子，则选择这个兄弟
+            this.$store.commit('selectItem',{
+              item:siblingBefore,
+              scene:SCENE.OBJECT_TREE
+            });
+          }else{
+            let findIn = siblingBefore.children().value[siblingBefore.children().value.length-1];
+            //这个兄弟有孩子且展开了，则需要让这个兄弟找他最后一个孩子的已展开的最后一个孩子
+            while(!findIn.fold && findIn.children && findIn.children().value.length>0){
+              //只要这最后一个孩子展开了，并且还有孩子，那就继续向下找
+              findIn= findIn.children().value[findIn.children().value.length-1]
+            }
+            //跳出循环，代表找到了最后一个可见的孩子，选择之
+            
+            this.$store.commit('selectItem',{
+              item:findIn,
+              scene:SCENE.OBJECT_TREE
+            });
+          }
+        }
+      }else{
+        //stage 什么也不做
+      }
+      
 
     },
     /**
@@ -164,6 +206,22 @@ export default {
         //如果没有父亲，则表示他是stage,则无需处理
       }
     },
+
+    forceOpenSelectItem(){
+      
+      this.$store.commit('updateObject',{
+        id:this.currentSelection._id().value,
+        propName:'fold',
+        propValue:false
+      });
+    },
+    forceFoldSelectItem(){      
+      this.$store.commit('updateObject',{
+        id:this.currentSelection._id().value,
+        propName:'fold',
+        propValue:true
+      });
+    }
   },
   created() {
     //注册键盘事件
@@ -171,12 +229,19 @@ export default {
     hotkeys('up', this.selectUpItem);
     hotkeys('down', this.selectDownItem);
     hotkeys('enter', this.toggleFoldSelectItem);
+    hotkeys('right', this.forceOpenSelectItem);
+    hotkeys('left', this.forceFoldSelectItem);
     //选择stage
     this.selectStage();
   },
   beforeDestroy(){
     //释放键盘事件注册
     hotkeys.unbind('delete,backspace');
+    hotkeys.unbind('up');
+    hotkeys.unbind('down');
+    hotkeys.unbind('enter');
+    hotkeys.unbind('right');
+    hotkeys.unbind('left');
   }
 }
 </script>
