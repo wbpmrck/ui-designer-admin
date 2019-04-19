@@ -1,7 +1,7 @@
 <template>
     <div id="visual-canvas" v-if="currentPage" class="scrollable-1">
         <!-- 缩放调节区域 -->
-        <scaler></scaler>
+        <scaler @change="changeScale"></scaler>
         <!-- 主场景区域 -->
         <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
             <!-- 舞台 -->
@@ -33,11 +33,14 @@ export default {
           //舞台容器偏移
           offset:{
               x:0,
-              y:0,
+              y:120,
           }
       }
   },
   methods:{
+      changeScale(scale){
+          this.scale = scale/100;
+      },
       initDrag(){
           let self = this;
           // target elements with the "draggable" class
@@ -90,8 +93,6 @@ export default {
 
     //注意因为画布父亲的text-align是center,所以默认画布就在中间,我们只需要把它向左偏移一半的位置
     this.offset.x = 0-this.stage.sw().value/2;
-    this.offset.y = 80;
-
   },
   mounted(){
       this.initDrag();
