@@ -24,11 +24,25 @@ html,body{
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;
     height:100%;
 }
+.bg-inverted {
+    filter: invert(100%);
+}
 /* 简易的需要垂直居中的元素 */
 .ud-v-middle {
     position: absolute;
     top:50%;
     transform:translateY(-50%);
+}
+.ud-all-middle {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translateX(-50%) translateY(-50%);
+}
+.ud-h-middle {
+    position: absolute;
+    left:50%;
+    transform:translateX(-50%);
 }
 .active {
     color:#fff;
