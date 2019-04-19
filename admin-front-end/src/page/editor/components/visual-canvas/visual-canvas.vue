@@ -1,7 +1,7 @@
 <template>
     <div id="visual-canvas" v-if="currentPage" class="scrollable-1">
         <!-- 缩放调节区域 -->
-        <scaler @change="changeScale"></scaler>
+        <scaler @change="changeScale" :init="scale*100"></scaler>
         <!-- 主场景区域 -->
         <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
             <!-- 舞台 -->

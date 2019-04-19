@@ -20,6 +20,10 @@ export default {
       }
   },
     props: {
+        init:{
+            type: Number,
+            default: 100
+        },
         step:{
             type: Number,
             default: 10
@@ -39,7 +43,7 @@ export default {
       }
   },
   created() {
-
+      this.val = this.init;
   },
   mounted(){
   },
