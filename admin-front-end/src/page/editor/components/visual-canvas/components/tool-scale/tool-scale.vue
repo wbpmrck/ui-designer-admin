@@ -72,8 +72,12 @@ export default {
                 position: absolute;
                 opacity: 0;
                 // width: 100px;
-                transition: opacity 1s;
+                transition: opacity .4s;
                 top:30px;
+
+                .el-input-number__increase:before{
+                    content:'%'
+                }
             }
         }
     }

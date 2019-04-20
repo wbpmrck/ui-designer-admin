@@ -2,13 +2,13 @@
     <div id="bg-ruler">
         <!-- 横向标尺 -->
         <div id="ruler-h" class="ruler" :style="{width:targetWidth+'px'}">
-            <span class="mark"  :style="{width:scaleUnit+'px'}" v-for="(mark,index) in horizontalMarks" :class="{'big':index %10 ===0,'small':index % 10 !== 0}"  :key="mark">
+            <span class="mark"  :style="{width:scaleUnit+'px'}" v-for="(mark,index) in horizontalMarks" :class="{'big':index %10 ===0,'medium':index %5 ===0,'small':index % 10 !== 0 && index % 10 !== 5}"  :key="mark">
                 <span class="label" v-if="index % 10 ===0">{{mark}}</span>
             </span>
         </div>
         <!-- 纵向标尺 -->
         <div id="ruler-v" class="ruler" :style="{width:targetHeight+'px'}">
-            <span class="mark"  :style="{width:scaleUnit+'px'}" v-for="(mark,index) in verticalMarks" :class="{'big':index %10 ===0,'small':index % 10 !== 0}"  :key="mark">
+            <span class="mark"  :style="{width:scaleUnit+'px'}" v-for="(mark,index) in verticalMarks" :class="{'big':index %10 ===0,'medium':index %5 ===0,'small':index % 10 !== 0 && index % 10 !== 5}"  :key="mark">
                 <span class="label" v-if="index % 10 ===0">{{mark}}</span>
             </span>
         </div>
@@ -96,6 +96,9 @@ export default {
             // 非整10刻度的单元
             .small{
                 height:4px;
+            }
+            .medium{
+                height:8px;
             }
             // 整10刻度单元
             .big{
