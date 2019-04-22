@@ -5,9 +5,21 @@
     <!-- 主场景区域 -->
     <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
       <!-- 舞台 -->
-      <div id="stage-root" :style="{width:stage.sw().value+'px',height:stage.sh().value+'px'}">
-        <bg-ruler :target-width="stage.sw().value" :target-height="stage.sh().value"></bg-ruler>
-        <UDPageAgent :ud-object="currentPage"></UDPageAgent>
+      <div id="stage-root" class="scrollable-1" :style="{width:stage.sw().value+30+'px',height:stage.sh().value+30+'px'}">
+        <!-- 尺子 FIXME:修改背景方式，让舞台包括ruler在内，让ruler刻度可以随着page滚动一起滚动-->
+        <div
+          class="bg-paper"
+          :style="{width:Math.max(stage.sw().value,currentPage.w().value+currentPage.x().value)+'px',height:Math.max(stage.sh().value,currentPage.h().value+currentPage.y().value)+'px'}"
+        ></div>
+        <!-- <bg-ruler :target-width="stage.sw().value" :target-height="stage.sh().value"></bg-ruler> -->
+        <bg-ruler
+          :target-width="Math.max(stage.sw().value,currentPage.w().value+currentPage.x().value)"
+          :target-height="Math.max(stage.sh().value,currentPage.h().value+currentPage.y().value)"
+        ></bg-ruler>
+
+        <div id="display-container">
+          <UDPageAgent :ud-object="currentPage"></UDPageAgent>
+        </div>
       </div>
     </div>
   </div>
@@ -154,11 +166,31 @@
 
       // 使用纯css3实现灰白格子效果(模拟类似透明图片的设计效果)
       #stage-root {
-        background-color: #fff;
-        background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
-          linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-        background-size: 16px 16px;
-        background-position: 0 0, 8px 8px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+
+        .bg-paper {
+          display: inline-block;
+          position: relative;
+          margin-left: 30px;
+          margin-top: 30px;
+          background-color: #fff;
+          background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
+            linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+          background-size: 16px 16px;
+          background-position: 0 0, 8px 8px;
+        }
+        #display-container {
+          display: inline-block;
+          position: absolute;
+          left: 30px;
+          top: 30px;
+        }
       }
     }
   }

@@ -2,87 +2,101 @@
     display: block;
     background: url(../img/icon-sprite.svg) no-repeat;
 }
+
 .icon-2 {
     display: block;
     background: url(../img/icon-sprite-2.svg) no-repeat;
 }
+
 .icon-3 {
     display: block;
     background: url(../img/icon-sprite-3.svg) no-repeat;
 }
+
 .icon-4 {
     display: block;
     background: url(../img/icon-sprite-4.svg) no-repeat;
 }
+
 .icon-5 {
     display: block;
     background: url(../img/icon-sprite-5.svg) no-repeat;
 }
-html,body{
+
+html,
+body {
     font-size: 12px;
-    color:#bfbfbf;
-    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;
-    height:100%;
+    color: #bfbfbf;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \\5FAE\8F6F\96C5\9ED1, Arial, sans-serif;
+    height: 100%;
 }
+
 .bg-inverted {
     filter: invert(100%);
 }
+
 /* 简易的需要垂直居中的元素 */
 .ud-v-middle {
     position: absolute;
-    top:50%;
-    transform:translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
 }
+
 .ud-all-middle {
     position: absolute;
-    left:50%;
-    top:50%;
-    transform:translateX(-50%) translateY(-50%);
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
+
 .ud-h-middle {
     position: absolute;
-    left:50%;
-    transform:translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
 }
+
 .active {
-    color:#fff;
+    color: #fff;
     font-weight: bold;
 }
-div, input, textarea {
+
+div,
+input,
+textarea {
     box-sizing: border-box;
 }
 
-.btn-clear{
+.btn-clear {
     cursor: pointer;
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
 }
+
 /* 可按下效果 */
-.pressable:active{
+.pressable:active {
     transform: translateX(2px) translateY(2px)
 }
 
 /* 滚动条定制 */
-.scrollable-1::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.scrollable-1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
 }
 
-.scrollable-1::-webkit-scrollbar
-{
-    width:0px;
-	max-width: 10px;
-	background-color: #F5F5F5;
+.scrollable-1::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    /* max-width: 10px; */
+    /* background-color: #F5F5F5; */
 }
 
-.scrollable-1::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+.scrollable-1::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 2px solid #555555;
 }
+
 /* 通用的文本长度限制和省略号效果 */
 .text-ellipsis {
     text-overflow: ellipsis;
@@ -94,7 +108,7 @@ div, input, textarea {
 /* 下面是对element-ui的定制 */
 
 /* ============ 数字输入框 ============  */
-#property-panel .el-input-number{
+#property-panel .el-input-number {
     width: 100%;
 }
 
@@ -102,15 +116,17 @@ div, input, textarea {
 #property-panel .el-input-number {
     line-height: 22px;
 }
-#property-panel .el-input-number span{
-    border:none;
+
+#property-panel .el-input-number span {
+    border: none;
 
     background: #151515;
     width: 16px;
-    height: 10px!important;
+    height: 10px !important;
     border-left: 1px solid #313131;
 }
-#property-panel .el-input-number i{
+
+#property-panel .el-input-number i {
     position: absolute;
     width: 12px;
     height: 12px;
@@ -138,18 +154,19 @@ div, input, textarea {
     /* color: #999; */
     color: #ffa800;
 }
+
 #property-panel .el-input-number .el-icon-arrow-up:before {
     /* content: "\E610"; */
 }
 
 
 /* ============  文本框 ============  */
-#property-panel .el-input__inner{
+#property-panel .el-input__inner {
     height: 22px;
     font-size: 12px;
     line-height: 22px;
     border-radius: 0;
-    transition: border .2s cubic-bezier(.645,.045,.355,1),background .2s cubic-bezier(.645,.045,.355,1),box-shadow .2s cubic-bezier(.645,.045,.355,1);
+    transition: border .2s cubic-bezier(.645, .045, .355, 1), background .2s cubic-bezier(.645, .045, .355, 1), box-shadow .2s cubic-bezier(.645, .045, .355, 1);
     border: 1px solid #444;
     color: #a0a0a0;
     background-color: #353535;
@@ -171,23 +188,24 @@ div, input, textarea {
 
 #app .el-color-picker {
     position: absolute;
-    top:50%;
+    top: 50%;
     transform: translateY(-50%);
-    width:100%;
+    width: 100%;
 }
 
 #app .el-color-picker .el-color-picker__trigger {
-    border:none;
-    width:100%;
+    border: none;
+    width: 100%;
 }
 
 /* ============  下拉框 ============  */
 .el-select-dropdown .el-scrollbar .el-select-dropdown__wrap {
-    border:none;
+    border: none;
     padding: 0 0 0 0;
-    max-height: 380px; 
+    max-height: 380px;
 }
-.el-select-dropdown .el-scrollbar .el-select-dropdown__list{
+
+.el-select-dropdown .el-scrollbar .el-select-dropdown__list {
     overflow: visible;
     /* max-height: 380px; */
     outline: none;
@@ -195,16 +213,16 @@ div, input, textarea {
     padding: 0 0 0 0;
     list-style: none;
 
-    color: #a0a0a0!important;
-    border: 1px solid #353535!important;
+    color: #a0a0a0 !important;
+    border: 1px solid #353535 !important;
     background: #353535;
-    border-bottom-left-radius: 2px!important;
-    border-bottom-right-radius: 2px!important;
+    border-bottom-left-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     box-shadow: 2px 2px 5px #1d1d1d;
 
-    box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+    box-shadow: 0 1px 6px hsla(0, 0%, 39%, .2);
     /* border-radius: 6px; */
     box-sizing: border-box;
     z-index: 1050;
@@ -212,7 +230,8 @@ div, input, textarea {
     overflow: hidden;
     font-size: 12px;
 }
-.el-select-dropdown .el-scrollbar .el-select-dropdown__item{
+
+.el-select-dropdown .el-scrollbar .el-select-dropdown__item {
     color: #a0a0a0;
     /* padding: 7px 15px; */
     font-weight: 400;
@@ -223,17 +242,17 @@ div, input, textarea {
     -webkit-transition: background .3s ease;
     transition: background .3s ease;
 
-    border: 1px solid #353535!important;
+    border: 1px solid #353535 !important;
     background: #353535;
-    border-bottom-left-radius: 2px!important;
-    border-bottom-right-radius: 2px!important;
+    border-bottom-left-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     box-shadow: 2px 2px 5px #1d1d1d;
 
 
     border: 1px solid #d9d9d9;
-    box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+    box-shadow: 0 1px 6px hsla(0, 0%, 39%, .2);
     /* border-radius: 6px; */
     box-sizing: border-box;
     z-index: 1050;
@@ -241,40 +260,45 @@ div, input, textarea {
     overflow: hidden;
     font-size: 12px;
 }
+
 .el-select-dropdown .el-scrollbar .el-select-dropdown__item:hover {
     background: #151515;
     /* color: #fff; */
     color: #ffa800;
 }
-.form-dropdown .el-select{
+
+.form-dropdown .el-select {
     width: 100%;
 }
 
-#app .el-switch__core{
-    width: 100%!important;
+#app .el-switch__core {
+    width: 100% !important;
 }
 
-#app .el-switch{
+#app .el-switch {
     width: 100%;
 }
 
 /* ============  表单标签框 ============  */
-#app .el-form-item__label{
+#app .el-form-item__label {
     font-size: 12px;
     color: #a0a0a0;
 }
+
 /* 表单项 */
 #app .el-form-item {
     margin-bottom: 0px;
 }
+
 #app .el-form-item__label {
-    padding-right:6px;
+    padding-right: 6px;
 }
 
 /* 只有第一个表单item左侧需要预留label的空间 */
-#app .el-form-item__content{
-    margin-left: 0!important;
+#app .el-form-item__content {
+    margin-left: 0 !important;
 }
-#app .first .el-form-item__content{
-    margin-left: 55px!important;
+
+#app .first .el-form-item__content {
+    margin-left: 55px !important;
 }

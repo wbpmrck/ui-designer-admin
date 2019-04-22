@@ -78,13 +78,13 @@
 <style lang="scss" scoped>
   #bg-ruler {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 30px;
+    top: 30px;
     right: 0;
     bottom: 0;
     display: inline-block;
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
     // 尺子容器
     .ruler {
       position: absolute;
