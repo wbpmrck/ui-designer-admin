@@ -6,7 +6,6 @@
     <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
       <!-- 舞台 -->
       <div id="stage-root" class="scrollable-1" :style="{width:stage.sw().value+30+'px',height:stage.sh().value+30+'px'}">
-        <!-- 尺子 FIXME:修改背景方式，让舞台包括ruler在内，让ruler刻度可以随着page滚动一起滚动-->
         <div
           class="bg-paper"
           :style="{width:Math.max(stage.sw().value,currentPage.w().value+currentPage.x().value)+'px',height:Math.max(stage.sh().value,currentPage.h().value+currentPage.y().value)+'px'}"

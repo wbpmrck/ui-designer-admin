@@ -1,28 +1,43 @@
 <template>
-  <div class="ud-page" :style="styleObject"></div>
+  <div class="ud-page scrollable-1" :style="styleObject" :id="'agent-'+udObject._id().value">
+    <component
+      :is="visualAgents[child.constructor.getTypeName()]"
+      :ud-object="child"
+      v-for="child in udObject.__ud_attribute_children__.value"
+      :key="child.__ud_attribute__id__.value"
+    ></component>
+  </div>
 </template>
 
 <script>
   /*
-                                   这是一个用于在设计器中渲染Page的类:
-                                   特性：
+                                    这是一个用于在设计器中渲染Page的类:
+                                    特性：
                                     1、Page的设计器代理不同于其他的UI元素，其并不支持拖动改变大小、位置。原因是：日常编辑和设计过程中，用户经常是在页面范围内部进行拖拽等操作，这样设计可以防止用户
                                     错误的操作导致Page的位置、大小发生改变
-                                   */
+                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
+  import UDRectangle from '../ud-rect/ud-rect.vue';
 
   export default {
     name: 'ud-page',
     data() {
-      return {};
+      return {
+        visualAgents: {
+          UDRectangle
+        }
+      };
     },
     props: {
       udObject: {
         type: Object,
         default: {}
       }
+    },
+    components: {
+      UDRectangle
     },
 
     computed: {
@@ -45,7 +60,11 @@
     },
     methods: {},
     created() {},
-    mounted() {}
+    mounted() {
+      //   alert(this.udObject.__ud_attribute_children__.value.length);
+      //   alert(this.udObject.__ud_attribute_children__.value[0].name().value);
+      //   alert(this.udObject.__ud_attribute_children__.value[0].constructor.getTypeName());
+    }
   };
 </script>
 
