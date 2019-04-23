@@ -1,11 +1,21 @@
 import UDObject from '../ud-object'
 import UDEvent from '../ud-event'
-import {UDAttributeUnit}  from "../enums/ud-unit"
+import {
+    UDAttributeUnit
+} from "../enums/ud-unit"
 import UDTouchEventContext from "../gesture/ud-touch-event-context"
 import UDTouch from "../gesture/ud-touch"
 import UDRange from "../enums/ud-range"
 import UDAction from "../ud-action"
-import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import {
+    regEnums,
+    regClass,
+    createClassObject,
+    Types,
+    DECORATORS,
+    field,
+    UDAttribute
+} from "../ud-runtime"
 import UDUIOneDim from './ud-ui-one-dim';
 
 const className = 'UDUITwoDim'
@@ -13,9 +23,9 @@ const className = 'UDUITwoDim'
  * 所有二维图形的基类
  */
 @DECORATORS.serializable(true)
-class UDUITwoDim extends UDUIOneDim{
-    
-    static getTypeName(){
+class UDUITwoDim extends UDUIOneDim {
+
+    static getTypeName() {
         return className
     }
     /**
@@ -23,41 +33,121 @@ class UDUITwoDim extends UDUIOneDim{
      * 
      * 定义了一个类型支持的事件，从而可以允许可视化编辑器辅助用户进行相关配置
      */
-    static getSupportEvents(){
+    static getSupportEvents() {
         return super.getSupportEvents().concat([
-            new UDEvent({name:'tap',desc:'手指/光标单击',contextParams:[]}),
-            new UDEvent({name:'touchStart',desc:'手指/光标按下',contextParams:[
-                new UDAttribute({name:'touchEvent',desc:'按下的手势位置',valueType:UDTouch.getType()})
-            ]}),
-            new UDEvent({name:'move',desc:'手指/光标移动',contextParams:[
-                new UDAttribute({name:'touchEvent',desc:'移动过程中的手势信息',valueType:UDTouchEventContext.getType()})
-            ]}),
-            new UDEvent({name:'touchEnd',desc:'手指/光标抬起',contextParams:[
-                new UDAttribute({name:'touchEvent',desc:'抬起的手势位置',valueType:UDTouch.getType()})
-            ]}),
-            new UDEvent({name:'swipeLeft',desc:'手指/光标向左滑动',contextParams:[]}),
-            new UDEvent({name:'swipeRight',desc:'手指/光标向右滑动',contextParams:[]}),
-            new UDEvent({name:'swipeUp',desc:'手指/光标向上滑动',contextParams:[]}),
-            new UDEvent({name:'swipeDown',desc:'手指/光标向下滑动',contextParams:[]}),
-            new UDEvent({name:'mouseEnter',desc:'光标移入',contextParams:[]}),
-            new UDEvent({name:'mouseLeave',desc:'光标移出',contextParams:[]}),
+            new UDEvent({
+                name: 'tap',
+                desc: '手指/光标单击',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'touchStart',
+                desc: '手指/光标按下',
+                contextParams: [
+                    new UDAttribute({
+                        name: 'touchEvent',
+                        desc: '按下的手势位置',
+                        valueType: UDTouch.getType()
+                    })
+                ]
+            }),
+            new UDEvent({
+                name: 'move',
+                desc: '手指/光标移动',
+                contextParams: [
+                    new UDAttribute({
+                        name: 'touchEvent',
+                        desc: '移动过程中的手势信息',
+                        valueType: UDTouchEventContext.getType()
+                    })
+                ]
+            }),
+            new UDEvent({
+                name: 'touchEnd',
+                desc: '手指/光标抬起',
+                contextParams: [
+                    new UDAttribute({
+                        name: 'touchEvent',
+                        desc: '抬起的手势位置',
+                        valueType: UDTouch.getType()
+                    })
+                ]
+            }),
+            new UDEvent({
+                name: 'swipeLeft',
+                desc: '手指/光标向左滑动',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'swipeRight',
+                desc: '手指/光标向右滑动',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'swipeUp',
+                desc: '手指/光标向上滑动',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'swipeDown',
+                desc: '手指/光标向下滑动',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'mouseEnter',
+                desc: '光标移入',
+                contextParams: []
+            }),
+            new UDEvent({
+                name: 'mouseLeave',
+                desc: '光标移出',
+                contextParams: []
+            }),
         ]);
     }
 
     /**
      * 获取该对象支持的行为
      */
-    static getSupportActions(){
+    static getSupportActions() {
         return super.getSupportActions().concat([
-            new UDAction({name:'show',desc:'显示对象',params:[]}),
-            new UDAction({name:'hide',desc:'隐藏对象',params:[]}),
-            new UDAction({name:'toggleShow',desc:'交替显示/隐藏对象',params:[]}),
-            new UDAction({name:'placeZindexTop',desc:'置于顶层',params:[
-                new UDAttribute({name:'range',desc:'适用范围',valueType:UDRange.getType()})
-            ]}),
-            new UDAction({name:'placeZindexBottom',desc:'置于底层',params:[
-                new UDAttribute({name:'range',desc:'适用范围',valueType:UDRange.getType()})
-            ]})
+            new UDAction({
+                name: 'show',
+                desc: '显示对象',
+                params: []
+            }),
+            new UDAction({
+                name: 'hide',
+                desc: '隐藏对象',
+                params: []
+            }),
+            new UDAction({
+                name: 'toggleShow',
+                desc: '交替显示/隐藏对象',
+                params: []
+            }),
+            new UDAction({
+                name: 'placeZindexTop',
+                desc: '置于顶层',
+                params: [
+                    new UDAttribute({
+                        name: 'range',
+                        desc: '适用范围',
+                        valueType: UDRange.getType()
+                    })
+                ]
+            }),
+            new UDAction({
+                name: 'placeZindexBottom',
+                desc: '置于底层',
+                params: [
+                    new UDAttribute({
+                        name: 'range',
+                        desc: '适用范围',
+                        valueType: UDRange.getType()
+                    })
+                ]
+            })
         ]);
     }
 
@@ -65,20 +155,40 @@ class UDUITwoDim extends UDUIOneDim{
         1.位置相关
     */
     @DECORATORS.serializable(true)
-    @DECORATORS.field({type:Number.getType(),desc:'x坐标',value:0,unit:UDAttributeUnit.PX})
-    x(){};
-    
-    @DECORATORS.serializable(true)
-    @DECORATORS.field({type:Number.getType(),desc:'y坐标',value:0,unit:UDAttributeUnit.PX})
-    y(){};
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: 'x坐标',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    x() {};
 
     @DECORATORS.serializable(true)
-    @DECORATORS.field({type:Number.getType(),desc:'宽度',value:0,unit:UDAttributeUnit.PX})
-    w(){};
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: 'y坐标',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    y() {};
 
     @DECORATORS.serializable(true)
-    @DECORATORS.field({type:Number.getType(),desc:'高度',value:0,unit:UDAttributeUnit.PX})
-    h(){};
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '宽度',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    w() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '高度',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    h() {};
 
 
 
@@ -86,17 +196,22 @@ class UDUITwoDim extends UDUIOneDim{
         2.边框和阴影
     */
 
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'边框圆角',value:0,unit:UDAttributeUnit.PX})
-   borderRadius(){};
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '边框宽度',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    borderWidth() {};
 
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:Number.getType(),desc:'边框宽度',value:0,unit:UDAttributeUnit.PX})
-   borderWidth(){};
-
-   @DECORATORS.serializable(true)
-   @DECORATORS.field({type:String.getType(),desc:'边框颜色',value:''})
-   borderColor(){};
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: String.getType(),
+        desc: '边框颜色',
+        value: ''
+    })
+    borderColor() {};
 
 
     // constructor({typeName,serializedString}) {
@@ -104,6 +219,6 @@ class UDUITwoDim extends UDUIOneDim{
         super();
     }
 }
-regClass(className,UDUITwoDim)
+regClass(className, UDUITwoDim)
 
 export default UDUITwoDim;

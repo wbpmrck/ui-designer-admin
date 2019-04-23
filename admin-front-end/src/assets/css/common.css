@@ -63,6 +63,7 @@ body {
 div,
 input,
 textarea {
+    touch-action: none;
     box-sizing: border-box;
 }
 
@@ -102,6 +103,12 @@ textarea {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+/* 可视化编辑区域的基础样式重置 */
+#display-container {
+    color: #000;
+    box-sizing: border-box;
 }
 
 

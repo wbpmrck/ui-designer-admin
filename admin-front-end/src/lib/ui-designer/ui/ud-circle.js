@@ -1,5 +1,15 @@
-import {UDAttributeUnit}  from "../enums/ud-unit"
-import {regEnums,regClass,createClassObject,Types,DECORATORS,field,UDAttribute} from "../ud-runtime"
+import {
+    UDAttributeUnit
+} from "../enums/ud-unit"
+import {
+    regEnums,
+    regClass,
+    createClassObject,
+    Types,
+    DECORATORS,
+    field,
+    UDAttribute
+} from "../ud-runtime"
 import UDUITwoDim from './ud-ui-two-dim';
 
 const className = 'UDCircle'
@@ -7,9 +17,9 @@ const className = 'UDCircle'
  * 一个圆形
  */
 @DECORATORS.serializable(true)
-class UDCircle extends UDUITwoDim{
-    
-    static getTypeName(){
+class UDCircle extends UDUITwoDim {
+
+    static getTypeName() {
         return className
     }
     /**
@@ -17,17 +27,15 @@ class UDCircle extends UDUITwoDim{
      * 
      * 定义了一个类型支持的事件，从而可以允许可视化编辑器辅助用户进行相关配置
      */
-    static getSupportEvents(){
-        return super.getSupportEvents().concat([
-        ]);
+    static getSupportEvents() {
+        return super.getSupportEvents().concat([]);
     }
 
     /**
      * 获取该对象支持的行为
      */
-    static getSupportActions(){
-        return super.getSupportActions().concat([
-        ]);
+    static getSupportActions() {
+        return super.getSupportActions().concat([]);
     }
 
     // constructor({typeName,serializedString}) {
@@ -35,6 +43,6 @@ class UDCircle extends UDUITwoDim{
         super();
     }
 }
-regClass(className,UDCircle)
+regClass(className, UDCircle)
 
 export default UDCircle;

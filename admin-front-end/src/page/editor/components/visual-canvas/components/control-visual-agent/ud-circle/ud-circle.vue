@@ -1,17 +1,17 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-rect" :style="styleObject" @click.stop="selectMe"></div>
+  <div :id="'agent-'+udObject._id().value" class="ud-circle" :style="styleObject" @click.stop="selectMe"></div>
 </template>
 
 <script>
   /*
-                                                                                                            矩形
-                                                                                                            */
+                                                                                                                矩形
+                                                                                                                */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
   export default {
-    name: 'ud-rect',
+    name: 'ud-circle',
     data() {
       return {
         offset: {
@@ -50,7 +50,6 @@
             this.udObject.rotateZ().value
           }deg)`,
           visibility: this.udObject.editorHide ? 'hidden' : 'visible',
-          'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,
           'border-style': 'solid'
@@ -180,6 +179,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-rect {
+  .ud-circle {
   }
 </style>
