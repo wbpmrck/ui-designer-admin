@@ -3,7 +3,8 @@
     <!-- 缩放调节区域 -->
     <scaler @change="changeScale" :init="scale*100"></scaler>
     <!-- 主场景区域 -->
-    <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
+    <!-- <div id="canvas-wrapper" class="not-drag" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}"> -->
+    <div id="canvas-wrapper" :style="{ transform: 'scale('+scale+')  translate(' + offset.x + 'px, ' + offset.y + 'px)'}">
       <!-- 舞台 -->
       <div id="stage-root" class="scrollable-1" :style="{width:stage.sw().value+30+'px',height:stage.sh().value+30+'px'}">
         <div
@@ -103,6 +104,9 @@
     },
     mounted() {
       this.initDrag();
+    },
+    beforeDestroy() {
+      interact('#visual-canvas').unset();
     },
     computed: {
       ...mapState({
