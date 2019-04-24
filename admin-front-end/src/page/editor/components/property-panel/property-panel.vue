@@ -489,6 +489,18 @@
                 ]
               },
               {
+                field: 'lockRatio',
+                desc: '等比缩放',
+                form: [
+                  {
+                    type: formSwitch,
+                    param: {},
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+
+              {
                 field: 'z',
                 desc: 'Z轴',
                 form: [

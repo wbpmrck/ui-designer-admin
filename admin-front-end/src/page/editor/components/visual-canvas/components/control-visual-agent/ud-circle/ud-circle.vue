@@ -13,8 +13,8 @@
 
 <script>
   /*
-                                                                                                                                                    矩形
-                                                                                                                                                    */
+                                                                                                                                                        矩形
+                                                                                                                                                        */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -153,6 +153,7 @@
               bottom: '.op-bottom',
               top: '.op-top'
             },
+            preserveAspectRatio: this.udObject.lockRatio().value,
 
             modifiers: [
               // minimum size NOTICE:注意，interact有坑，这个min必须大于0,否则resize事件拿不到正确的width,height
@@ -218,6 +219,12 @@
 
     beforeDestroy() {
       interact('#' + 'agent-' + this.udObject._id().value).unset();
+    },
+    watch: {
+      'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
+        interact('#' + 'agent-' + this.udObject._id().value).unset();
+        this.initDrag();
+      }
     },
     mounted() {
       this.initDrag();

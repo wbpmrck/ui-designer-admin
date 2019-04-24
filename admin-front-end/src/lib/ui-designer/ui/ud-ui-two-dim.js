@@ -190,6 +190,13 @@ class UDUITwoDim extends UDUIOneDim {
     })
     h() {};
 
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Boolean.getType(),
+        desc: '锁定',
+        value: false
+    })
+    lockRatio() {};
 
 
     /*

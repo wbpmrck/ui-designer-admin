@@ -7,8 +7,8 @@
 
 <script>
   /*
-                                                                                                                                                矩形
-                                                                                                                                                */
+                                                                                                                                                            矩形
+                                                                                                                                                            */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -138,6 +138,7 @@
               top: '.op-top'
             },
 
+            preserveAspectRatio: this.udObject.lockRatio().value,
             modifiers: [
               // minimum size NOTICE:注意，interact有坑，这个min必须大于0,否则resize事件拿不到正确的width,height
               interact.modifiers.restrictSize({
@@ -202,6 +203,35 @@
 
     beforeDestroy() {
       interact('#' + 'agent-' + this.udObject._id().value).unset();
+    },
+    watch: {
+      'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
+        interact('#' + 'agent-' + this.udObject._id().value).unset();
+        this.initDrag();
+      },
+
+      'udObject.__ud_attribute_url__.value': function(newVal, oldVal) {
+        function getUrlMeta(url, cb) {
+          var img = new Image();
+          img.addEventListener('load', function() {
+            cb && cb(this.naturalWidth, this.naturalHeight);
+          });
+          img.src = url;
+        }
+        //根据最新的url,获取图片大小，重新修改图片高宽
+        getUrlMeta(newVal, (w, h) => {
+          this.$store.commit('updateObjectUDProperty', {
+            id: this.udObject._id().value,
+            propName: 'w',
+            propValue: w
+          });
+          this.$store.commit('updateObjectUDProperty', {
+            id: this.udObject._id().value,
+            propName: 'h',
+            propValue: h
+          });
+        });
+      }
     },
     mounted() {
       this.initDrag();
