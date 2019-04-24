@@ -209,7 +209,7 @@ class UDUITwoDim extends UDUIOneDim {
     @DECORATORS.field({
         type: String.getType(),
         desc: '边框颜色',
-        value: ''
+        value: '#000'
     })
     borderColor() {};
 

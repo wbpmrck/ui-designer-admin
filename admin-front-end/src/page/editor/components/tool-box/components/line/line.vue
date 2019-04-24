@@ -58,6 +58,7 @@
         me.by({ value: 50 });
         me.ex({ value: 150 });
         me.ey({ value: 150 });
+        me.bgColor({ value: '#000' });
         me.name({ value: '线条' + sliblingCount });
 
         // 添加并且选中对象。这种方式可能不方便连续添加对象
