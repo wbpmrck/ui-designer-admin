@@ -6,8 +6,8 @@
 
 <script>
   /*
-                                                                                                                矩形
-                                                                                                                */
+                                                                                                                  矩形
+                                                                                                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -120,7 +120,12 @@
           })
           .resizable({
             // resize from all edges and corners
-            edges: { left: true, right: true, bottom: true, top: true },
+            edges: {
+              left: '.op-left',
+              right: '.op-right',
+              bottom: '.op-bottom',
+              top: '.op-top'
+            },
 
             modifiers: [
               // minimum size NOTICE:注意，interact有坑，这个min必须大于0,否则resize事件拿不到正确的width,height

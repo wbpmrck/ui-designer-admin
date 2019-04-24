@@ -9,8 +9,8 @@
 
 <script>
   /*
-                                                                                                                                          矩形
-                                                                                                                                          */
+                                                                                                                                                  矩形
+                                                                                                                                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -76,9 +76,15 @@
           // cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 + this.udObject.borderWidth().value),
 
           //对于椭圆来说，半径的长度要考虑减去边框线条的厚度
-          rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
+          rx: Math.floor(
+            (this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value / 2
+          ),
+          // rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
           cx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2),
-          ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
+          ry: Math.floor(
+            (this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value / 2
+          ),
+          // ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
           cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2),
 
           'background-color': this.udObject.bgColor().value,
@@ -137,7 +143,12 @@
           })
           .resizable({
             // resize from all edges and corners
-            edges: { left: true, right: true, bottom: true, top: true },
+            edges: {
+              left: '.op-left',
+              right: '.op-right',
+              bottom: '.op-bottom',
+              top: '.op-top'
+            },
 
             modifiers: [
               // minimum size NOTICE:注意，interact有坑，这个min必须大于0,否则resize事件拿不到正确的width,height
