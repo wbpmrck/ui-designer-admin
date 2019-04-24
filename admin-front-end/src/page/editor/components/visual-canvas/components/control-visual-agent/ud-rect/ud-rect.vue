@@ -4,8 +4,8 @@
 
 <script>
   /*
-                                                                                                            矩形
-                                                                                                            */
+                                                                                                              矩形
+                                                                                                              */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -39,9 +39,9 @@
           left: 0 + 'px',
           position: 'absolute',
           // width: this.udObject.w().value + 'px',
-          width: (this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+          width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
           // height: this.udObject.h().value + 'px',
-          height: (this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
           'background-color': this.udObject.bgColor().value,

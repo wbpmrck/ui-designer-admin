@@ -1,11 +1,15 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-circle" :style="styleObject" @click.stop="selectMe"></div>
+  <div :id="'agent-'+udObject._id().value" class="ud-circle" :style="wrapperStyle" @click.stop="selectMe">
+    <svg style="width:100%;height:100%;" :stroke="svgStyle['border-color']" :stroke-width="svgStyle['border-width']">
+      <ellipse :fill="svgStyle['background-color']" :cx="svgStyle.cx" :cy="svgStyle.cy" :rx="svgStyle.rx" :ry="svgStyle.ry"></ellipse>
+    </svg>
+  </div>
 </template>
 
 <script>
   /*
-                                                                                                                矩形
-                                                                                                                */
+                                                                                                                                    矩形
+                                                                                                                                    */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -32,27 +36,39 @@
     },
 
     computed: {
-      // 动态根据配置的数据对象，计算出元素的可视化样式
-      styleObject() {
+      wrapperStyle() {
         return {
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-          // width: this.udObject.w().value + 'px',
-          width: (this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
-          // height: this.udObject.h().value + 'px',
-          height: (this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+          height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
-          'background-color': this.udObject.bgColor().value,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
             this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
             this.udObject.rotateZ().value
           }deg)`,
-          visibility: this.udObject.editorHide ? 'hidden' : 'visible',
-          'border-width': this.udObject.borderWidth().value + 'px',
-          'border-color': this.udObject.borderColor().value,
-          'border-style': 'solid'
+          visibility: this.udObject.editorHide ? 'hidden' : 'visible'
+        };
+      },
+      // 动态根据配置的数据对象，计算出元素的可视化样式
+      svgStyle() {
+        return {
+          // rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
+          // cx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 + this.udObject.borderWidth().value),
+          // ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
+          // cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 + this.udObject.borderWidth().value),
+
+          rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
+          cx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2),
+          ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
+          cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2),
+
+          'background-color': this.udObject.bgColor().value,
+
+          'border-width': this.udObject.borderWidth().value,
+          'border-color': this.udObject.borderColor().value
         };
       }
     },
