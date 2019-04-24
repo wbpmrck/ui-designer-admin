@@ -1,55 +1,55 @@
 <template>
   <div class="two-dim-operator" :style="{'border-width':strokeWidth+'px','border-color':strokeColor}">
-    <div class="end-point top-left op-top op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point top-left op-top op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point top op-top" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point top op-top" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point top-right op-top op-right" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point top-right op-top op-right" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point right op-right" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point right op-right" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point bottom-right op-right op-bottom" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point bottom-right op-right op-bottom" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point bottom op-bottom" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point bottom op-bottom" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point bottom-left op-bottom op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point bottom-left op-bottom op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
       ></div>
     </div>
 
-    <div class="end-point left op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
+    <div class="operate-handle-point left op-left" :style="{width:endPointHandleSize+'px',height:endPointHandleSize+'px'}">
       <div
         class="icon"
         :style="{width:endPointDisplaySize+'px',height:endPointDisplaySize+'px','background-color':endPointColor,'border-width':strokeWidth+'px','border-color':strokeColor}"
@@ -137,7 +137,7 @@
     bottom: 0;
     right: 0;
     border-style: solid;
-    .end-point {
+    .operate-handle-point {
       display: inline-block;
       position: absolute;
       border-style: none;

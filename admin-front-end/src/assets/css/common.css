@@ -31,6 +31,7 @@ body {
     height: 100%;
 }
 
+
 .bg-inverted {
     filter: invert(100%);
 }
