@@ -1,5 +1,6 @@
 <template>
   <div :id="'agent-'+udObject._id().value" class="ud-circle" :style="wrapperStyle" @click.stop="selectMe">
+    <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
     <svg style="width:100%;height:100%;" :stroke="svgStyle['border-color']" :stroke-width="svgStyle['border-width']">
       <ellipse :fill="svgStyle['background-color']" :cx="svgStyle.cx" :cy="svgStyle.cy" :rx="svgStyle.rx" :ry="svgStyle.ry"></ellipse>
     </svg>
@@ -8,12 +9,15 @@
 
 <script>
   /*
-                                                                                                                                    矩形
-                                                                                                                                    */
+                                                                                                                                          矩形
+                                                                                                                                          */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
+
+  import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
+
   export default {
     name: 'ud-circle',
     data() {
@@ -34,8 +38,19 @@
         default: {}
       }
     },
+    components: {
+      operateHandlerTwoDim
+    },
 
     computed: {
+      ...mapState({
+        currentSelection(state) {
+          return state.selection.currentSelect;
+        },
+        currentScene(state) {
+          return state.selection.scene;
+        }
+      }),
       wrapperStyle() {
         return {
           top: 0 + 'px',
@@ -60,6 +75,7 @@
           // ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
           // cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 + this.udObject.borderWidth().value),
 
+          //对于椭圆来说，半径的长度要考虑减去边框线条的厚度
           rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
           cx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2),
           ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),

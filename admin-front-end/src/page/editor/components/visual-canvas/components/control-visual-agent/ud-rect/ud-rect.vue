@@ -1,15 +1,18 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-rect" :style="styleObject" @click.stop="selectMe"></div>
+  <div :id="'agent-'+udObject._id().value" class="ud-rect" :style="styleObject" @click.stop="selectMe">
+    <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
+  </div>
 </template>
 
 <script>
   /*
-                                                                                                              矩形
-                                                                                                              */
+                                                                                                                矩形
+                                                                                                                */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
+  import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
   export default {
     name: 'ud-rect',
     data() {
@@ -30,8 +33,19 @@
         default: {}
       }
     },
+    components: {
+      operateHandlerTwoDim
+    },
 
     computed: {
+      ...mapState({
+        currentSelection(state) {
+          return state.selection.currentSelect;
+        },
+        currentScene(state) {
+          return state.selection.scene;
+        }
+      }),
       // 动态根据配置的数据对象，计算出元素的可视化样式
       styleObject() {
         return {
