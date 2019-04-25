@@ -1,7 +1,7 @@
 <template>
   <div :id="'agent-'+udObject._id().value" class="ud-line" :style="wrapperStyle" @click.stop="selectMe">
     <svg style="width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;" :stroke="svgStyle['color']" :stroke-width="svgStyle['stroke-width']">
-      <line :x1="svgStyle.bx" :y1="svgStyle.by" :x2="svgStyle.ex" :y2="svgStyle.ey"></line>
+      <line class="svg-line" :x1="svgStyle.bx" :y1="svgStyle.by" :x2="svgStyle.ex" :y2="svgStyle.ey"></line>
     </svg>
     <div v-if="udObject === currentSelection" class="start-point operate-handle-point" :style="{left:svgStyle.bx+'px',top:svgStyle.by+'px'}">
       <div class="icon"></div>
@@ -14,8 +14,8 @@
 
 <script>
   /*
-                                                                                                                                                                                                                                          矩形
-                                                                                                                                                                                                                                          */
+                                                                                                                                                                                                                                                矩形
+                                                                                                                                                                                                                                                */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -163,7 +163,7 @@
         let self = this;
 
         // 整条线的移动
-        interact('#' + 'agent-' + self.udObject._id().value).draggable({
+        interact('#' + 'agent-' + self.udObject._id().value + ' .svg-line').draggable({
           // enable inertial throwing
           inertia: false,
           // enabled: false,
@@ -279,7 +279,7 @@
     created() {},
 
     beforeDestroy() {
-      interact('#' + 'agent-' + this.udObject._id().value).unset();
+      interact('#' + 'agent-' + this.udObject._id().value + ' .svg-line').unset();
       interact('#' + 'agent-' + this.udObject._id().value + ' .start-point').unset();
       interact('#' + 'agent-' + this.udObject._id().value + ' .end-point').unset();
     },
