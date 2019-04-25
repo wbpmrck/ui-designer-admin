@@ -562,7 +562,7 @@
                     param: {
                       precision: 0,
                       step: 1, //增加的步长
-                      min: 0,
+                      min: 12,
                       max: 160 //最大值
                     },
                     col: 9
@@ -623,6 +623,33 @@
                   {
                     type: formSwitch,
                     param: {},
+                    col: 12
+                  }
+                ]
+              },
+              {
+                field: 'underline',
+                desc: '下划线',
+                form: [
+                  {
+                    type: formSwitch,
+                    param: {},
+                    col: 12
+                  }
+                ]
+              },
+              {
+                field: 'ls',
+                desc: '行距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
                     col: 12
                   }
                 ]

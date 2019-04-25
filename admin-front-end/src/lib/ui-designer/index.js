@@ -21,6 +21,8 @@ import UDCompareOperator from "./logic/ud-compare-operator"
 import UDLogicOperator from "./logic/ud-logic-operator"
 import UDRelationOperator from "./logic/ud-relation-operator"
 import UDRange from "./enums/ud-range"
+import UDTextAlignH from "./enums/ud-text-align-h"
+import UDTextAlignV from "./enums/ud-text-align-v"
 import UDClipMode from "./enums/ud-clip-mode"
 import {
     UDCompareOperatorEnum,
@@ -52,6 +54,8 @@ export {
     UDLine,
     UDText,
     UDClipMode,
+    UDTextAlignH,
+    UDTextAlignV,
     UDCompareOperatorEnum,
     UDArithmeticOperatorEnum,
     UDLogicOperatorEnum,
