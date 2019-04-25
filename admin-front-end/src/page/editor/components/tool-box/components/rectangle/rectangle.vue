@@ -58,6 +58,7 @@
         me.w({ value: 50 });
         me.h({ value: 50 });
         me.borderWidth({ value: 1 });
+        me.borderColor({ value: '#000' });
 
         // 添加并且选中对象。这种方式可能不方便连续添加对象
         // this.$store.dispatch('addObjectAndSelectIt',{

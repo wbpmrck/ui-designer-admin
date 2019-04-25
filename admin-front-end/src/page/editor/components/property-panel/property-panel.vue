@@ -47,6 +47,7 @@
   import { mapGetters, mapState } from 'vuex';
   import SCENE from '../../../../model/ui-scene.js';
   import formText from './components/form-text/form-text';
+  import formTextarea from './components/form-textarea/form-textarea';
   import formImage from './components/form-image/form-image';
   import formSlider from './components/form-slider/form-slider';
   import formNumber from './components/form-number/form-number';
@@ -163,7 +164,7 @@
                 desc: '内容',
                 form: [
                   {
-                    type: formText,
+                    type: formTextarea,
                     col: 24 //24栏，表示这个表单占据一整行
                   }
                 ]

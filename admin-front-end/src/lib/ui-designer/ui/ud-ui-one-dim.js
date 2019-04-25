@@ -180,7 +180,7 @@ class UDUIOneDim extends UDObject {
     @DECORATORS.field({
         type: String.getType(),
         desc: '背景色',
-        value: '#000'
+        value: ''
     })
     bgColor() {};
 
