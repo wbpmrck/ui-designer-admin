@@ -60,8 +60,9 @@
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-          width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
-          height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          
+          width:this.resize.w + 'px',
+          height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
@@ -81,15 +82,15 @@
 
           //对于椭圆来说，半径的长度要考虑减去边框线条的厚度
           rx: Math.floor(
-            (this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value / 2
+            (this.resize.w) / 2 - this.udObject.borderWidth().value / 2
           ),
           // rx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2 - this.udObject.borderWidth().value),
-          cx: Math.floor((this.resize.w === 0 ? this.udObject.w().value : this.resize.w) / 2),
+          cx: Math.floor((this.resize.w) / 2),
           ry: Math.floor(
-            (this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value / 2
+            (this.resize.h) / 2 - this.udObject.borderWidth().value / 2
           ),
           // ry: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2 - this.udObject.borderWidth().value),
-          cy: Math.floor((this.resize.h === 0 ? this.udObject.h().value : this.resize.h) / 2),
+          cy: Math.floor((this.resize.h) / 2),
 
           'background-color': this.udObject.bgColor().value,
 
@@ -207,8 +208,8 @@
             // 将本次resize操作的结果重置，避免影响下一次操作
             self.offset.x = 0;
             self.offset.y = 0;
-            self.resize.w = 0;
-            self.resize.h = 0;
+            // self.resize.w = 0;
+            // self.resize.h = 0;
           });
       }
     },
@@ -224,7 +225,13 @@
       'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
         interact('#' + 'agent-' + this.udObject._id().value).unset();
         this.initDrag();
-      }
+      },
+      'udObject.__ud_attribute_w__.value': function(newVal, oldVal) {
+        this.resize.w = newVal;
+      },
+      'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
+        this.resize.h = newVal;
+      },
     },
     mounted() {
       this.initDrag();

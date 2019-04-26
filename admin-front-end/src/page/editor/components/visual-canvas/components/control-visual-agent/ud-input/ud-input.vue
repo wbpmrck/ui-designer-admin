@@ -1,17 +1,20 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-text" :style="styleObject" @click.stop="selectMe">{{udObject.txt().value}}<operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim></div>
+  <div :id="'agent-'+udObject._id().value" class="ud-input" :style="wrapperStyle" @click.stop="selectMe">
+    <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
+    <input :style="elementStyle" :type="udObject.inputType().value.key.toLowerCase()" v-model="inputValue" :placeholder="udObject.placeholder().value" :maxlength="udObject.maxLen().value">
+  </div>
 </template>
 
 <script>
   // 文本框
   import { mapGetters, mapState } from 'vuex';
-  import { UDClipMode,UDTextAlignH,UDTextAlignV } from '../../../../../../../lib/ui-designer/index.js';
+  import { UDClipMode, UDTextAlignH, UDTextAlignV } from '../../../../../../../lib/ui-designer/index.js';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
   import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
-  import {translateAlignH,translateAlignV} from '../../../../../../../model/style-transform.js'
+  import { translateAlignH, translateAlignV } from '../../../../../../../model/style-transform.js';
   export default {
-    name: 'ud-text',
+    name: 'ud-input',
     data() {
       return {
         offset: {
@@ -21,7 +24,8 @@
         resize: {
           w: 0,
           h: 0
-        }
+        },
+        inputValue:""
       };
     },
     props: {
@@ -44,40 +48,85 @@
         }
       }),
       // 动态根据配置的数据对象，计算出元素的可视化样式
-      styleObject() {
+      wrapperStyle() {
+        // console.log(this.resize.w + this.resize.h + this.udObject.w().value+this.udObject.h().value);
+        // return {
+        //   top: 0 + 'px',
+        //   left: 0 + 'px',
+        //   position: 'absolute',
+        //   // width: this.udObject.w().value + 'px',
+        //   width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+        //   // height: this.udObject.h().value + 'px',
+        //   height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+        //   'z-index': this.udObject.z().value,
+        //   opacity: this.udObject.alpha().value / 100,
+        //   transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
+        //     this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
+        //     this.udObject.rotateZ().value
+        //   }deg)`,
+        //   visibility: this.udObject.editorHide ? 'hidden' : 'visible',
+        // };
         return {
           top: 0 + 'px',
           left: 0 + 'px',
-          display: 'flex',
           position: 'absolute',
-          
+          // height: this.udObject.h().value + 'px',
+          // width: this.udObject.w().value + 'px',
           width:this.resize.w + 'px',
           height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
-          'background-color': this.udObject.bgColor().value,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
             this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
             this.udObject.rotateZ().value
           }deg)`,
-          'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
           visibility: this.udObject.editorHide ? 'hidden' : 'visible',
+        };
+      },
+      elementStyle() {
+        // console.log(this.resize.w + this.resize.h + this.udObject.w().value+this.udObject.h().value);
+        // return {
+
+        //   display: 'flex',
+        //   width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+        //   height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+        //   'background-color': this.udObject.bgColor().value,
+        //   'border-radius': this.udObject.borderRadius().value + 'px',
+        //   'border-width': this.udObject.borderWidth().value + 'px',
+        //   'border-color': this.udObject.borderColor().value,
+        //   'border-style': 'solid',
+        //   'font-family': this.udObject.font().value,
+        //   'font-size': this.udObject.fs().value + 'px',
+        //   color: this.udObject.fontColor().value,
+        //   'font-weight': this.udObject.bold().value ? 'bold' : 'normal',
+        //   'font-style': this.udObject.italic().value ? 'italic' : 'normal',
+        //   'text-decoration': this.udObject.underline().value ? 'underline' : 'none',
+        //   'text-align': translateAlignH(this.udObject.alignH().value,'normal'),
+        //   'word-break': 'break-all',
+        //   'white-space': 'pre-wrap',
+        // };
+         return {
+
+          display: 'flex',
+          
+        //   width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+        //   height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          width:this.resize.w + 'px',
+          height: this.resize.h + 'px',
+          'background-color': this.udObject.bgColor().value,
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,
           'border-style': 'solid',
-          'font-family':this.udObject.font().value,
-          'font-size':this.udObject.fs().value+'px',
-          'color':this.udObject.fontColor().value,
-          'font-weight':this.udObject.bold().value?'bold':'normal',
-          'font-style':this.udObject.italic().value?'italic':'normal',
-          'text-decoration':this.udObject.underline().value?'underline':'none',
-          'justify-content':translateAlignH(this.udObject.alignH().value,'flex'),
-          'align-items':translateAlignV(this.udObject.alignV().value),
-          'word-break':'break-all',
+          'font-family': this.udObject.font().value,
+          'font-size': this.udObject.fs().value + 'px',
+          color: this.udObject.fontColor().value,
+          'font-weight': this.udObject.bold().value ? 'bold' : 'normal',
+          'font-style': this.udObject.italic().value ? 'italic' : 'normal',
+          'text-decoration': this.udObject.underline().value ? 'underline' : 'none',
+          'text-align': translateAlignH(this.udObject.alignH().value,'normal'),
+          'word-break': 'break-all',
           'white-space': 'pre-wrap',
-          'line-height': (this.udObject.fs().value + this.udObject.ls().value )+'px'
         };
       }
     },
@@ -189,8 +238,6 @@
             // 将本次resize操作的结果重置，避免影响下一次操作
             self.offset.x = 0;
             self.offset.y = 0;
-            // self.resize.w = 0;
-            // self.resize.h = 0;
           });
       }
     },
@@ -203,9 +250,8 @@
       interact('#' + 'agent-' + this.udObject._id().value).unset();
     },
     watch: {
-      'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
-        interact('#' + 'agent-' + this.udObject._id().value).unset();
-        this.initDrag();
+      'udObject.__ud_attribute_value__.value': function(newVal, oldVal) {
+        this.inputValue = newVal;
       },
       'udObject.__ud_attribute_w__.value': function(newVal, oldVal) {
         this.resize.w = newVal;
@@ -213,6 +259,13 @@
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
       },
+      'inputValue':function(newVal, oldVal) {
+            this.$store.commit('updateObjectUDProperty', {
+              id: this.udObject._id().value,
+              propName: 'value',
+              propValue: newVal
+            });
+      }
     },
     mounted() {
       this.initDrag();
@@ -221,6 +274,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-text {
+  .ud-input {
   }
 </style>

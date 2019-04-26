@@ -1,5 +1,4 @@
 import UDTextAlignH from "../enums/ud-text-align-h"
-import UDTextAlignV from "../enums/ud-text-align-v"
 import {
     UDAttributeUnit
 } from "../enums/ud-unit"
@@ -76,14 +75,6 @@ class UDTextBase extends UDUITwoDim {
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({
-        type: UDTextAlignV.getType(),
-        desc: '垂直对齐',
-        value: UDTextAlignV.MIDDLE
-    })
-    alignV() {};
-
-    @DECORATORS.serializable(true)
-    @DECORATORS.field({
         type: Boolean.getType(),
         desc: '是否加粗',
         value: false
@@ -106,14 +97,6 @@ class UDTextBase extends UDUITwoDim {
     })
     underline() {};
 
-    @DECORATORS.serializable(true)
-    @DECORATORS.field({
-        type: Number.getType(),
-        desc: '行距',
-        value: 0,
-        unit: UDAttributeUnit.PX
-    })
-    ls() {};
 
 
     /*

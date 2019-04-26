@@ -4,15 +4,30 @@ import {
 } from '../lib/ui-designer/index.js';
 
 
-const translateAlignH = (val) => {
-  if (val === UDTextAlignH.LEFT) {
-    return 'flex-start'
+const translateAlignH = (val, mode) => {
+  if (mode === 'flex') {
+
+    if (val === UDTextAlignH.LEFT) {
+      return 'flex-start'
+    }
+    if (val === UDTextAlignH.CENTER) {
+      return 'center'
+    }
+    if (val === UDTextAlignH.RIGHT) {
+      return 'flex-end'
+    }
   }
-  if (val === UDTextAlignH.CENTER) {
-    return 'center'
-  }
-  if (val === UDTextAlignH.RIGHT) {
-    return 'flex-end'
+  if (mode === 'normal') {
+
+    if (val === UDTextAlignH.LEFT) {
+      return 'left'
+    }
+    if (val === UDTextAlignH.CENTER) {
+      return 'center'
+    }
+    if (val === UDTextAlignH.RIGHT) {
+      return 'right'
+    }
   }
 };
 

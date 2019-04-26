@@ -1,6 +1,9 @@
 import UDTextBase from './ud-text-base'
+import UDTextAlignV from "../enums/ud-text-align-v"
 import UDClipMode from "../enums/ud-clip-mode"
-import {UDAttributeUnit} from "../enums/ud-unit"
+import {
+    UDAttributeUnit
+} from "../enums/ud-unit"
 import {
     regEnums,
     regClass,
@@ -40,6 +43,22 @@ class UDText extends UDTextBase {
             .getSupportActions()
             .concat([]);
     }
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: UDTextAlignV.getType(),
+        desc: '垂直对齐',
+        value: UDTextAlignV.MIDDLE
+    })
+    alignV() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '行距',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    ls() {};
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({

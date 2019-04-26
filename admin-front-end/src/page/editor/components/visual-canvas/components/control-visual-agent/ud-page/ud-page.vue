@@ -19,6 +19,7 @@
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
+  import UDInput from '../ud-input/ud-input.vue';
   import UDText from '../ud-text/ud-text.vue';
   import UDRectangle from '../ud-rect/ud-rect.vue';
   import UDCircle from '../ud-circle/ud-circle.vue';
@@ -32,6 +33,7 @@
     data() {
       return {
         visualAgents: {
+          UDInput,
           UDText,
           UDUIContainer,
           UDImage,
@@ -48,6 +50,7 @@
       }
     },
     components: {
+      UDInput,
       UDText,
       UDUIContainer,
       UDImage,

@@ -53,10 +53,9 @@
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-          // width: this.udObject.w().value + 'px',
-          width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
-          // height: this.udObject.h().value + 'px',
-          height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          
+          width:this.resize.w + 'px',
+          height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
           'background-color': this.udObject.bgColor().value,
@@ -69,9 +68,9 @@
       },
       imageStyle() {
         return {
-          width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
-          // height: this.udObject.h().value + 'px',
-          height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+        
+          width:this.resize.w + 'px',
+          height: this.resize.h + 'px',
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,
@@ -191,8 +190,8 @@
             // 将本次resize操作的结果重置，避免影响下一次操作
             self.offset.x = 0;
             self.offset.y = 0;
-            self.resize.w = 0;
-            self.resize.h = 0;
+            // self.resize.w = 0;
+            // self.resize.h = 0;
           });
       }
     },
@@ -208,6 +207,12 @@
       'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
         interact('#' + 'agent-' + this.udObject._id().value).unset();
         this.initDrag();
+      },
+      'udObject.__ud_attribute_w__.value': function(newVal, oldVal) {
+        this.resize.w = newVal;
+      },
+      'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
+        this.resize.h = newVal;
       },
 
       'udObject.__ud_attribute_url__.value': function(newVal, oldVal) {
