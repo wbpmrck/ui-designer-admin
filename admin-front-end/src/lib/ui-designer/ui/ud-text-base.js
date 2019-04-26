@@ -78,7 +78,7 @@ class UDTextBase extends UDUITwoDim {
     @DECORATORS.field({
         type: UDTextAlignV.getType(),
         desc: '垂直对齐',
-        value: UDTextAlignV.TOP
+        value: UDTextAlignV.MIDDLE
     })
     alignV() {};
 
