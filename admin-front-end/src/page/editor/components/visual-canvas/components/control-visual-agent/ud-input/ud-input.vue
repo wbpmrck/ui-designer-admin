@@ -1,7 +1,13 @@
 <template>
   <div :id="'agent-'+udObject._id().value" class="ud-input" :style="wrapperStyle" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
-    <input :style="elementStyle" :type="udObject.inputType().value.key.toLowerCase()" v-model="inputValue" :placeholder="udObject.placeholder().value" :maxlength="udObject.maxLen().value">
+    <input
+      :style="elementStyle"
+      :type="udObject.inputType().value.key.toLowerCase()"
+      v-model="inputValue"
+      :placeholder="udObject.placeholder().value"
+      :maxlength="udObject.maxLen().value"
+    >
   </div>
 </template>
 
@@ -25,7 +31,7 @@
           w: 0,
           h: 0
         },
-        inputValue:""
+        inputValue: ''
       };
     },
     props: {
@@ -72,7 +78,7 @@
           position: 'absolute',
           // height: this.udObject.h().value + 'px',
           // width: this.udObject.w().value + 'px',
-          width:this.resize.w + 'px',
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
@@ -80,7 +86,7 @@
             this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
             this.udObject.rotateZ().value
           }deg)`,
-          visibility: this.udObject.editorHide ? 'hidden' : 'visible',
+          visibility: this.udObject.editorHide ? 'hidden' : 'visible'
         };
       },
       elementStyle() {
@@ -105,13 +111,12 @@
         //   'word-break': 'break-all',
         //   'white-space': 'pre-wrap',
         // };
-         return {
-
+        return {
           display: 'flex',
-          
-        //   width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
-        //   height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
-          width:this.resize.w + 'px',
+
+          //   width: Math.floor(this.resize.w === 0 ? this.udObject.w().value : this.resize.w) + 'px',
+          //   height: Math.floor(this.resize.h === 0 ? this.udObject.h().value : this.resize.h) + 'px',
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
           'background-color': this.udObject.bgColor().value,
           'border-radius': this.udObject.borderRadius().value + 'px',
@@ -124,9 +129,9 @@
           'font-weight': this.udObject.bold().value ? 'bold' : 'normal',
           'font-style': this.udObject.italic().value ? 'italic' : 'normal',
           'text-decoration': this.udObject.underline().value ? 'underline' : 'none',
-          'text-align': translateAlignH(this.udObject.alignH().value,'normal'),
+          'text-align': translateAlignH(this.udObject.alignH().value, 'normal'),
           'word-break': 'break-all',
-          'white-space': 'pre-wrap',
+          'white-space': 'pre-wrap'
         };
       }
     },
@@ -244,6 +249,7 @@
     created() {
       this.resize.w = this.udObject.w().value;
       this.resize.h = this.udObject.h().value;
+      this.inputValue = this.udObject.value().value;
     },
 
     beforeDestroy() {
@@ -259,12 +265,12 @@
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
       },
-      'inputValue':function(newVal, oldVal) {
-            this.$store.commit('updateObjectUDProperty', {
-              id: this.udObject._id().value,
-              propName: 'value',
-              propValue: newVal
-            });
+      inputValue: function(newVal, oldVal) {
+        this.$store.commit('updateObjectUDProperty', {
+          id: this.udObject._id().value,
+          propName: 'value',
+          propValue: newVal
+        });
       }
     },
     mounted() {
