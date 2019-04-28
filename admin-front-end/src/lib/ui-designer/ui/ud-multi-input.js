@@ -11,14 +11,14 @@ import {
     field,
     UDAttribute
 } from "../ud-runtime"
-import UDInput from './ud-input';
+import UDTextBase from './ud-text-base';
 
 const className = 'UDMultiInput'
 /**
  * 多行文本输入框
  */
 @DECORATORS.serializable(true)
-class UDMultiInput extends UDInput {
+class UDMultiInput extends UDTextBase {
 
     static getTypeName() {
         return className
@@ -41,19 +41,34 @@ class UDMultiInput extends UDInput {
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({
+        type: String.getType(),
+        desc: '输入内容',
+        value: ""
+    })
+    value() {};
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '最大长度',
+        value: 50
+    })
+    maxLen() {};
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: String.getType(),
+        desc: '提示文本',
+        value: ""
+    })
+    placeholder() {};
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
         type: Number.getType(),
         desc: '行距',
         value: 0,
         unit: UDAttributeUnit.PX
     })
     ls() {};
-    @DECORATORS.serializable(true)
-    @DECORATORS.field({
-        type: Boolean.getType(),
-        desc: '禁用回车',
-        value: false
-    })
-    forbidEnter() {};
+
 
     // constructor({typeName,serializedString}) {
     constructor() {

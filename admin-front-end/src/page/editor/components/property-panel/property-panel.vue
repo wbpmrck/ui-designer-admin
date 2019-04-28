@@ -95,7 +95,7 @@
     },
     watch: {
       // 如果 `question` 发生改变，这个函数就会运行
-      currentSelection: function(newQuestion, oldQuestion) {
+      currentSelection: function(newVal, oldVal) {
         let self = this;
         function findFieldConfig(object) {
           let forms = [];
@@ -108,12 +108,17 @@
             group.props.forEach(field => {
               // console.log('forEach2')
               // console.log(field.field)
+
+              //如果对象含有这个属性
               if (object[field.field] && object[field.field].__ud_attribute__) {
-                if (!g) {
-                  g = new FormGroup(group.name, group.collapsed);
-                  forms.push(g);
+                // 如果这个属性没有附加约束host类型，或者约束的host类型恰好是本对象
+                if (!field.host || field.host === object.constructor.name) {
+                  if (!g) {
+                    g = new FormGroup(group.name, group.collapsed);
+                    forms.push(g);
+                  }
+                  g.addField(field);
                 }
-                g.addField(field);
               }
             });
           });
@@ -171,6 +176,7 @@
               }, //文本类组件的文本内容
               {
                 field: 'value',
+                host: 'UDInput', //只有当属性在input组件中出现，才使用本规则
                 desc: '输入内容',
                 form: [
                   {
@@ -178,7 +184,18 @@
                     col: 24 //24栏，表示这个表单占据一整行
                   }
                 ]
-              } //input组件的文本内容
+              },
+              {
+                field: 'value',
+                host: 'UDMultiInput', //只有当属性在 UDMultiInput 组件中出现，才使用本规则
+                desc: '输入内容',
+                form: [
+                  {
+                    type: formTextarea,
+                    col: 24 //24栏，表示这个表单占据一整行
+                  }
+                ]
+              }
             ]
           },
 
@@ -244,17 +261,6 @@
                     type: formDropDown,
                     param: {},
                     col: 24
-                  }
-                ]
-              },
-              {
-                field: 'forbidEnter',
-                desc: '禁用回车',
-                form: [
-                  {
-                    type: formSwitch,
-                    param: {},
-                    col: 12
                   }
                 ]
               }

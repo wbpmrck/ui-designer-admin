@@ -68,6 +68,10 @@ textarea {
     box-sizing: border-box;
 }
 
+textarea {
+    resize: none;
+}
+
 .btn-clear {
     cursor: pointer;
     margin: 0;
