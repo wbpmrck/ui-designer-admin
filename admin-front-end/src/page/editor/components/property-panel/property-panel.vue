@@ -496,6 +496,135 @@
                 ]
               },
               {
+                field: 'marginTop',
+                desc: '上外边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'marginRight',
+                desc: '右外边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'marginBottom',
+                desc: '下外边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'marginLeft',
+                desc: '左外边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'paddingTop',
+                desc: '上内边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'paddingRight',
+                desc: '右内边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'paddingBottom',
+                desc: '下内边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
+                field: 'paddingLeft',
+                desc: '左内边距',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+
+              {
                 field: 'lockRatio',
                 desc: '等比缩放',
                 form: [

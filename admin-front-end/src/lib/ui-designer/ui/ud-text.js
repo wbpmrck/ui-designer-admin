@@ -43,6 +43,45 @@ class UDText extends UDTextBase {
             .getSupportActions()
             .concat([]);
     }
+
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '内边距(上)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    paddingTop() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '内边距(右)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    paddingRight() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '内边距(下)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    paddingBottom() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '内边距(左)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    paddingLeft() {};
+
+
     @DECORATORS.serializable(true)
     @DECORATORS.field({
         type: UDTextAlignV.getType(),

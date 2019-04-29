@@ -199,6 +199,43 @@ class UDUITwoDim extends UDUIOneDim {
     lockRatio() {};
 
 
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '外边距(上)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    marginTop() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '外边距(右)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    marginRight() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '外边距(下)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    marginBottom() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '外边距(左)',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    marginLeft() {};
+
+
     /*
         2.边框和阴影
     */

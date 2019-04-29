@@ -50,7 +50,7 @@ class UDUIContainerAbsolute extends UDUIContainer {
      * 如果该对象有子元素，那么子元素的哪些属性需要被禁用
      */
     getDisableChildrenProps() {
-        return [];
+        return ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'];
     }
 
     constructor() {
