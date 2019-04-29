@@ -109,8 +109,8 @@
               // console.log('forEach2')
               // console.log(field.field)
 
-              //如果对象含有这个属性
-              if (object[field.field] && object[field.field].__ud_attribute__) {
+              //如果对象含有这个属性,且该属性当前是启用的
+              if (object[field.field] && object[field.field].__ud_attribute__ && object[field.field]().enable) {
                 // 如果这个属性没有附加约束host类型，或者约束的host类型恰好是本对象
                 if (!field.host || field.host === object.constructor.name) {
                   if (!g) {

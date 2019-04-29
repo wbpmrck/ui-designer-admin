@@ -6,8 +6,8 @@
 
 <script>
   /*
-                                                                                                                        矩形
-                                                                                                                        */
+                                                                                                                            矩形
+                                                                                                                            */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -52,8 +52,8 @@
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-         
-          width:this.resize.w + 'px',
+
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
@@ -85,7 +85,7 @@
           .draggable({
             // enable inertial throwing
             inertia: false,
-            // enabled: false,
+            // enabled: self.udObject.x().enable,
 
             // enable autoScroll
             autoScroll: true,
@@ -201,7 +201,7 @@
       },
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
-      },
+      }
     },
     mounted() {
       this.initDrag();

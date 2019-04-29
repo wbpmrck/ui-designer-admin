@@ -23,6 +23,11 @@
     background: url(../img/icon-sprite-5.svg) no-repeat;
 }
 
+.icon-new-1 {
+    display: block;
+    background: url(../img/icon-sprite-new-1.svg) no-repeat;
+}
+
 html,
 body {
     font-size: 12px;
@@ -340,4 +345,10 @@ textarea {
 
 #app .first .el-form-item__content {
     margin-left: 55px !important;
+}
+
+/* ============  工具栏的tooltip ============  */
+.ud-tool-tip {
+    font-size: 12px;
+    color: #000;
 }

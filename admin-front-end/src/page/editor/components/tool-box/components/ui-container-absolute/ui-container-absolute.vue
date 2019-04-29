@@ -1,14 +1,14 @@
 <template>
-  <div class="ui-container" :class="{disabled:disable}" @click="clickMe"></div>
+  <div class="ui-container-absolute" :class="{disabled:disable}" @click="clickMe"></div>
 </template>
 
 <script>
   import { mapGetters, mapState } from 'vuex';
   import SCENE from '../../../../../../model/ui-scene.js';
   import { isInstanceOf } from '../../../../../../lib/utils/oop.js';
-  import { UDStage, UDUIContainer, UDRectangle, UDPage } from '../../../../../../lib/ui-designer/index.js';
+  import { UDStage, UDUIContainerAbsolute, UDRectangle, UDPage } from '../../../../../../lib/ui-designer/index.js';
   export default {
-    name: 'ui-container',
+    name: 'ui-container-absolute',
     props: [],
     props: ['name'],
     data() {
@@ -52,7 +52,7 @@
       disable() {
         if (
           //  (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
-          (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDUIContainer)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
+          (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDUIContainerAbsolute)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
           (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDPage)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
           (this.currentScene === SCENE.TOOL_BOX && this.currentSelectTool === this.name) //当选择的是工具箱，且当前选择的工具就是自己的时候
         ) {
@@ -71,8 +71,8 @@
 
         let sliblingCount = this.currentSelection.children().value.length + 1;
         // 一个矩形
-        let me = new UDUIContainer();
-        me.name({ value: '区块容器' + sliblingCount });
+        let me = new UDUIContainerAbsolute();
+        me.name({ value: '绝对定位容器' + sliblingCount });
 
         me.w({ value: this.currentPage.w().value });
         me.h({ value: 200 });
@@ -98,10 +98,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .ui-container {
+  .ui-container-absolute {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/ui-container.svg) no-repeat;
+    background: url(./assets/img/ui-container-absolute.svg) no-repeat;
   }
 </style>

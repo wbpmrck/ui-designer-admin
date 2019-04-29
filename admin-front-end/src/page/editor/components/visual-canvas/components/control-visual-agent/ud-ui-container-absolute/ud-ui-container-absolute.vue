@@ -1,7 +1,7 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-ui-container scrollable-1" :style="styleObject" @click.stop="selectMe">
+  <div :id="'agent-'+udObject._id().value" class="ud-ui-container-absolute scrollable-1" :style="styleObject" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
-      <component
+    <component
       :is="visualAgents[child.constructor.getTypeName()]"
       :ud-object="child"
       v-for="child in udObject.__ud_attribute_children__.value"
@@ -12,8 +12,8 @@
 
 <script>
   /*
-                                                                                                                            矩形
-                                                                                                                            */
+                                                                                                                              矩形
+                                                                                                                              */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -24,11 +24,11 @@
   import UDCircle from '../ud-circle/ud-circle.vue';
   import UDLine from '../ud-line/ud-line.vue';
   import UDImage from '../ud-image/ud-image.vue';
-  import UDUIContainer from '../ud-ui-container/ud-ui-container.vue';
+  import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
   export default {
-    name: 'ud-ui-container',
+    name: 'ud-ui-container-absolute',
     components: {
-      UDUIContainer,
+      UDUIContainerAbsolute,
       UDImage,
       UDLine,
       UDRectangle,
@@ -39,7 +39,7 @@
     data() {
       return {
         visualAgents: {
-          UDUIContainer,
+          UDUIContainerAbsolute,
           UDImage,
           UDLine,
           UDRectangle,
@@ -77,7 +77,7 @@
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-          width:this.resize.w + 'px',
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
@@ -226,7 +226,7 @@
       },
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
-      },
+      }
     },
     mounted() {
       this.initDrag();
@@ -235,6 +235,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-ui-container {
+  .ud-ui-container-absolute {
   }
 </style>
