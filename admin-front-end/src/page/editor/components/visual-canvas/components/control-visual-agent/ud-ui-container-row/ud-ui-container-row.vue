@@ -1,5 +1,5 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-ui-container-absolute scrollable-1" :style="styleObject" @click.stop="selectMe">
+  <div :id="'agent-'+udObject._id().value" class="ud-ui-container-row scrollable-1" :style="styleObject" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
     <component
       :is="visualAgents[child.constructor.getTypeName()]"
@@ -12,8 +12,8 @@
 
 <script>
   /*
-                                                                                                                                      矩形
-                                                                                                                                      */
+                                                                                                                                        矩形
+                                                                                                                                        */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -27,15 +27,15 @@
   import UDCircle from '../ud-circle/ud-circle.vue';
   import UDLine from '../ud-line/ud-line.vue';
   import UDImage from '../ud-image/ud-image.vue';
-  import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
+  import UDUIContainerAbsolute from '../ud-ui-container-row/ud-ui-container-row.vue';
   import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
   export default {
-    name: 'ud-ui-container-absolute',
+    name: 'ud-ui-container-row',
     components: {
+      UDUIContainerRow,
       UDMultiInput,
       UDInput,
       UDText,
-      UDUIContainerRow,
       UDUIContainerAbsolute,
       UDImage,
       UDLine,
@@ -247,6 +247,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-ui-container-absolute {
+  .ud-ui-container-row {
   }
 </style>

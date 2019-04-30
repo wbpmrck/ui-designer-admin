@@ -263,6 +263,40 @@
                     col: 24
                   }
                 ]
+              },
+              {
+                field: 'rowAlignH',
+                desc: '水平对齐',
+                form: [
+                  {
+                    type: formDropDown,
+                    param: {},
+                    col: 12
+                  }
+                ]
+              },
+              {
+                field: 'rowAlignV',
+                desc: '垂直对齐',
+                form: [
+                  {
+                    type: formDropDown,
+                    param: {},
+                    col: 12
+                  }
+                ]
+              },
+              ,
+              {
+                field: 'autoWrap',
+                desc: '允许折行',
+                form: [
+                  {
+                    type: formSwitch,
+                    param: {},
+                    col: 12
+                  }
+                ]
               }
             ]
           },

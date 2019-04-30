@@ -28,6 +28,11 @@
     background: url(../img/icon-sprite-new-1.svg) no-repeat;
 }
 
+.left-bar-icon-1 {
+    display: block;
+    background: url(../img/left-bar-icon-1.svg) no-repeat;
+}
+
 html,
 body {
     font-size: 12px;

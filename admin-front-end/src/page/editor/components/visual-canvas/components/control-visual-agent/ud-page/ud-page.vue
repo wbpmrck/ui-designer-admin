@@ -11,11 +11,11 @@
 
 <script>
   /*
-                                                          这是一个用于在设计器中渲染Page的类:
-                                                          特性：
-                                                          1、Page的设计器代理不同于其他的UI元素，其并不支持拖动改变大小、位置。原因是：日常编辑和设计过程中，用户经常是在页面范围内部进行拖拽等操作，这样设计可以防止用户
-                                                          错误的操作导致Page的位置、大小发生改变
-                                                        */
+                                                            这是一个用于在设计器中渲染Page的类:
+                                                            特性：
+                                                            1、Page的设计器代理不同于其他的UI元素，其并不支持拖动改变大小、位置。原因是：日常编辑和设计过程中，用户经常是在页面范围内部进行拖拽等操作，这样设计可以防止用户
+                                                            错误的操作导致Page的位置、大小发生改变
+                                                          */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -27,6 +27,7 @@
   import UDLine from '../ud-line/ud-line.vue';
   import UDImage from '../ud-image/ud-image.vue';
   import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
+  import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
   import SCENE from '../../../../../../../model/ui-scene.js';
 
   export default {
@@ -37,6 +38,7 @@
           UDMultiInput,
           UDInput,
           UDText,
+          UDUIContainerRow,
           UDUIContainerAbsolute,
           UDImage,
           UDLine,
@@ -52,6 +54,7 @@
       }
     },
     components: {
+      UDUIContainerRow,
       UDMultiInput,
       UDInput,
       UDText,

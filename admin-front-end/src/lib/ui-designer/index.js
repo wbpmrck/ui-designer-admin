@@ -10,6 +10,7 @@ import UDImage from "./ui/ud-image"
 import UDContainer from "./container/ud-container"
 import UDUIContainer from "./container/ud-ui-container"
 import UDUIContainerAbsolute from "./container/ud-ui-container-absolute"
+import UDUIContainerRow from "./container/ud-ui-container-row"
 import UDStage from "./container/ud-stage"
 import UDPage from "./container/ud-page"
 import UDEvent from "./ud-event"
@@ -78,7 +79,7 @@ export {
     UDEvent,
     UDEventHandler,
     UDAction,
-    UDLayoutContainerRow,
+    UDUIContainerRow,
     UDUIContainerAbsolute,
     UDUIContainer,
     UDTouch,

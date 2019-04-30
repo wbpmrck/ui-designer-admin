@@ -1,14 +1,14 @@
 <template>
-  <div class="ui-container-absolute" :class="{disabled:disable}" @click="clickMe"></div>
+  <div class="ui-container-row left-bar-icon-1" :class="{disabled:disable}" @click="clickMe"></div>
 </template>
 
 <script>
   import { mapGetters, mapState } from 'vuex';
   import SCENE from '../../../../../../model/ui-scene.js';
   import { isInstanceOf } from '../../../../../../lib/utils/oop.js';
-  import { UDStage, UDUIContainerAbsolute, UDRectangle, UDPage } from '../../../../../../lib/ui-designer/index.js';
+  import { UDStage, UDUIContainerRow, UDUIContainer, UDPage } from '../../../../../../lib/ui-designer/index.js';
   export default {
-    name: 'ui-container-absolute',
+    name: 'ui-container-row',
     props: [],
     props: ['name'],
     data() {
@@ -52,7 +52,7 @@
       disable() {
         if (
           //  (this.currentScene=== SCENE.OBJECT_TREE && this.currentSelection && this.currentSelection.children) || //当选择对象树，且当前选择的对象可以有孩子的时候
-          (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDUIContainerAbsolute)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
+          (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDUIContainer)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
           (this.currentScene === SCENE.OBJECT_TREE && isInstanceOf(this.currentSelection, UDPage)) || //当选择对象树，且当前选择的对象是 ud-container 的时候（也就是可视化的容器）
           (this.currentScene === SCENE.TOOL_BOX && this.currentSelectTool === this.name) //当选择的是工具箱，且当前选择的工具就是自己的时候
         ) {
@@ -71,12 +71,12 @@
 
         let sliblingCount = this.currentSelection.children().value.length + 1;
         // 一个矩形
-        let me = new UDUIContainerAbsolute();
-        me.name({ value: '绝对定位容器' + sliblingCount });
+        let me = new UDUIContainerRow();
+        me.name({ value: '行容器' + sliblingCount });
 
         me.w({ value: this.currentSelection.w().value });
         me.h({ value: 200 });
-        me.bgColor({ value: '#fff' });
+        me.bgColor({ value: '#e5a5e1' });
         // 添加并且选中对象。这种方式可能不方便连续添加对象
         // this.$store.dispatch('addObjectAndSelectIt',{
         //   object:me,
@@ -96,10 +96,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .ui-container-absolute {
+  .ui-container-row {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/ui-container-absolute.svg) no-repeat;
+    background-position: -450px -72px;
   }
 </style>

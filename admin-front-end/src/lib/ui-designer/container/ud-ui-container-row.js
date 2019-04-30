@@ -2,6 +2,11 @@ import UDEvent from '../ud-event'
 import UDObject from "../ud-object"
 import UDAction from "../ud-action"
 import UDClipMode from "../enums/ud-clip-mode"
+import UDRowAlignH from "../enums/ud-row-align-h"
+import UDRowAlignV from "../enums/ud-row-align-v"
+import {
+    UDAttributeUnit
+} from '../enums/ud-unit'
 import {
     regEnums,
     regClass,
@@ -9,18 +14,19 @@ import {
     Types,
     DECORATORS,
     field,
-    UDAttribute
+    UDAttribute,
+
 } from "../ud-runtime"
 import UDUIContainer from './ud-ui-container';
 
-const className = 'UDLayoutContainerRow'
+const className = 'UDUIContainerRow'
 /**
  * 表示可以被展示和显示的界面元素的容器
  * 注：UIContainer本身也是参与布局和渲染的
  */
 
 @DECORATORS.serializable(true)
-class UDLayoutContainerRow extends UDUIContainer {
+class UDUIContainerRow extends UDUIContainer {
 
     static getTypeName() {
         return className
@@ -82,6 +88,33 @@ class UDLayoutContainerRow extends UDUIContainer {
     })
     paddingLeft() {};
 
+
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: UDRowAlignH.getType(),
+        desc: '水平布局',
+        value: UDRowAlignH.SPACE_BETWEEN
+    })
+    rowAlignH() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: UDRowAlignV.getType(),
+        desc: '垂直布局',
+        value: UDRowAlignV.MIDDLE
+    })
+    rowAlignV() {};
+
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Boolean.getType(),
+        desc: '自动换行',
+        value: true
+    })
+    autoWrap() {};
+
     /**
      * 如果该对象有子元素，那么子元素的哪些属性需要被禁用
      */
@@ -93,6 +126,6 @@ class UDLayoutContainerRow extends UDUIContainer {
         super()
     }
 }
-regClass(className, UDLayoutContainerRow)
+regClass(className, UDUIContainerRow)
 
-export default UDLayoutContainerRow;
+export default UDUIContainerRow;

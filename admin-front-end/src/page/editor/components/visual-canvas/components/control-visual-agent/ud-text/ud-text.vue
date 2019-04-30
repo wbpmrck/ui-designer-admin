@@ -1,15 +1,18 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-text" :style="styleObject" @click.stop="selectMe">{{udObject.txt().value}}<operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim></div>
+  <div :id="'agent-'+udObject._id().value" class="ud-text" :style="styleObject" @click.stop="selectMe">
+    {{udObject.txt().value}}
+    <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
+  </div>
 </template>
 
 <script>
   // 文本框
   import { mapGetters, mapState } from 'vuex';
-  import { UDClipMode,UDTextAlignH,UDTextAlignV } from '../../../../../../../lib/ui-designer/index.js';
+  import { UDClipMode, UDTextAlignH, UDTextAlignV } from '../../../../../../../lib/ui-designer/index.js';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
   import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
-  import {translateAlignH,translateAlignV} from '../../../../../../../model/style-transform.js'
+  import { translateAlignH, translateAlignV } from '../../../../../../../model/style-transform.js';
   export default {
     name: 'ud-text',
     data() {
@@ -50,8 +53,8 @@
           left: 0 + 'px',
           display: 'flex',
           position: 'absolute',
-          
-          width:this.resize.w + 'px',
+
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
@@ -63,21 +66,25 @@
           'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
           'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
           visibility: this.udObject.editorHide ? 'hidden' : 'visible',
+          'padding-top': this.udObject.paddingTop().value + 'px',
+          'padding-right': this.udObject.paddingRight().value + 'px',
+          'padding-left': this.udObject.paddingLeft().value + 'px',
+          'padding-bottom': this.udObject.paddingBottom().value + 'px',
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,
           'border-style': 'solid',
-          'font-family':this.udObject.font().value,
-          'font-size':this.udObject.fs().value+'px',
-          'color':this.udObject.fontColor().value,
-          'font-weight':this.udObject.bold().value?'bold':'normal',
-          'font-style':this.udObject.italic().value?'italic':'normal',
-          'text-decoration':this.udObject.underline().value?'underline':'none',
-          'justify-content':translateAlignH(this.udObject.alignH().value,'flex'),
-          'align-items':translateAlignV(this.udObject.alignV().value),
-          'word-break':'break-all',
+          'font-family': this.udObject.font().value,
+          'font-size': this.udObject.fs().value + 'px',
+          color: this.udObject.fontColor().value,
+          'font-weight': this.udObject.bold().value ? 'bold' : 'normal',
+          'font-style': this.udObject.italic().value ? 'italic' : 'normal',
+          'text-decoration': this.udObject.underline().value ? 'underline' : 'none',
+          'justify-content': translateAlignH(this.udObject.alignH().value, 'flex'),
+          'align-items': translateAlignV(this.udObject.alignV().value),
+          'word-break': 'break-all',
           'white-space': 'pre-wrap',
-          'line-height': (this.udObject.fs().value + this.udObject.ls().value )+'px'
+          'line-height': this.udObject.fs().value + this.udObject.ls().value + 'px'
         };
       }
     },
@@ -212,7 +219,7 @@
       },
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
-      },
+      }
     },
     mounted() {
       this.initDrag();

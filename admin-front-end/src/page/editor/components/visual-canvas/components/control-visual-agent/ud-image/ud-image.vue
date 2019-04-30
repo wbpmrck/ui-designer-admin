@@ -7,8 +7,8 @@
 
 <script>
   /*
-                                                                                                                                                            矩形
-                                                                                                                                                            */
+                                                                                                                                                                  矩形
+                                                                                                                                                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -53,9 +53,13 @@
           top: 0 + 'px',
           left: 0 + 'px',
           position: 'absolute',
-          
-          width:this.resize.w + 'px',
+
+          width: this.resize.w + 'px',
           height: this.resize.h + 'px',
+          'padding-top': this.udObject.paddingTop().value + 'px',
+          'padding-right': this.udObject.paddingRight().value + 'px',
+          'padding-left': this.udObject.paddingLeft().value + 'px',
+          'padding-bottom': this.udObject.paddingBottom().value + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
           'background-color': this.udObject.bgColor().value,
@@ -68,9 +72,10 @@
       },
       imageStyle() {
         return {
-        
-          width:this.resize.w + 'px',
-          height: this.resize.h + 'px',
+          // width: this.resize.w + 'px',
+          width: '100%',
+          // height: this.resize.h + 'px',
+          height: '100%',
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,
