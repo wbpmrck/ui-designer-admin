@@ -67,7 +67,7 @@
         return this.$store.getters.item(this.objectId);
       },
       options() {
-        console.log(this.itemData);
+        // console.log(this.itemData);
         let ops = [];
 
         //如果绑定的数据值，是一个枚举类型，就直接读取元数据动态创建下拉列表

@@ -52,13 +52,13 @@ const translateRowAlignH = (val) => {
   if (val === UDRowAlignH.LEFT) {
     return 'flex-start'
   }
-  if (val === UDTextAlignV.CENTER) {
+  if (val === UDRowAlignH.CENTER) {
     return 'center'
   }
-  if (val === UDTextAlignV.RIGHT) {
+  if (val === UDRowAlignH.RIGHT) {
     return 'flex-end'
   }
-  if (val === UDTextAlignV.SPACE_BETWEEN) {
+  if (val === UDRowAlignH.SPACE_BETWEEN) {
     return 'space-between'
   }
 };
