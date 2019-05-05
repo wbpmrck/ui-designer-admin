@@ -17,8 +17,10 @@
       //TODO:先创建一个空的舞台对象进去，做测试使用
       var rootStage = new UDStage();
       rootStage.name({ value: '舞台' });
-      rootStage.sw({ value: 750 });
-      rootStage.sh({ value: 1334 });
+      // rootStage.sw({ value: 750 });
+      // rootStage.sh({ value: 1334 });
+      rootStage.sw({ value: 375 });
+      rootStage.sh({ value: 600 });
 
       // rootStage.eventHandlers({
       //   value:[

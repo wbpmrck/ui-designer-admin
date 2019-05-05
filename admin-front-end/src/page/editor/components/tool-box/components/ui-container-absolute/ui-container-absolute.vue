@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-container-absolute" :class="{disabled:disable}" @click="clickMe"></div>
+  <div class="ui-container-absolute left-bar-icon-1" :class="{disabled:disable}" @click="clickMe"></div>
 </template>
 
 <script>
@@ -100,6 +100,7 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(./assets/img/ui-container-absolute.svg) no-repeat;
+    background-position: -180px -72px;
+    // background: url(./assets/img/ui-container-absolute.svg) no-repeat;
   }
 </style>

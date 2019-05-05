@@ -1,63 +1,28 @@
 <template>
-  <div :id="'agent-'+udObject._id().value" class="ud-ui-container-row scrollable-1" :style="styleObject" @click.stop="selectMe">
+  <div :id="'agent-'+udObject._id().value" class="ud-ui-two-dim" :style="wrapperStyle" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
-    <component
-      :is="visualAgents[child.constructor.getTypeName()]"
-      :ud-object="child"
-      v-for="child in udObject.__ud_attribute_children__.value"
-      :key="child.__ud_attribute__id__.value"
-    ></component>
+    <!-- 允许子组件插入自己要展示的内容 -->
+    <slot></slot>
   </div>
 </template>
 
 <script>
   /*
-                                                                                                                                              矩形
-                                                                                                                                              */
+                                                                                                                                                                                            矩形
+                                                                                                                                                                                            */
 
   import { mapGetters, mapState } from 'vuex';
-  import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
   import interact from 'interactjs';
-  import SCENE from '../../../../../../../model/ui-scene.js';
-  import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
-  import UDInput from '../ud-input/ud-input.vue';
-  import UDMultiInput from '../ud-multi-input/ud-multi-input.vue';
-  import UDText from '../ud-text/ud-text.vue';
-  import UDRectangle from '../ud-rect/ud-rect.vue';
-  import UDCircle from '../ud-circle/ud-circle.vue';
-  import UDLine from '../ud-line/ud-line.vue';
-  import UDImage from '../ud-image/ud-image.vue';
-  import UDUIContainerAbsolute from '../ud-ui-container-row/ud-ui-container-row.vue';
-  import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
-  import { translateRowAlignV, translateRowAlignH } from '../../../../../../../model/style-transform.js';
-  export default {
-    name: 'ud-ui-container-row',
-    components: {
-      UDUIContainerRow,
-      UDMultiInput,
-      UDInput,
-      UDText,
-      UDUIContainerAbsolute,
-      UDImage,
-      UDLine,
-      UDRectangle,
-      UDCircle,
-      operateHandlerTwoDim
-    },
+  import SCENE from '../../../../../../../../model/ui-scene.js';
+  import { isInstanceOf } from '../../../../../../../../lib/utils/oop.js';
+  import { UDPage, UDUIContainerAbsolute, UDUIContainerRow } from '../../../../../../../../lib/ui-designer/index.js';
 
+  import operateHandlerTwoDim from '../../operate-handler-two-dim/operate-handler-two-dim';
+
+  export default {
+    name: 'ud-ui-two-dim',
     data() {
       return {
-        visualAgents: {
-          UDUIContainerRow,
-          UDMultiInput,
-          UDInput,
-          UDText,
-          UDUIContainerAbsolute,
-          UDImage,
-          UDLine,
-          UDRectangle,
-          UDCircle
-        },
         offset: {
           x: 0,
           y: 0
@@ -74,6 +39,9 @@
         default: {}
       }
     },
+    components: {
+      operateHandlerTwoDim
+    },
 
     computed: {
       ...mapState({
@@ -84,40 +52,42 @@
           return state.selection.scene;
         }
       }),
-      // 动态根据配置的数据对象，计算出元素的可视化样式
-      styleObject() {
-        return {
-          top: 0 + 'px',
-          left: 0 + 'px',
-          display: 'flex',
-          'flex-direction': 'row',
-          position: 'absolute',
-          width: this.resize.w + 'px',
-          height: this.resize.h + 'px',
+      /**
+       * 组件所处的布局上下文环境，决定了组件的可视化代理如何在页面中呈现
+       */
+      layoutEnv() {
+        if (isInstanceOf(this.udObject.parent, UDPage) || isInstanceOf(this.udObject.parent, UDUIContainerAbsolute)) {
+          return 'absolute';
+        } else if (isInstanceOf(this.udObject.parent, UDUIContainerRow)) {
+          return 'relative';
+        }
+        return 'unknow';
+      },
+      wrapperStyle() {
+        let base = {
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
-          'background-color': this.udObject.bgColor().value,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
             this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
             this.udObject.rotateZ().value
           }deg)`,
-          'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          visibility: this.udObject.editorHide ? 'hidden' : 'visible',
-          'border-width': this.udObject.borderWidth().value + 'px',
-          'border-color': this.udObject.borderColor().value,
-          'border-style': 'solid',
-          'padding-top': this.udObject.paddingTop().value + 'px',
-          'padding-right': this.udObject.paddingRight().value + 'px',
-          'padding-left': this.udObject.paddingLeft().value + 'px',
-          'padding-bottom': this.udObject.paddingBottom().value + 'px',
-          'justify-content': translateRowAlignH(this.udObject.rowAlignH().value),
-          'align-items': translateRowAlignV(this.udObject.rowAlignV().value)
+          visibility: this.udObject.editorHide ? 'hidden' : 'visible'
         };
+        let ret = base;
+        if (this.layoutEnv === 'absolute') {
+          ret = {
+            top: 0 + 'px',
+            left: 0 + 'px',
+            position: 'absolute',
+            ...base
+          };
+        }
+        return ret;
       }
     },
     methods: {
       selectMe() {
+        console.log('base select');
         this.$store.commit('selectItem', {
           item: this.udObject,
           scene: SCENE.OBJECT_TREE
@@ -125,6 +95,8 @@
       },
       initDrag() {
         let self = this;
+        console.log(`init drag:${'#' + 'agent-' + self.udObject._id().value}`);
+
         // target elements with the "draggable" class
         // interact('#canvas-wrapper')
         interact('#' + 'agent-' + self.udObject._id().value)
@@ -146,7 +118,7 @@
             onend: function(event) {
               // 将移动改变的位移，提交到store,并清空自身的编辑位移量
 
-              // console.log(`end drag,update :x=${self.offset.x},y=${self.offset.y}`);
+              console.log(`end drag,update :x=${self.offset.x},y=${self.offset.y}`);
               self.$store.commit('updateObjectUDProperty', {
                 id: self.udObject._id().value,
                 propName: 'x',
@@ -172,6 +144,7 @@
               top: '.op-top'
             },
             preserveAspectRatio: this.udObject.lockRatio().value,
+
             modifiers: [
               // minimum size NOTICE:注意，interact有坑，这个min必须大于0,否则resize事件拿不到正确的width,height
               interact.modifiers.restrictSize({
@@ -238,6 +211,12 @@
       interact('#' + 'agent-' + this.udObject._id().value).unset();
     },
     watch: {
+      'resize.w': function(newVal, oldVal) {
+        this.$emit('resize-width-change', newVal, oldVal);
+      },
+      'resize.h': function(newVal, oldVal) {
+        this.$emit('resize-height-change', newVal, oldVal);
+      },
       'udObject.__ud_attribute_lockRatio__.value': function(newVal, oldVal) {
         interact('#' + 'agent-' + this.udObject._id().value).unset();
         this.initDrag();
@@ -256,6 +235,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-ui-container-row {
+  .ud-ui-two-dim {
+    font-size: 0; //消除所有书写过程中的空白造成的容器像素偏差
   }
 </style>

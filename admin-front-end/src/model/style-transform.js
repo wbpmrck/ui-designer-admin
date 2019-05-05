@@ -1,6 +1,10 @@
 import {
   UDTextAlignH,
-  UDTextAlignV
+  UDTextAlignV,
+  UDRowAlignH,
+  UDRowAlignV,
+  UDColAlignH,
+  UDColAlignV
 } from '../lib/ui-designer/index.js';
 
 
@@ -43,7 +47,37 @@ const translateAlignV = (val) => {
   }
 };
 
+
+const translateRowAlignH = (val) => {
+  if (val === UDRowAlignH.LEFT) {
+    return 'flex-start'
+  }
+  if (val === UDTextAlignV.CENTER) {
+    return 'center'
+  }
+  if (val === UDTextAlignV.RIGHT) {
+    return 'flex-end'
+  }
+  if (val === UDTextAlignV.SPACE_BETWEEN) {
+    return 'space-between'
+  }
+};
+
+const translateRowAlignV = (val) => {
+  if (val === UDRowAlignV.TOP) {
+    return 'flex-start'
+  }
+  if (val === UDRowAlignV.MIDDLE) {
+    return 'center'
+  }
+  if (val === UDRowAlignV.BOTTOM) {
+    return 'flex-end'
+  }
+};
+
 export {
+  translateRowAlignV,
+  translateRowAlignH,
   translateAlignH,
   translateAlignV,
 }
