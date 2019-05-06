@@ -34,6 +34,7 @@
     },
     methods: {
       triggerUpload() {
+        console.log('triggerUpload');
         var event = new MouseEvent('click', {
           view: window,
           bubbles: true,
@@ -78,6 +79,7 @@
       }
     },
     created() {
+      console.log('created init .triggerUpload');
       this.val = this.propInitVal;
       this.triggerUpload = this.triggerUpload.bind(this);
 

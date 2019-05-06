@@ -10,8 +10,8 @@
 
 <script>
   /*
-                                                                                                                                                                    矩形
-                                                                                                                                                                    */
+                                                                                                                                                                              矩形
+                                                                                                                                                                              */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -48,6 +48,7 @@
 
       imageStyle() {
         return {
+          position: 'relative',
           display: 'inline-block',
           width: this.width + 'px',
           height: this.height + 'px',
@@ -74,6 +75,7 @@
         this.height = newVal;
       },
       changeImgSrc() {
+        console.log('changeImgSrc');
         this.globalBus.$emit('change-image-src');
       }
     },
