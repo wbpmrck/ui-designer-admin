@@ -8,8 +8,8 @@
 
 <script>
   /*
-                                                                                                                                                                                            矩形
-                                                                                                                                                                                            */
+                                                                                                                                                                                              矩形
+                                                                                                                                                                                              */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -79,6 +79,11 @@
             top: 0 + 'px',
             left: 0 + 'px',
             position: 'absolute',
+            ...base
+          };
+        } else {
+          ret = {
+            position: 'relative',
             ...base
           };
         }

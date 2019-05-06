@@ -94,7 +94,7 @@ class UDUIContainerRow extends UDUIContainer {
     @DECORATORS.field({
         type: UDRowAlignH.getType(),
         desc: '水平布局',
-        value: UDRowAlignH.SPACE_BETWEEN
+        value: UDRowAlignH.CENTER
     })
     rowAlignH() {};
 

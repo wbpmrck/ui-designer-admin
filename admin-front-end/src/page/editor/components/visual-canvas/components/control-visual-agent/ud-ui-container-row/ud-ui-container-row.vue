@@ -1,6 +1,6 @@
 <template>
   <udUITwoDimBase :ud-object="udObject" ref="baseComponent" @resize-width-change="widthChange" @resize-height-change="heightChange">
-    <div class="ud-ui-container-row" :style="styleObject">
+    <div class="ud-ui-container-row scrollable-1" :style="styleObject">
       <component
         :is="visualAgents[child.constructor.getTypeName()]"
         :ud-object="child"
@@ -22,8 +22,8 @@
 
 <script>
   /*
-                                                                                                                                                            矩形
-                                                                                                                                                            */
+                                                                                                                                                                  矩形
+                                                                                                                                                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -38,7 +38,7 @@
   import UDCircle from '../ud-circle/ud-circle.vue';
   import UDLine from '../ud-line/ud-line.vue';
   import UDImage from '../ud-image/ud-image.vue';
-  import UDUIContainerAbsolute from '../ud-ui-container-row/ud-ui-container-row.vue';
+  import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
   import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
   import { translateRowAlignV, translateRowAlignH } from '../../../../../../../model/style-transform.js';
   export default {
@@ -92,14 +92,14 @@
     },
 
     computed: {
-      ...mapState({
-        currentSelection(state) {
-          return state.selection.currentSelect;
-        },
-        currentScene(state) {
-          return state.selection.scene;
-        }
-      }),
+      // ...mapState({
+      //   currentSelection(state) {
+      //     return state.selection.currentSelect;
+      //   },
+      //   currentScene(state) {
+      //     return state.selection.scene;
+      //   }
+      // }),
       // 动态根据配置的数据对象，计算出元素的可视化样式
       styleObject() {
         return {
