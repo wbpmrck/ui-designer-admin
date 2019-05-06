@@ -22,8 +22,8 @@
 
 <script>
   /*
-                                                                                                                                                      矩形
-                                                                                                                                                      */
+                                                                                                                                                        矩形
+                                                                                                                                                        */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -102,6 +102,7 @@
       // 动态根据配置的数据对象，计算出元素的可视化样式
       styleObject() {
         return {
+          position: 'absolute', // 容器设置绝对定位，主要是因为子元素是绝对定位，为了实现overflow特性，不得不而已
           width: this.width + 'px',
           height: this.height + 'px',
           'background-color': this.udObject.bgColor().value,

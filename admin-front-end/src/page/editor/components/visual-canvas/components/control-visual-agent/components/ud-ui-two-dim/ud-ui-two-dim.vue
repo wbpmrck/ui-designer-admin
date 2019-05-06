@@ -8,8 +8,8 @@
 
 <script>
   /*
-                                                                                                                                                                                              矩形
-                                                                                                                                                                                              */
+                                                                                                                                                                                                              矩形
+                                                                                                                                                                                                              */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -65,6 +65,9 @@
       },
       wrapperStyle() {
         let base = {
+          // 'text-align': 'left',
+          width: this.resize.w + 'px',
+          height: this.resize.h + 'px',
           'z-index': this.udObject.z().value,
           opacity: this.udObject.alpha().value / 100,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
@@ -79,6 +82,8 @@
             top: 0 + 'px',
             left: 0 + 'px',
             position: 'absolute',
+            // position: 'relative',
+            // display: 'inline-block',
             ...base
           };
         } else {

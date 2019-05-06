@@ -132,12 +132,13 @@
   .two-dim-operator {
     display: inline-block;
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
     border-style: solid;
     .operate-handle-point {
+      z-index: 10;
       display: inline-block;
       position: absolute;
       border-style: none;
