@@ -10,8 +10,8 @@
 
 <script>
   /*
-                                                                                                                                                                                                                                                                                        矩形
-                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                    矩形
+                                                                                                                                                                                                                                                                                                    */
 
   import { UDPage, UDUIContainerAbsolute, UDUIContainerRow, UDClipMode } from '../../../../../../../../lib/ui-designer/index.js';
   import { mapGetters, mapState } from 'vuex';
@@ -68,9 +68,13 @@
 
       wrapperStyle() {
         let base = {
-          // 'text-align': 'left',
-          // 'min-width': this.resize.w + 'px',
-          // 'min-height': this.resize.h + 'px',
+          // 外边距要加在wrapper对象上而不是content.因为在容器中参与布局的时候，只有父亲元素会参与flex布局
+          'margin-top': this.udObject.marginTop().value + 'px',
+          'margin-right': this.udObject.marginRight().value + 'px',
+          'margin-left': this.udObject.marginLeft().value + 'px',
+          'margin-bottom': this.udObject.marginBottom().value + 'px',
+          width: this.resize.w + 'px',
+          height: this.resize.h + 'px',
           // 'z-index': this.udObject.z().value,
           // opacity: this.udObject.alpha().value / 100,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
@@ -102,14 +106,11 @@
       //帮助子类自动渲染属性
       contentBoxStyle(that) {
         let base = {
+          // display: 'inline-block', // 默认是inline-block,子类可以覆盖
           'z-index': that.udObject.z().value,
           width: that.udObject.resizeW + 'px',
           height: that.udObject.resizeH + 'px',
           opacity: that.udObject.alpha().value / 100,
-          'margin-top': that.udObject.marginTop().value + 'px',
-          'margin-right': that.udObject.marginRight().value + 'px',
-          'margin-left': that.udObject.marginLeft().value + 'px',
-          'margin-bottom': that.udObject.marginBottom().value + 'px',
           'background-color': that.udObject.bgColor().value,
           'border-width': that.udObject.borderWidth().value + 'px',
           'border-color': that.udObject.borderColor().value,
@@ -131,6 +132,13 @@
 
             'overflow-x': that.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
             'overflow-y': that.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll'
+          };
+        }
+
+        if (that.udObject.borderRadius) {
+          base = {
+            ...base,
+            'border-radius': that.udObject.borderRadius().value + 'px'
           };
         }
 

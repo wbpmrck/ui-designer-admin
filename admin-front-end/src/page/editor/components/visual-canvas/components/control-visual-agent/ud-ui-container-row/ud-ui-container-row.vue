@@ -23,8 +23,8 @@
 
 <script>
   /*
-                                                                                                                                                                                          矩形
-                                                                                                                                                                                          */
+                                                                                                                                                                                            矩形
+                                                                                                                                                                                            */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -118,12 +118,12 @@
       }
     },
     methods: {
-      widthChange(newVal, oldVal) {
-        this.width = newVal;
-      },
-      heightChange(newVal, oldVal) {
-        this.height = newVal;
-      }
+      // widthChange(newVal, oldVal) {
+      //   this.width = newVal;
+      // },
+      // heightChange(newVal, oldVal) {
+      //   this.height = newVal;
+      // }
       // selectMe() {
       //   this.$store.commit('selectItem', {
       //     item: this.udObject,
@@ -139,7 +139,6 @@
       //       // enable inertial throwing
       //       inertia: false,
       //       // enabled: false,
-
       //       // enable autoScroll
       //       autoScroll: true,
       //       ignoreFrom: '.not-drag',
@@ -152,20 +151,17 @@
       //       // call this function on every dragend event
       //       onend: function(event) {
       //         // 将移动改变的位移，提交到store,并清空自身的编辑位移量
-
       //         // console.log(`end drag,update :x=${self.offset.x},y=${self.offset.y}`);
       //         self.$store.commit('updateObjectUDProperty', {
       //           id: self.udObject._id().value,
       //           propName: 'x',
       //           propValue: self.udObject.x().value + self.offset.x
       //         });
-
       //         self.$store.commit('updateObjectUDProperty', {
       //           id: self.udObject._id().value,
       //           propName: 'y',
       //           propValue: self.udObject.y().value + self.offset.y
       //         });
-
       //         self.offset.x = 0;
       //         self.offset.y = 0;
       //       }
@@ -185,7 +181,6 @@
       //           min: { width: 1, height: 1 }
       //         })
       //       ]
-
       //       // inertia: true
       //     })
       //     .on('resizemove', event => {
@@ -193,12 +188,10 @@
       //       // console.log(event.rect);
       //       // console.log(`resizemove,update :w=${event.rect.width},h=${event.rect.height}`);
       //       // console.log(`resizemove,deltaRect `);
-
       //       // console.log(event.deltaRect);
       //       // 记录当前变形之后的形状大小，vue自动绘制到DOM
       //       self.resize.w = event.rect.width;
       //       self.resize.h = event.rect.height;
-
       //       // 如果拖动了矩形的左边和上边，则记录到位移参数里
       //       self.offset.x += event.deltaRect.left;
       //       self.offset.y += event.deltaRect.top;
@@ -210,13 +203,11 @@
       //         propName: 'x',
       //         propValue: self.udObject.x().value + self.offset.x
       //       });
-
       //       self.$store.commit('updateObjectUDProperty', {
       //         id: self.udObject._id().value,
       //         propName: 'y',
       //         propValue: self.udObject.y().value + self.offset.y
       //       });
-
       //       self.$store.commit('updateObjectUDProperty', {
       //         id: self.udObject._id().value,
       //         propName: 'w',
@@ -227,7 +218,6 @@
       //         propName: 'h',
       //         propValue: self.resize.h
       //       });
-
       //       // 将本次resize操作的结果重置，避免影响下一次操作
       //       self.offset.x = 0;
       //       self.offset.y = 0;
