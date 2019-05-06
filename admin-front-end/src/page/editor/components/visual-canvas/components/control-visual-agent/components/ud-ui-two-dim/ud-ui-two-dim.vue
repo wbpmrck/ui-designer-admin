@@ -1,21 +1,23 @@
 <template>
   <div :id="'agent-'+udObject._id().value" class="ud-ui-two-dim" :style="wrapperStyle" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
+    <!-- <div class="content-box" :style="contentBoxStyle"> -->
     <!-- 允许子组件插入自己要展示的内容 -->
     <slot></slot>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
   /*
-                                                                                                                                                                                                                矩形
-                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                        矩形
+                                                                                                                                                                                                                                                                                        */
 
+  import { UDPage, UDUIContainerAbsolute, UDUIContainerRow, UDClipMode } from '../../../../../../../../lib/ui-designer/index.js';
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../../model/ui-scene.js';
   import { isInstanceOf } from '../../../../../../../../lib/utils/oop.js';
-  import { UDPage, UDUIContainerAbsolute, UDUIContainerRow } from '../../../../../../../../lib/ui-designer/index.js';
 
   import operateHandlerTwoDim from '../../operate-handler-two-dim/operate-handler-two-dim';
 
@@ -63,13 +65,14 @@
         }
         return 'unknow';
       },
+
       wrapperStyle() {
         let base = {
           // 'text-align': 'left',
-          width: this.resize.w + 'px',
-          height: this.resize.h + 'px',
-          'z-index': this.udObject.z().value,
-          opacity: this.udObject.alpha().value / 100,
+          // 'min-width': this.resize.w + 'px',
+          // 'min-height': this.resize.h + 'px',
+          // 'z-index': this.udObject.z().value,
+          // opacity: this.udObject.alpha().value / 100,
           transform: `translate(${this.udObject.x().value + this.offset.x}px,${this.udObject.y().value +
             this.offset.y}px) rotateX(${this.udObject.rotateX().value}deg) rotateY(${this.udObject.rotateY().value}deg) rotateZ(${
             this.udObject.rotateZ().value
@@ -96,6 +99,43 @@
       }
     },
     methods: {
+      //帮助子类自动渲染属性
+      contentBoxStyle(that) {
+        let base = {
+          'z-index': that.udObject.z().value,
+          width: that.udObject.resizeW + 'px',
+          height: that.udObject.resizeH + 'px',
+          opacity: that.udObject.alpha().value / 100,
+          'margin-top': that.udObject.marginTop().value + 'px',
+          'margin-right': that.udObject.marginRight().value + 'px',
+          'margin-left': that.udObject.marginLeft().value + 'px',
+          'margin-bottom': that.udObject.marginBottom().value + 'px',
+          'background-color': that.udObject.bgColor().value,
+          'border-width': that.udObject.borderWidth().value + 'px',
+          'border-color': that.udObject.borderColor().value,
+          'border-style': 'solid'
+        };
+        if (that.udObject.paddingTop) {
+          base = {
+            ...base,
+            'padding-top': that.udObject.paddingTop().value + 'px',
+            'padding-right': that.udObject.paddingRight().value + 'px',
+            'padding-left': that.udObject.paddingLeft().value + 'px',
+            'padding-bottom': that.udObject.paddingBottom().value + 'px'
+          };
+        }
+
+        if (that.udObject.clipX) {
+          base = {
+            ...base,
+
+            'overflow-x': that.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
+            'overflow-y': that.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll'
+          };
+        }
+
+        return base;
+      },
       selectMe() {
         console.log('base select');
         this.$store.commit('selectItem', {
@@ -122,6 +162,7 @@
             onmove: ({ x0, y0, dx, dy }) => {
               self.offset.x += dx;
               self.offset.y += dy;
+
               // console.log(self.offset);
             },
             // call this function on every dragend event
@@ -175,6 +216,17 @@
             self.resize.w = event.rect.width;
             self.resize.h = event.rect.height;
 
+            self.$store.commit('updateObject', {
+              id: self.udObject._id().value,
+              propName: 'resizeW',
+              propValue: self.resize.w
+            });
+
+            self.$store.commit('updateObject', {
+              id: self.udObject._id().value,
+              propName: 'resizeH',
+              propValue: self.resize.h
+            });
             // 如果拖动了矩形的左边和上边，则记录到位移参数里
             self.offset.x += event.deltaRect.left;
             self.offset.y += event.deltaRect.top;
@@ -198,12 +250,24 @@
               propName: 'w',
               propValue: self.resize.w
             });
+
+            self.$store.commit('updateObject', {
+              id: self.udObject._id().value,
+              propName: 'resizeW',
+              propValue: self.resize.w
+            });
+
             self.$store.commit('updateObjectUDProperty', {
               id: self.udObject._id().value,
               propName: 'h',
               propValue: self.resize.h
             });
 
+            self.$store.commit('updateObject', {
+              id: self.udObject._id().value,
+              propName: 'resizeH',
+              propValue: self.resize.h
+            });
             // 将本次resize操作的结果重置，避免影响下一次操作
             self.offset.x = 0;
             self.offset.y = 0;
@@ -214,7 +278,22 @@
     },
     created() {
       this.resize.w = this.udObject.w().value;
+
+      this.$store.commit('updateObject', {
+        id: this.udObject._id().value,
+        propName: 'resizeW',
+        propValue: this.resize.w
+      });
+
+      // this.udObject.resizeW = this.udObject.w().value;
       this.resize.h = this.udObject.h().value;
+      this.$store.commit('updateObject', {
+        id: this.udObject._id().value,
+        propName: 'resizeH',
+        propValue: this.resize.h
+      });
+
+      // this.udObject.resizeH = this.udObject.h().value;
     },
 
     beforeDestroy() {
@@ -233,9 +312,21 @@
       },
       'udObject.__ud_attribute_w__.value': function(newVal, oldVal) {
         this.resize.w = newVal;
+
+        this.$store.commit('updateObject', {
+          id: this.udObject._id().value,
+          propName: 'resizeW',
+          propValue: this.resize.w
+        });
       },
       'udObject.__ud_attribute_h__.value': function(newVal, oldVal) {
         this.resize.h = newVal;
+
+        this.$store.commit('updateObject', {
+          id: this.udObject._id().value,
+          propName: 'resizeH',
+          propValue: this.resize.h
+        });
       }
     },
     mounted() {

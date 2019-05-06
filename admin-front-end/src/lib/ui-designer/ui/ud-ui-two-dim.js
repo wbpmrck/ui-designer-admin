@@ -162,6 +162,7 @@ class UDUITwoDim extends UDUIOneDim {
         unit: UDAttributeUnit.PX
     })
     x() {};
+    resizeX; //在编辑器里变化的量，不参与序列化
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({
@@ -171,6 +172,7 @@ class UDUITwoDim extends UDUIOneDim {
         unit: UDAttributeUnit.PX
     })
     y() {};
+    resizeY; //在编辑器里变化的量，不参与序列化
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({
@@ -180,6 +182,7 @@ class UDUITwoDim extends UDUIOneDim {
         unit: UDAttributeUnit.PX
     })
     w() {};
+    resizeW; //在编辑器里变化的量，不参与序列化
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({
@@ -189,6 +192,7 @@ class UDUITwoDim extends UDUIOneDim {
         unit: UDAttributeUnit.PX
     })
     h() {};
+    resizeH; //在编辑器里变化的量，不参与序列化
 
     @DECORATORS.serializable(true)
     @DECORATORS.field({

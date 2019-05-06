@@ -10,8 +10,8 @@
 
 <script>
   /*
-                                                                                                                                                                              矩形
-                                                                                                                                                                              */
+                                                                                                                                                                                  矩形
+                                                                                                                                                                                  */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -52,14 +52,14 @@
           display: 'inline-block',
           width: this.width + 'px',
           height: this.height + 'px',
-          'margin-top': this.udObject.marginTop().value + 'px',
-          'margin-right': this.udObject.marginRight().value + 'px',
-          'margin-left': this.udObject.marginLeft().value + 'px',
-          'margin-bottom': this.udObject.marginBottom().value + 'px',
-          'padding-top': this.udObject.paddingTop().value + 'px',
-          'padding-right': this.udObject.paddingRight().value + 'px',
-          'padding-left': this.udObject.paddingLeft().value + 'px',
-          'padding-bottom': this.udObject.paddingBottom().value + 'px',
+          // 'margin-top': this.udObject.marginTop().value + 'px',
+          // 'margin-right': this.udObject.marginRight().value + 'px',
+          // 'margin-left': this.udObject.marginLeft().value + 'px',
+          // 'margin-bottom': this.udObject.marginBottom().value + 'px',
+          // 'padding-top': this.udObject.paddingTop().value + 'px',
+          // 'padding-right': this.udObject.paddingRight().value + 'px',
+          // 'padding-left': this.udObject.paddingLeft().value + 'px',
+          // 'padding-bottom': this.udObject.paddingBottom().value + 'px',
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',
           'border-color': this.udObject.borderColor().value,

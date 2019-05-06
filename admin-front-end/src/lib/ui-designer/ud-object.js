@@ -133,9 +133,11 @@ class UDObject {
             if (this[p] && this[p].__ud_attribute__) {
                 if (propNamesArray.indexOf(p) > -1) {
                     console.log(`disable prop:[${p}]`)
-                    this[p]().enable = false;
+                    this[p]().setEnable(false);
+                    // this[p]().enable = false;
                 } else {
-                    this[p]().enable = true;
+                    this[p]().setEnable(true);
+                    // this[p]().enable = true;
                 }
             }
         }

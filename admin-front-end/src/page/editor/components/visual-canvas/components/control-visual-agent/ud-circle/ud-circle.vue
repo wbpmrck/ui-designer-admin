@@ -19,8 +19,8 @@
 
 <script>
   /*
-                                                                                                                                                              矩形
-                                                                                                                                                              */
+                                                                                                                                                                矩形
+                                                                                                                                                                */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -55,7 +55,7 @@
           // ry: Math.floor((this.height === 0 ? this.udObject.h().value : this.height) / 2 - this.udObject.borderWidth().value),
           cy: Math.floor(this.height / 2),
 
-          'background-color': this.udObject.bgColor().value,
+          'background-color': this.udObject.color().value,
 
           'border-width': this.udObject.borderWidth().value,
           'border-color': this.udObject.borderColor().value

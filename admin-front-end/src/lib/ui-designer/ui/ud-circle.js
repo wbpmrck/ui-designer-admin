@@ -38,6 +38,14 @@ class UDCircle extends UDUITwoDim {
         return super.getSupportActions().concat([]);
     }
 
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: String.getType(),
+        desc: '颜色',
+        value: '#000'
+    })
+    color() {};
+
     // constructor({typeName,serializedString}) {
     constructor() {
         super();

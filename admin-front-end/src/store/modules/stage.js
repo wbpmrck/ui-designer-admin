@@ -7,34 +7,49 @@ const state = {
 // getters
 const getters = {
   item: (state) => (id) => {
-    return findObject(state.stage,id)
+    return findObject(state.stage, id)
   },
-  stage(state){
+  stage(state) {
     return state.stage;
   }
 }
 
 // actions
 const actions = {
-  addObjectAndSelectIt ({ state, commit,dispatch, rootState },{object,parent,scene}) {
+  addObjectAndSelectIt({
+    state,
+    commit,
+    dispatch,
+    rootState
+  }, {
+    object,
+    parent,
+    scene
+  }) {
     // 先提交添加孩子的mutation  
-    commit('addObject',{object,parent})
+    commit('addObject', {
+      object,
+      parent
+    })
     // 再提交选择对象的mutation
-    commit('selectItem',{item:object,scene})
+    commit('selectItem', {
+      item: object,
+      scene
+    })
   }
 }
 
-function findObject(parent,id){
+function findObject(parent, id) {
   let found = undefined;
 
-  if(parent){
-    if(parent._id().value === id){
+  if (parent) {
+    if (parent._id().value === id) {
       return parent;
-    }else if(parent.children &&  parent.children().value && parent.children().value.length>0){
+    } else if (parent.children && parent.children().value && parent.children().value.length > 0) {
 
-      for(var i =0;i<parent.children().value.length;i++){
-        found = findObject(parent.children().value[i],id)
-        if(found){
+      for (var i = 0; i < parent.children().value.length; i++) {
+        found = findObject(parent.children().value[i], id)
+        if (found) {
           break;
         }
       }
@@ -51,7 +66,7 @@ const mutations = {
    * @param {*} state 
    * @param {Object} stage 
    */
-  setStage (state,stage){
+  setStage(state, stage) {
     console.log('store setStage')
     // state.stage = stage;
     Vue.set(state, "stage", stage)
@@ -62,8 +77,12 @@ const mutations = {
    * @param {*} state 
    * @param {Object} param1 
    */
-  updateObject (state,{id,propName,propValue}) {
-    console.log(`store updateObject:${propName}=${propValue}`)
+  updateObject(state, {
+    id,
+    propName,
+    propValue
+  }) {
+    // console.log(`store updateObject:${propName}=${propValue}`)
     // console.log('id=')
     // console.log(id)
     // console.log('propName=')
@@ -71,7 +90,7 @@ const mutations = {
     // console.log('propValue=')
     // console.log(propValue)
 
-    let obj = findObject(state.stage,id);
+    let obj = findObject(state.stage, id);
     // obj[propName] =propValue;
     Vue.set(obj, propName, propValue)
   },
@@ -81,24 +100,36 @@ const mutations = {
    * @param {*} state 
    * @param {Object} param1 
    */
-  updateObjectUDProperty (state,{id,propName,propValue}) {
-    console.log(`store updateObjectUDProperty:${propName}=${propValue}`)
+  updateObjectUDProperty(state, {
+    id,
+    propName,
+    propValue
+  }) {
+    // console.log(`store updateObjectUDProperty:${propName}=${propValue}`)
 
-    let obj = findObject(state.stage,id);
-    obj[propName]({value:propValue});
+    let obj = findObject(state.stage, id);
+    obj[propName]({
+      value: propValue
+    });
     // Vue.set(obj[`__ud_attribute_${this.propName}__`],'value', propValue)
   },
 
-  addObject (state,{parent,object}){
+  addObject(state, {
+    parent,
+    object
+  }) {
     console.log('store addObject')
     parent.addChild && parent.addChild(object)
   },
-  deleteObject (state,{parent,object}){
+  deleteObject(state, {
+    parent,
+    object
+  }) {
     console.log('store deleteObject')
 
-    if(parent){
+    if (parent) {
       parent.removeChild && parent.removeChild(object)
-    }else{
+    } else {
       console.log('store deleteObject failed,no parent!')
     }
   },

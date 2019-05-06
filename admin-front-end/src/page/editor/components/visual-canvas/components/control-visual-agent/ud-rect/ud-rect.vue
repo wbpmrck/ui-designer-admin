@@ -6,13 +6,13 @@
 
 <script>
   /*
-                                                                                                                                                                      矩形
-                                                                                                                                                                      */
+                                                                                                                                                                                      矩形
+                                                                                                                                                                                      */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
   import SCENE from '../../../../../../../model/ui-scene.js';
-  // import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
+
   import udUITwoDimBase from '../components/ud-ui-two-dim/ud-ui-two-dim.vue';
   export default {
     name: 'ud-rect',
@@ -58,10 +58,10 @@
           display: 'inline-block',
           width: this.width + 'px',
           height: this.height + 'px',
-          'margin-top': this.udObject.marginTop().value + 'px',
-          'margin-right': this.udObject.marginRight().value + 'px',
-          'margin-left': this.udObject.marginLeft().value + 'px',
-          'margin-bottom': this.udObject.marginBottom().value + 'px',
+          // 'margin-top': this.udObject.marginTop().value + 'px',
+          // 'margin-right': this.udObject.marginRight().value + 'px',
+          // 'margin-left': this.udObject.marginLeft().value + 'px',
+          // 'margin-bottom': this.udObject.marginBottom().value + 'px',
           'background-color': this.udObject.bgColor().value,
           'border-radius': this.udObject.borderRadius().value + 'px',
           'border-width': this.udObject.borderWidth().value + 'px',

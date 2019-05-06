@@ -22,8 +22,8 @@
 
 <script>
   /*
-                                                                                                                                                        矩形
-                                                                                                                                                        */
+                                                                                                                                                          矩形
+                                                                                                                                                          */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -110,12 +110,12 @@
           'border-color': this.udObject.borderColor().value,
           'border-style': 'solid',
           'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
+          'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll'
 
-          'margin-top': this.udObject.marginTop().value + 'px',
-          'margin-right': this.udObject.marginRight().value + 'px',
-          'margin-left': this.udObject.marginLeft().value + 'px',
-          'margin-bottom': this.udObject.marginBottom().value + 'px'
+          // 'margin-top': this.udObject.marginTop().value + 'px',
+          // 'margin-right': this.udObject.marginRight().value + 'px',
+          // 'margin-left': this.udObject.marginLeft().value + 'px',
+          // 'margin-bottom': this.udObject.marginBottom().value + 'px'
         };
       }
     },

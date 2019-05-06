@@ -761,6 +761,16 @@ class UDAttribute {
             return this.defaultUnit;
         }
     }
+    setEnable(e) {
+        this.enable = !!e;
+        //如果设置为无效，则重置各项基本数据
+        if (!this.enable) {
+            this.value = this.defaultValue;
+            this.valueType = this.defaultValueType;
+            this.unit = this.defaultUnit;
+        }
+    }
+
     setValue(val) {
         if (val !== undefined && this.enable) {
             //TODO: 后期根据 valueType 增加参数类型检查功能
