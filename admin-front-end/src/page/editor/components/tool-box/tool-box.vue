@@ -26,7 +26,7 @@
 
 <script>
   import uiContainerRow from './components/ui-container-row/ui-container-row.vue';
-  import udTextarea from './components/textarea/textarea';
+  import udTextarea from './components/multi-input/multi-input';
   import udInput from './components/input/input';
   import udText from './components/text/text';
   import udLine from './components/line/line';
