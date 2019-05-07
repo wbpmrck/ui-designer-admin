@@ -56,7 +56,7 @@
         let me = new UDCircle();
         me.w({ value: 50 });
         me.h({ value: 50 });
-        me.bgColor({ value: '#000' });
+        me.color({ value: '#000' });
         me.name({ value: '圆形' + sliblingCount });
 
         // 添加并且选中对象。这种方式可能不方便连续添加对象

@@ -530,6 +530,21 @@
                 ]
               },
               {
+                field: 'color',
+                host: 'UDCircle', //只有当属性在 Circle 组件中出现，才使用本规则
+                desc: '图形颜色',
+                form: [
+                  {
+                    type: formColorPicker,
+                    col: 10
+                  },
+                  {
+                    type: formText,
+                    col: 14
+                  }
+                ]
+              },
+              {
                 field: 'marginTop',
                 desc: '上外边距',
                 form: [
