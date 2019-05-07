@@ -2,6 +2,7 @@
   <udUITwoDimBase :ud-object="udObject">
     <input
       :style="elementStyle"
+      spellcheck="false"
       :type="udObject.inputType().value.key.toLowerCase()"
       v-model="inputValue"
       :placeholder="udObject.placeholder().value"
