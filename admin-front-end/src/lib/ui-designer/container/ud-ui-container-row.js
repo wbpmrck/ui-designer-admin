@@ -119,7 +119,7 @@ class UDUIContainerRow extends UDUIContainer {
      * 如果该对象有子元素，那么子元素的哪些属性需要被禁用
      */
     getDisableChildrenProps() {
-        return ['x', 'y'];
+        return ['x', 'y', 'ex', 'ey', 'bx', 'by'];
     }
 
     constructor() {

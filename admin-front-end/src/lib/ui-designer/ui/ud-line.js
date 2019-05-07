@@ -85,6 +85,15 @@ class UDLine extends UDUIOneDim {
         unit: UDAttributeUnit.PX
     })
     strokeWidth() {};
+
+    @DECORATORS.serializable(true)
+    @DECORATORS.field({
+        type: Number.getType(),
+        desc: '长度',
+        value: 0,
+        unit: UDAttributeUnit.PX
+    })
+    lineLen() {};
     // constructor({typeName,serializedString}) {
     constructor() {
         super();

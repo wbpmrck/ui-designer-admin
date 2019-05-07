@@ -466,6 +466,22 @@
                 ]
               },
               {
+                field: 'lineLen',
+                desc: '线长',
+                form: [
+                  {
+                    type: formNumber,
+                    param: {
+                      precision: 0, //精度，整数
+                      step: 1, //增加的步长
+                      max: 99999, //最大值
+                      min: 0 //最小值
+                    },
+                    col: 12 //12栏，表示这个表单占半行
+                  }
+                ]
+              },
+              {
                 field: 'x',
                 desc: 'X坐标',
                 form: [

@@ -1,6 +1,12 @@
 <template>
   <div :id="'agent-'+udObject._id().value" class="ud-line" :style="wrapperStyle" @click.stop="selectMe">
-    <svg style="width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;" :stroke="svgStyle['color']" :stroke-width="svgStyle['stroke-width']">
+    <!-- <svg style="width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;" :stroke="svgStyle['color']" :stroke-width="svgStyle['stroke-width']"> -->
+    <svg
+      :style="{width:svgStyle.width,height:svgStyle.height}"
+      style="position:absolute;left:0;top:0;"
+      :stroke="svgStyle['color']"
+      :stroke-width="svgStyle['stroke-width']"
+    >
       <line class="svg-line" :x1="svgStyle.bx" :y1="svgStyle.by" :x2="svgStyle.ex" :y2="svgStyle.ey"></line>
     </svg>
     <div v-if="udObject === currentSelection" class="start-point operate-handle-point" :style="{left:svgStyle.bx+'px',top:svgStyle.by+'px'}">
@@ -14,14 +20,14 @@
 
 <script>
   /*
-                                                                                                                                                                                                                                                矩形
-                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                          矩形
+                                                                                                                                                                                                                                                                          */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
+  import { isInstanceOf } from '../../../../../../../lib/utils/oop.js';
+  import { UDPage, UDUIContainerAbsolute, UDUIContainerRow, UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
   import SCENE from '../../../../../../../model/ui-scene.js';
-
-  import operateHandlerTwoDim from '../operate-handler-two-dim/operate-handler-two-dim';
 
   const layoutUtil = {};
 
@@ -51,9 +57,7 @@
         default: {}
       }
     },
-    components: {
-      operateHandlerTwoDim
-    },
+    components: {},
 
     computed: {
       ...mapState({
@@ -64,6 +68,15 @@
           return state.selection.scene;
         }
       }),
+      layoutEnv() {
+        if (isInstanceOf(this.udObject.parent, UDPage) || isInstanceOf(this.udObject.parent, UDUIContainerAbsolute)) {
+          return 'absolute';
+        } else if (isInstanceOf(this.udObject.parent, UDUIContainerRow)) {
+          return 'relative';
+        }
+        return 'unknow';
+      },
+
       lineDirection() {
         let direction = '';
         let dx = this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx);
@@ -85,23 +98,25 @@
         return direction;
       },
       wrapperStyle() {
-        return {
-          top: 0 + 'px',
-          left: 0 + 'px',
-          position: 'absolute',
-
-          //注意：这里+15只是为了拖动的时候多一些可操作区域，无其他用途。
+        let base = {
+          //注意：这里+15只是为了拖动的时候多一些可操作区域，无其他用途。(2019年05月07日 因为在相对定位容器中是按照wrapper排列的，修改为0减少排列时的视差)
           width:
             Math.floor(
-              Math.abs(this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx)) +
+              Math.max(
+                Math.abs(this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx)),
+                this.udObject.lineLen().value
+              ) +
                 this.udObject.strokeWidth().value +
-                15
+                0
             ) + 'px',
           height:
             Math.floor(
-              Math.abs(this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by)) +
+              Math.max(
+                Math.abs(this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by)),
+                this.udObject.lineLen().value
+              ) +
                 this.udObject.strokeWidth().value +
-                15
+                0
             ) + 'px',
 
           'z-index': this.udObject.z().value,
@@ -113,10 +128,43 @@
           }deg)`,
           visibility: this.udObject.editorHide ? 'hidden' : 'visible'
         };
+
+        let ret = base;
+
+        if (this.layoutEnv === 'absolute') {
+          ret = {
+            top: 0 + 'px',
+            left: 0 + 'px',
+            position: 'absolute',
+            ...base
+          };
+        } else {
+          ret = {
+            position: 'relative',
+            ...base
+          };
+        }
+
+        return ret;
       },
+
       // 动态根据配置的数据对象，计算出元素的可视化样式
       svgStyle() {
         let s = {
+          width:
+            Math.floor(
+              Math.max(
+                Math.abs(this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx)),
+                this.udObject.lineLen().value
+              ) + this.udObject.strokeWidth().value
+            ) + 'px',
+          height:
+            Math.floor(
+              Math.max(
+                Math.abs(this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by)),
+                this.udObject.lineLen().value
+              ) + this.udObject.strokeWidth().value
+            ) + 'px',
           bx: 0,
           by: 0,
           ex: 0,
@@ -126,33 +174,45 @@
 
           'stroke-width': this.udObject.strokeWidth().value
         };
-        switch (this.lineDirection) {
-          case 'right-bottom':
-            s.ex = this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx);
-            s.ey = this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by);
-            break;
+        //如果是绝对定位环境，则根据方向计算坐标
+        if (this.layoutEnv === 'absolute') {
+          switch (this.lineDirection) {
+            case 'right-bottom':
+              s.ex = this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx);
+              s.ey = this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by);
+              break;
 
-          case 'right-top':
-            s.by = this.udObject.by().value + this.offset.by - (this.udObject.ey().value + this.offset.ey);
-            s.ex = this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx);
-            break;
+            case 'right-top':
+              s.by = this.udObject.by().value + this.offset.by - (this.udObject.ey().value + this.offset.ey);
+              s.ex = this.udObject.ex().value + this.offset.ex - (this.udObject.bx().value + this.offset.bx);
+              break;
 
-          case 'left-top':
-            s.bx = this.udObject.bx().value + this.offset.bx - (this.udObject.ex().value + this.offset.ex);
-            s.by = this.udObject.by().value + this.offset.by - (this.udObject.ey().value + this.offset.ey);
-            break;
+            case 'left-top':
+              s.bx = this.udObject.bx().value + this.offset.bx - (this.udObject.ex().value + this.offset.ex);
+              s.by = this.udObject.by().value + this.offset.by - (this.udObject.ey().value + this.offset.ey);
+              break;
 
-          case 'left-bottom':
-            s.bx = this.udObject.bx().value + this.offset.bx - (this.udObject.ex().value + this.offset.ex);
-            s.ey = this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by);
-            break;
-          default:
-            break;
+            case 'left-bottom':
+              s.bx = this.udObject.bx().value + this.offset.bx - (this.udObject.ex().value + this.offset.ex);
+              s.ey = this.udObject.ey().value + this.offset.ey - (this.udObject.by().value + this.offset.by);
+              break;
+            default:
+              break;
+          }
+        } else {
+          s.by = Math.floor(parseInt(s.height) / 2);
+          s.ey = Math.floor(parseInt(s.height) / 2);
+          //如果是相对定位环境，则根据线条长度计算
+          s.ex = this.udObject.lineLen().value;
         }
         return s;
       }
     },
     methods: {
+      // 根据坐标信息计算线条长度
+      calculateLen() {},
+      // 根据线条长度计算终止坐标信息
+      calculatePos() {},
       selectMe() {
         this.$store.commit('selectItem', {
           item: this.udObject,
@@ -166,7 +226,7 @@
         interact('#' + 'agent-' + self.udObject._id().value + ' .svg-line').draggable({
           // enable inertial throwing
           inertia: false,
-          // enabled: false,
+          enabled: self.layoutEnv === 'absolute',
 
           // enable autoScroll
           autoScroll: true,
@@ -214,6 +274,7 @@
         interact('#' + 'agent-' + self.udObject._id().value + ' .start-point').draggable({
           // enable inertial throwing
           inertia: false,
+          enable: self.layoutEnv === 'absolute',
           // enable autoScroll
           autoScroll: true,
           ignoreFrom: '.not-drag',
@@ -247,6 +308,7 @@
         interact('#' + 'agent-' + self.udObject._id().value + ' .end-point').draggable({
           // enable inertial throwing
           inertia: false,
+          enable: self.layoutEnv === 'absolute',
           // enable autoScroll
           autoScroll: true,
           ignoreFrom: '.not-drag',
@@ -285,6 +347,23 @@
     },
     mounted() {
       this.initDrag();
+    },
+    watch: {
+      'udObject.__ud_attribute_bx__.value': function(newVal, oldVal) {
+        this.calculateLen();
+      },
+      'udObject.__ud_attribute_by__.value': function(newVal, oldVal) {
+        this.calculateLen();
+      },
+      'udObject.__ud_attribute_ex__.value': function(newVal, oldVal) {
+        this.calculateLen();
+      },
+      'udObject.__ud_attribute_ey__.value': function(newVal, oldVal) {
+        this.calculateLen();
+      },
+      'udObject.__ud_attribute_lineLen__.value': function(newVal, oldVal) {
+        this.calculatePos();
+      }
     }
   };
 </script>

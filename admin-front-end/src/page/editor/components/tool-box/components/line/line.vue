@@ -54,10 +54,9 @@
         let sliblingCount = this.currentSelection.children().value.length + 1;
         // 一个矩形
         let me = new UDLine();
-        me.bx({ value: 50 });
-        me.by({ value: 50 });
-        me.ex({ value: 150 });
-        me.ey({ value: 150 });
+        me.ex({ value: 50 });
+        me.ey({ value: 50 });
+        me.lineLen({ value: 40 });
         me.bgColor({ value: '#000' });
         me.name({ value: '线条' + sliblingCount });
 
