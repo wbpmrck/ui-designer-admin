@@ -1,6 +1,6 @@
 <template>
-  <udUITwoDimBase :ud-object="udObject" ref="baseComponent" @resize-width-change="widthChange" @resize-height-change="heightChange">
-    <div class="ud-text" :style="styleObject">{{udObject.txt().value}}</div>
+  <udUITwoDimBase :ud-object="udObject">
+    <div class="ud-text scrollable-1" :style="styleObject">{{udObject.txt().value}}</div>
   </udUITwoDimBase>
 
   <!-- <div :id="'agent-'+udObject._id().value" class="ud-text" :style="styleObject" @click.stop="selectMe">
@@ -20,52 +20,27 @@
   export default {
     name: 'ud-text',
     data() {
-      return {
-        width: 0,
-        height: 0
-        // offset: {
-        //   x: 0,
-        //   y: 0
-        // },
-        // resize: {
-        //   w: 0,
-        //   h: 0
-        // }
-      };
+      return {};
     },
     props: {
       ...udUITwoDimBase.props
-      // udObject: {
-      //   type: Object,
-      //   default: {}
-      // }
     },
     components: {
       udUITwoDimBase
     },
 
     computed: {
-      // ...mapState({
-      //   currentSelection(state) {
-      //     return state.selection.currentSelect;
-      //   },
-      //   currentScene(state) {
-      //     return state.selection.scene;
-      //   }
-      // }),
-      // 动态根据配置的数据对象，计算出元素的可视化样式
       styleObject() {
         return {
+          ...udUITwoDimBase.methods.contentBoxStyle(this),
           display: 'flex',
-          width: this.width + 'px',
-          height: this.height + 'px',
-          'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
-          'background-color': this.udObject.bgColor().value,
-          'border-radius': this.udObject.borderRadius().value + 'px',
-          'border-width': this.udObject.borderWidth().value + 'px',
-          'border-color': this.udObject.borderColor().value,
-          'border-style': 'solid',
+          // 'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
+          // 'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
+          // 'background-color': this.udObject.bgColor().value,
+          // 'border-radius': this.udObject.borderRadius().value + 'px',
+          // 'border-width': this.udObject.borderWidth().value + 'px',
+          // 'border-color': this.udObject.borderColor().value,
+          // 'border-style': 'solid',
           'font-family': this.udObject.font().value,
           'font-size': this.udObject.fs().value + 'px',
           color: this.udObject.fontColor().value,
@@ -80,18 +55,8 @@
         };
       }
     },
-    methods: {
-      widthChange(newVal, oldVal) {
-        this.width = newVal;
-      },
-      heightChange(newVal, oldVal) {
-        this.height = newVal;
-      }
-    },
-    created() {
-      this.width = this.udObject.w().value;
-      this.height = this.udObject.h().value;
-    },
+    methods: {},
+    created() {},
 
     beforeDestroy() {},
     watch: {},
