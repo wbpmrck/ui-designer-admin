@@ -1,5 +1,5 @@
 <template>
-  <udUITwoDimBase :ud-object="udObject" ref="baseComponent" @resize-width-change="widthChange" @resize-height-change="heightChange">
+  <udUITwoDimBase :ud-object="udObject">
     <img :src="udObject.url().value" :style="imageStyle" alt="点击上传图片" @dblclick.stop="changeImgSrc">
   </udUITwoDimBase>
   <!-- <div :id="'agent-'+udObject._id().value" class="ud-image" :style="wrapperStyle" @click.stop="selectMe" @dblclick.stop="changeImgSrc">
@@ -10,8 +10,8 @@
 
 <script>
   /*
-                                                                                                                                                                                  矩形
-                                                                                                                                                                                  */
+                                                                                                                                                                                          矩形
+                                                                                                                                                                                          */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -20,10 +20,7 @@
   export default {
     name: 'ud-image',
     data() {
-      return {
-        width: 0,
-        height: 0
-      };
+      return {};
     },
     props: {
       ...udUITwoDimBase.props
@@ -37,21 +34,14 @@
     },
 
     computed: {
-      ...mapState({
-        currentSelection(state) {
-          return state.selection.currentSelect;
-        },
-        currentScene(state) {
-          return state.selection.scene;
-        }
-      }),
-
       imageStyle() {
         return {
-          position: 'relative',
+          ...udUITwoDimBase.methods.contentBoxStyle(this),
+          position: 'relative', //让图片可以被点击。
           display: 'inline-block',
-          width: this.width + 'px',
-          height: this.height + 'px',
+          'box-sizing': 'border-box'
+          // width: this.width + 'px',
+          // height: this.height + 'px',
           // 'margin-top': this.udObject.marginTop().value + 'px',
           // 'margin-right': this.udObject.marginRight().value + 'px',
           // 'margin-left': this.udObject.marginLeft().value + 'px',
@@ -60,29 +50,20 @@
           // 'padding-right': this.udObject.paddingRight().value + 'px',
           // 'padding-left': this.udObject.paddingLeft().value + 'px',
           // 'padding-bottom': this.udObject.paddingBottom().value + 'px',
-          'border-radius': this.udObject.borderRadius().value + 'px',
-          'border-width': this.udObject.borderWidth().value + 'px',
-          'border-color': this.udObject.borderColor().value,
-          'border-style': 'solid'
+          // 'border-radius': this.udObject.borderRadius().value + 'px',
+          // 'border-width': this.udObject.borderWidth().value + 'px',
+          // 'border-color': this.udObject.borderColor().value,
+          // 'border-style': 'solid'
         };
       }
     },
     methods: {
-      widthChange(newVal, oldVal) {
-        this.width = newVal;
-      },
-      heightChange(newVal, oldVal) {
-        this.height = newVal;
-      },
       changeImgSrc() {
         console.log('changeImgSrc');
         this.globalBus.$emit('change-image-src');
       }
     },
-    created() {
-      this.width = this.udObject.w().value;
-      this.height = this.udObject.h().value;
-    },
+    created() {},
 
     beforeDestroy() {},
     watch: {
