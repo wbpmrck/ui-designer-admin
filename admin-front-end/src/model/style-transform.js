@@ -75,9 +75,39 @@ const translateRowAlignV = (val) => {
   }
 };
 
+
+const translateColAlignH = (val) => {
+  if (val === UDColAlignH.LEFT) {
+    return 'flex-start'
+  }
+  if (val === UDColAlignH.CENTER) {
+    return 'center'
+  }
+  if (val === UDColAlignH.RIGHT) {
+    return 'flex-end'
+  }
+};
+
+const translateColAlignV = (val) => {
+  if (val === UDColAlignV.TOP) {
+    return 'flex-start'
+  }
+  if (val === UDColAlignV.MIDDLE) {
+    return 'center'
+  }
+  if (val === UDColAlignV.BOTTOM) {
+    return 'flex-end'
+  }
+  if (val === UDColAlignV.SPACE_BETWEEN) {
+    return 'space-between'
+  }
+};
+
 export {
   translateRowAlignV,
   translateRowAlignH,
+  translateColAlignV,
+  translateColAlignH,
   translateAlignH,
   translateAlignV,
 }

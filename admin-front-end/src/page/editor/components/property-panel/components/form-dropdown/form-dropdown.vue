@@ -37,7 +37,14 @@
           'UDRowAlignH.LEFT': '靠左',
           'UDRowAlignH.CENTER': '居中',
           'UDRowAlignH.RIGHT': '靠右',
-          'UDRowAlignH.SPACE_BETWEEN': '均匀分布'
+          'UDRowAlignH.SPACE_BETWEEN': '均匀分布',
+          'UDColAlignV.TOP': '顶部',
+          'UDColAlignV.MIDDLE': '居中',
+          'UDColAlignV.BOTTOM': '底部',
+          'UDColAlignV.SPACE_BETWEEN': '均匀分布',
+          'UDColAlignH.LEFT': '靠左',
+          'UDColAlignH.CENTER': '居中',
+          'UDColAlignH.RIGHT': '靠右'
         }
       };
     },

@@ -26,6 +26,7 @@
 
 <script>
   import uiContainerRow from './components/ui-container-row/ui-container-row.vue';
+  import uiContainerCol from './components/ui-container-col/ui-container-col.vue';
   import udTextarea from './components/multi-input/multi-input';
   import udInput from './components/input/input';
   import udText from './components/text/text';
@@ -51,6 +52,7 @@
       toolImage,
       toolPage,
       uiContainerRow,
+      uiContainerCol,
       uiContainerAbsolute
     },
     computed: {
@@ -84,7 +86,8 @@
             tools: [
               { name: 'tool-page', def: toolPage, desc: '页面' },
               { name: 'uiContainerAbsolute', def: uiContainerAbsolute, desc: '绝对定位容器' },
-              { name: 'uiContainerRow', def: uiContainerRow, desc: '行容器' }
+              { name: 'uiContainerRow', def: uiContainerRow, desc: '行容器' },
+              { name: 'uiContainerCol', def: uiContainerCol, desc: '列容器' }
             ]
           },
           {

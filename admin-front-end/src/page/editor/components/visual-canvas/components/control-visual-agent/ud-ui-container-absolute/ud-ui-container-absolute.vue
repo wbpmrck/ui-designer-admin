@@ -22,8 +22,8 @@
 
 <script>
   /*
-                                                                                                                                                                矩形
-                                                                                                                                                                */
+                                                                                                                                                                    矩形
+                                                                                                                                                                    */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -39,6 +39,7 @@
   import UDImage from '../ud-image/ud-image.vue';
   import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
   import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
+  import UDUIContainerCol from '../ud-ui-container-col/ud-ui-container-col.vue';
   export default {
     name: 'ud-ui-container-absolute',
     components: {
@@ -46,6 +47,7 @@
       UDInput,
       UDText,
       UDUIContainerRow,
+      UDUIContainerCol,
       UDUIContainerAbsolute,
       UDImage,
       UDLine,
@@ -58,6 +60,7 @@
       return {
         visualAgents: {
           UDUIContainerRow,
+          UDUIContainerCol,
           UDMultiInput,
           UDInput,
           UDText,

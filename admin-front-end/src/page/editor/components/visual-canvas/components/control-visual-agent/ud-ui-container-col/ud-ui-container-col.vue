@@ -1,7 +1,7 @@
 <template>
   <!-- <udUITwoDimBase :ud-object="udObject" ref="baseComponent" @resize-width-change="widthChange" @resize-height-change="heightChange"> -->
   <udUITwoDimBase :ud-object="udObject">
-    <div class="ud-ui-container-row scrollable-1" :style="styleObject">
+    <div class="ud-ui-container-col scrollable-1" :style="styleObject">
       <component
         :is="visualAgents[child.constructor.getTypeName()]"
         :ud-object="child"
@@ -10,7 +10,7 @@
       ></component>
     </div>
   </udUITwoDimBase>
-  <!-- <div :id="'agent-'+udObject._id().value" class="ud-ui-container-row scrollable-1" :style="styleObject" @click.stop="selectMe">
+  <!-- <div :id="'agent-'+udObject._id().value" class="ud-ui-container-col scrollable-1" :style="styleObject" @click.stop="selectMe">
     <operate-handler-two-dim v-if="udObject === currentSelection"></operate-handler-two-dim>
     <component
       :is="visualAgents[child.constructor.getTypeName()]"
@@ -23,8 +23,8 @@
 
 <script>
   /*
-                                                                                                                                                                                              矩形
-                                                                                                                                                                                              */
+                                                                                                                                                                                                      矩形
+                                                                                                                                                                                                      */
 
   import { mapGetters, mapState } from 'vuex';
   import { UDClipMode } from '../../../../../../../lib/ui-designer/index.js';
@@ -42,9 +42,9 @@
   import UDUIContainerAbsolute from '../ud-ui-container-absolute/ud-ui-container-absolute.vue';
   import UDUIContainerRow from '../ud-ui-container-row/ud-ui-container-row.vue';
   import UDUIContainerCol from '../ud-ui-container-col/ud-ui-container-col.vue';
-  import { translateRowAlignV, translateRowAlignH } from '../../../../../../../model/style-transform.js';
+  import { translateColAlignV, translateColAlignH } from '../../../../../../../model/style-transform.js';
   export default {
-    name: 'ud-ui-container-row',
+    name: 'ud-ui-container-col',
     components: {
       UDUIContainerRow,
       UDUIContainerCol,
@@ -103,7 +103,7 @@
           // 'border-color': this.udObject.borderColor().value,
           // 'border-style': 'solid',
           display: 'flex',
-          'flex-direction': 'row',
+          'flex-direction': 'column',
           'flex-wrap': this.udObject.autoWrap().value ? 'wrap' : 'nowrap',
           // 'overflow-x': this.udObject.clipX().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
           // 'overflow-y': this.udObject.clipY().value === UDClipMode.CLIP ? 'hidden' : 'scroll',
@@ -115,8 +115,8 @@
           // 'margin-right': this.udObject.marginRight().value + 'px',
           // 'margin-left': this.udObject.marginLeft().value + 'px',
           // 'margin-bottom': this.udObject.marginBottom().value + 'px',
-          'justify-content': translateRowAlignH(this.udObject.rowAlignH().value),
-          'align-items': translateRowAlignV(this.udObject.rowAlignV().value)
+          'align-items': translateColAlignH(this.udObject.colAlignH().value),
+          'justify-content': translateColAlignV(this.udObject.colAlignV().value)
         };
       }
     },
@@ -256,6 +256,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .ud-ui-container-row {
+  .ud-ui-container-col {
   }
 </style>

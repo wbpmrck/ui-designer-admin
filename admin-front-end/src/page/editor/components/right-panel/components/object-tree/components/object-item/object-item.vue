@@ -28,7 +28,7 @@
         <!-- item图标 -->
         <div :class="{['icon-'+itemType]:true,'icon-item':true}" @click="selectItem">
           <span class="icon-2" v-if="'UDImage'!==itemType"></span>
-          <span class="icon-new-1" v-if="'UDUIContainerAbsolute'===itemType || 'UDUIContainerRow'===itemType"></span>
+          <span class="icon-new-1" v-if="'UDUIContainerAbsolute'===itemType || 'UDUIContainerRow'===itemType|| 'UDUIContainerCol'===itemType "></span>
           <span class="icon-default" v-if="'UDImage'===itemType && !itemData[`__ud_attribute_url__`].value"></span>
           <img v-if="'UDImage'===itemType && itemData[`__ud_attribute_url__`].value" :src="itemData[`__ud_attribute_url__`].value">
         </div>
@@ -282,6 +282,12 @@
       width: 16px;
       height: 16px;
       background-position: -1600px -640px;
+    }
+    // 列容器图标(FIXME:)
+    .icon-UDUIContainerCol .icon-new-1 {
+      width: 16px;
+      height: 16px;
+      background-position: -1640px -640px;
     }
 
     // 图片图标

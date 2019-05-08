@@ -286,6 +286,28 @@
                   }
                 ]
               },
+              {
+                field: 'colAlignH',
+                desc: '水平对齐',
+                form: [
+                  {
+                    type: formDropDown,
+                    param: {},
+                    col: 12
+                  }
+                ]
+              },
+              {
+                field: 'colAlignV',
+                desc: '垂直对齐',
+                form: [
+                  {
+                    type: formDropDown,
+                    param: {},
+                    col: 12
+                  }
+                ]
+              },
               ,
               {
                 field: 'autoWrap',

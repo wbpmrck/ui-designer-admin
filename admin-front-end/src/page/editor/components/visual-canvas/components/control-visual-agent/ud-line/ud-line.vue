@@ -20,8 +20,8 @@
 
 <script>
   /*
-                                                                                                                                                                                                                                                                          矩形
-                                                                                                                                                                                                                                                                          */
+                                                                                                                                                                                                                                                                            矩形
+                                                                                                                                                                                                                                                                            */
 
   import { mapGetters, mapState } from 'vuex';
   import interact from 'interactjs';
@@ -200,9 +200,11 @@
               break;
           }
         } else {
+          //如果是相对定位环境，则起始点固定为svg元素的正左中点，截止点根据线条长度计算，固定画一个水平线。这种环境下，线条方向不使用2个点控制，使用
+          // rotateZ控制
           s.by = Math.floor(parseInt(s.height) / 2);
           s.ey = Math.floor(parseInt(s.height) / 2);
-          //如果是相对定位环境，则根据线条长度计算
+
           s.ex = this.udObject.lineLen().value;
         }
         return s;
